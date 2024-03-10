@@ -182,7 +182,7 @@ class System:
         )
         return np.unique(filtered_elements, return_counts=True)
 
-    def wrap_self_positions(self):
+    def wrap_positions(self):
         """Wraps atomic positions inside the simulation box using periodic boundary conditions."""
         for atom in tqdm(
             self.atoms,

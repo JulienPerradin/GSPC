@@ -43,7 +43,7 @@ class Box:
         self.length_x = np.array(length_x)
         self.length_y = np.array(length_y)
         self.length_z = np.array(length_z)
-        self.volume = self.get_volume()
+        self.volume = [self.get_volume(c) for c in range(len(self.length_x))]
 
     def get_volume(self, configuration):
         """Calculates and returns the volume of the box assuming the box is always cubic."""

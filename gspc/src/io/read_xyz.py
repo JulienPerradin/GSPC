@@ -35,6 +35,9 @@ def read_xyz(path_file, number_of_atoms, configuration_range, cutoffs):
         # Initialize the variable for configuration, atom count
         c, n = -1, 0
         
+        # checkpoint before the atomic informations
+        checkpoint = False
+        
         # Initialize the system
         system = System()
         
@@ -46,6 +49,8 @@ def read_xyz(path_file, number_of_atoms, configuration_range, cutoffs):
             data = f.readlines()
             for i,line in enumerate(data):
                 try:
+                    if line.split()[0] == str(number_of_atoms):
+                        checkpoint = False
                     # check if the line contains 'Lattice'
                     if line.split('=')[0] == "Lattice":
                         c += 1 # increment the number of configuration
@@ -56,12 +61,13 @@ def read_xyz(path_file, number_of_atoms, configuration_range, cutoffs):
                         lbx.append(float(lattice.split()[0]))
                         lby.append(float(lattice.split()[4]))
                         lbz.append(float(lattice.split()[8]))
+                        checkpoint = True
                 except:
                     print("Failed to read the extended XYZ file.\n Please check the file format and try again.\n Exiting.")
                     sys.exit(1)
                 try:
-                    # check if the line contains the number of atoms or the box information
-                    if line.split()[0] != str(number_of_atoms) and line.split('=')[0] != "Lattice":
+                    # check if checkpoint is True before reading the atomic informations
+                    if checkpoint == True and line[0:7] != "Lattice":
                         # read the atomic informations
                         parts = line.split()
                         x = float(parts[1])

@@ -1,6 +1,6 @@
 import numpy as np
 
-from gspc.src.data import (chemical_symbols, correlation_lengths, atomic_numbers, atomic_masses)
+from gspc.src.data import (chemical_symbols, correlation_lengths, atomic_masses)
 
 from tqdm import tqdm
 
@@ -50,7 +50,6 @@ class Atom:
             index = np.where(self.element == chemical_symbols)[0].astype(np.int32)
             self.correlation_length = correlation_lengths[index][0]
             self.atomic_mass = atomic_masses[index][0]
-            self.atomic_number = atomic_numbers[index][0]
         else:
             print(f"Element {self.element} not found in the periodic table.")
             print("Failed to initialize the Atom. Exiting.")
@@ -92,9 +91,6 @@ class Atom:
         """Returns the atomic mass of the atom."""
         return self.atomic_mass
     
-    def get_atomic_number(self):
-        """Returns the atomic number of the atom."""
-        return self.atomic_number
     
     def calculate_coordination(self):
         """Calculates the coordination number of the atom. (ie the number of first neighbours.)"""

@@ -62,10 +62,16 @@ class Neighbour:
         lbox = box.get_box_dimensions(self.configuration)
         
         tree = cKDTree(self.positions, boxsize=lbox)
+        
+        values = []
+        for cutoff in cutoffs:
+            values.append(cutoff["value"])
+        
+        max_cutoff = np.max(values)
 
         for i in tqdm(range(len(self.positions)), desc="Computing neighbouring atoms ...", colour="RED", leave=False):
             # query the neighbouring atoms within the cutoff distance
-            indices = tree.query_ball_point(self.positions[i], np.max(cutoffs)) 
+            indices = tree.query_ball_point(self.positions[i], max_cutoff) 
             
             # initialize the periodic distances
             periodic_dist = np.zeros((3, len(indices)))
@@ -83,14 +89,11 @@ class Neighbour:
             distances = np.linalg.norm(periodic_dist, axis=0) 
             
             # filter the indices and distances based on the cutoff distance
-            valid_indices = np.where(distances < np.max(cutoffs))[0]
+            valid_indices = np.where(distances < max_cutoff)[0]
             
             # add the indices and distances to the list
             filtered_indices = np.array(indices)[valid_indices]
             filtered_distances = distances[valid_indices]
-            
-            self.add_indices(filtered_indices)
-            self.add_distances(filtered_distances)
             
             # add the neighbours to the central atoms
             for j in filtered_indices:

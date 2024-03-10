@@ -1,0 +1,1 @@
+from gspc.src.analysis.structural_analyzer import StructuralAnalyzer

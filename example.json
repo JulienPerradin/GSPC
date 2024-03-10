@@ -1,0 +1,39 @@
+{
+    "multiple_trajectories": false,
+
+    "export_settings": {
+        "export_directory": "tests/results",
+        "build_fancy_recaps": true,
+        "build_fancy_plots": true
+    },
+
+    "path_to_xyz_file": "tests/inputs/sio2-1008at-1configuration/pos12.xyz",
+    "number_of_atoms": 1008,
+    
+    "properties_to_calculate": [
+        {"name" : "pair_distribution_function" },
+        {"name" : "bond_angle_distribution" },
+        {"name" : "connectivities" },
+        {"name" : "coordination_number" }
+    ],
+
+    "structural_properties_settings": {
+        "pair_distribution_function": {
+            "r_min": 0.0,
+            "r_max": 10.0,
+            "n_bins": 300
+        },
+        "bond_angle_distribution": {
+            "theta_min": 0.0,
+            "theta_max": 180.0,
+            "n_bins": 300
+        }
+    },
+
+    "cutoffs": [     
+        { "element1": "O" , "element2": "O" , "value": 3.05},
+        { "element1": "Si", "element2": "O" , "value": 2.30},
+        { "element1": "Si", "element2": "Si", "value": 3.50}
+    ]
+
+}
