@@ -110,13 +110,8 @@ class Atom:
         """
         new_list = []
         for k, other_atom in enumerate(self.neighbours):
-            for cutoff in self.cutoffs:
-                if self.element == cutoff["element1"]:
-                    if other_atom.element == cutoff["element2"]:
-                        rcut = cutoff["value"]
-                if self.element == cutoff["element2"]:
-                    if other_atom.element == cutoff["element1"]:
-                        rcut = cutoff["value"]
+            
+            rcut = self.cutoffs.get_cutoff(self.element, other_atom.element)
 
             rij = distances[k]
             if rij > rcut:
@@ -136,7 +131,7 @@ class Atom:
         # Perform DFS traversal to compute unwrapped positions
         stack = [self] # stack is used to keep track of the position
         
-        while tqdm(stack, desc="Unwrapping positions", colour="YELLOW", leave=False):
+        while tqdm(stack, desc="Unwrapping positions", colour="YELLOW", leave=False, ascii=True):
             current_atom = stack.pop() # pop the last element from the stack
             for first_neighbour in current_atom.neighbours:
                 for second_neighbour in first_neighbour.neighbours:

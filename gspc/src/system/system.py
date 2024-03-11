@@ -189,6 +189,7 @@ class System:
             desc="Wrapping positions inside the box ...",
             colour="GREEN",
             leave=False,
+            ascii=True,
         ):
             box_size = self.box.get_box_dimensions(atom.configuration)
             for i in range(len(box_size)):

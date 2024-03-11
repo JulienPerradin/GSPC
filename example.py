@@ -16,7 +16,7 @@ if list_of_parameters:
         
 settings.print_parameters()
 
-cutoffs = settings.get_parameter_value("cutoffs")
+cutoffs = gspc.system.Cutoff(settings.get_parameter_value("cutoffs"))
 
 # Read the extended XYZ file and create the system object
 system, nConfig = gspc.io.read_xyz(
@@ -30,7 +30,7 @@ system, nConfig = gspc.io.read_xyz(
 system.wrap_positions()
 
 # Analyse the system at each configuration
-for i in tqdm(range(nConfig), desc="Iterates through configurations ...", colour="MAGENTA", leave=False):
+for i in tqdm(range(nConfig), desc="Iterates through configurations ...", colour="MAGENTA", leave=False, ascii=True):
 # for i in range(nConfig): # no tqdm
     # get positions and mask of the system at the current configuration
     current_positions, mask = system.get_positions_at_configuration(i)
@@ -44,7 +44,7 @@ for i in tqdm(range(nConfig), desc="Iterates through configurations ...", colour
     system.add_neighbours(current_neighbours)
     
     # create the structural analyzer object 
-    structural_analyzer = gspc.analysis.StructuralAnalyzer(settings, system, i)
+    structural_analyzer = gspc.analysis.StructuralAnalyzer(settings, system, i, cutoffs)
     
     
 

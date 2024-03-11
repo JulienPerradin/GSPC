@@ -63,13 +63,9 @@ class Neighbour:
         
         tree = cKDTree(self.positions, boxsize=lbox)
         
-        values = []
-        for cutoff in cutoffs:
-            values.append(cutoff["value"])
-        
-        max_cutoff = np.max(values)
+        max_cutoff = cutoffs.get_max_cutoff()
 
-        for i in tqdm(range(len(self.positions)), desc="Computing neighbouring atoms ...", colour="RED", leave=False):
+        for i in tqdm(range(len(self.positions)), desc="Computing neighbouring atoms ...", colour="RED", leave=False, ascii=True):
             # query the neighbouring atoms within the cutoff distance
             indices = tree.query_ball_point(self.positions[i], max_cutoff) 
             
