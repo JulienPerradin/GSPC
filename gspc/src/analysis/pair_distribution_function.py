@@ -40,6 +40,8 @@ class PairDistributionFunction:
         
         self.gr = np.zeros((len(self.pairs), self.n_bins))
         self.distance = np.zeros((len(self.pairs), self.n_bins))
+        self.avg_rij = np.zeros(len(self.pairs)) # average distance between first neighbours of each pair
+        self.std_rij = np.zeros(len(self.pairs)) # standard deviation of the distance between first neighbours of each pair
         
         debug = 1
     
@@ -65,7 +67,10 @@ class PairDistributionFunction:
                 positions_2 = np.array([atom.get_position() for atom in self.atoms if atom.get_element() == element_2])
                 normalization_factor = self.volume / (4.0 * np.pi * len(positions_1) * len(positions_2) )
             
-            self.rdf[index] = self._compute_rdf(self.lx, self.ly, self.lz , positions_1, positions_2, self.dr, self.r_min, self.r_max, self.n_bins, cutoff)
+            self.rdf[index], rij  = self._compute_rdf(self.lx, self.ly, self.lz , positions_1, positions_2, self.dr, self.r_min, self.r_max, self.n_bins, cutoff)
+            self.avg_rij[index] = np.mean(rij)
+            self.std_rij[index] = np.std(rij)
+            
             for i in range(1,self.n_bins):
                 self.distance[index][i] = self.dr * i
                 vdr = self.dr * self.distance[index][i] ** 2
@@ -75,19 +80,27 @@ class PairDistributionFunction:
         """
         Exports the pair distribution function to a file.
         
-        Temporary function to be replaced by the export function of the io module.
+        Temporary function to be replaced by the export function of the io module.          
         """
-        file_name = "pair_distribution_function.dat"
+        file_name = f"pair_distribution_function-config_{self.configuration}.dat"
         with open(file_name, "w") as file:
             file.write("# pair_distribution_function\n")
-            file.write("# distance ")
+            file.write("# distance \t")
             for pair in self.pairs:
-                file.write(f"{pair[0]}-{pair[1]} ")
+                file.write(f"{pair[0]}-{pair[1]}\t")
+            file.write("\n")
+            file.write("# avg_rij :\t")
+            for pair in self.pairs:
+                file.write(f"{self.avg_rij[self.pairs.index(pair)]:.3f}\t")
+            file.write("\n")
+            file.write("# std_rij :\t")
+            for pair in self.pairs:
+                file.write(f"{self.std_rij[self.pairs.index(pair)]:.3f}\t")
             file.write("\n")
             for i in range(1, self.n_bins):
-                file.write(f"{self.distance[0][i]} ")
+                file.write(f"{self.distance[0][i]:10.5f}\t")
                 for j in range(len(self.pairs)):
-                    file.write(f"{self.gr[j][i]} ")
+                    file.write(f"{self.gr[j][i]:10.5f}\t")
                 file.write("\n")
                
     @staticmethod
@@ -104,7 +117,7 @@ class PairDistributionFunction:
                      cutoff=float):
         
         hist = np.zeros(n_bins)
-        avg_rij = 0.0
+        rij = []
         for p1 in positions_1:
             for p2 in positions_2:
                 dx = p1[0] - p2[0]
@@ -116,5 +129,7 @@ class PairDistributionFunction:
                 r = np.sqrt(dx * dx + dy * dy + dz * dz)
                 if r_min < r <= r_max:
                     hist[int((r - r_min) / dr)] += 1
-        
-        return hist
+                    if r < cutoff:
+                        rij.append(r)
+            
+        return hist, rij

@@ -1,3 +1,5 @@
+from gspc.src.io.results import Results
+
 from gspc.src.analysis.pair_distribution_function import PairDistributionFunction
 
 class StructuralAnalyzer:
@@ -10,7 +12,9 @@ class StructuralAnalyzer:
         self.settings = settings.get_parameter_value("structural_properties_settings")
         self.list_of_properties = settings.get_parameter_value("properties_to_calculate")
         self.export_settings = settings.get_parameter_value("export_settings")
-        
+        # add a new entry to the export_settings dictionary
+        self.export_settings["export_path"] = self.export_settings['export_directory']+"/"+self.export_settings['name_of_the_project']
+                
         param = settings.get_parameter_value("export_settings")
         self.build_fancy_recaps = param['build_fancy_recaps']
         self.build_fancy_plots = param['build_fancy_plots']
