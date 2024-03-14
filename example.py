@@ -29,6 +29,9 @@ system, nConfig = gspc.io.read_xyz(
 # Wrap the positions of the system within the simulation box
 system.wrap_positions()
 
+# create the structural analyzer object
+structural_analyzer = gspc.analysis.StructuralAnalyzer(settings, system, cutoffs)
+
 # Analyse the system at each configuration
 for i in tqdm(
     range(nConfig),
@@ -51,8 +54,10 @@ for i in tqdm(
     # add the neighbours to the system
     system.add_neighbours(current_neighbours)
 
-    # create the structural analyzer object
-    structural_analyzer = gspc.analysis.StructuralAnalyzer(settings, system, i, cutoffs)
+    structural_analyzer.launch_methods(system, i)
 
-
+structural_analyzer.all_results_pdf.write_each_configuration_results(export_settings=settings.get_parameter_value("export_settings"))
+structural_analyzer.all_results_bad.write_each_configuration_results(export_settings=settings.get_parameter_value("export_settings"))
+structural_analyzer.all_results_pdf.write_average_results(export_settings=settings.get_parameter_value("export_settings"))
+structural_analyzer.all_results_bad.write_average_results(export_settings=settings.get_parameter_value("export_settings"))
 debug = 1

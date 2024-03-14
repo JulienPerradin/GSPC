@@ -44,6 +44,7 @@ class Atom:
         self.configuration = configuration
         self.cutoffs = cutoffs
         self.neighbours = []
+        self.distances_with_neighbours = []
         
         # atomic data from the periodic table
         if self.element in chemical_symbols:
@@ -82,6 +83,10 @@ class Atom:
     def add_neighbour(self, atom):
         """Add a neighbour to the list of neighbours of the atom."""
         self.neighbours.append(atom)
+    
+    def add_distance_with_neighbour(self, distance):
+        """Add a distance to the list of distances with the neighbours of the atom."""
+        self.distances_with_neighbours.append(distance)
         
     def get_correlation_length(self):
         """Returns the correlation length of the atom."""
@@ -108,7 +113,8 @@ class Atom:
         ----------
         - distances (list): List of distances between the central atom and its neighbours.
         """
-        new_list = []
+        new_list_neighbours = []
+        new_list_distances = []
         for k, other_atom in enumerate(self.neighbours):
             
             rcut = self.cutoffs.get_cutoff(self.element, other_atom.element)
@@ -119,8 +125,11 @@ class Atom:
             elif rij == 0.0:
                 pass
             else:
-                new_list.append(other_atom)
-        self.neighbours = new_list
+                new_list_neighbours.append(other_atom)
+                new_list_distances.append(rij)
+                
+        self.neighbours = new_list_neighbours
+        self.distances_with_neighbours = new_list_distances
     
     def calculate_unwrapped_position(self, box):
         """Calculates the unwrapped position of the atom."""

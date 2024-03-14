@@ -47,7 +47,8 @@ class Results:
         """
         Averages the results.
         """
-        self.average_results = np.mean(self.results, axis=0)
+        avg_result = np.array([result.results[0] for result in self.results])
+        self.average_results = np.mean(avg_result, axis=0)
 
     def get_average_results(self):
         return self.average_results
@@ -59,12 +60,8 @@ class Results:
         """
         Writes the results of each configuration to a file.
         """
-        if os.path.exists(export_settings["export_path"]):
-            if os.path.exists(export_settings["export_path"]+"/timeline"):
-                if os.path.exists(export_settings["export_path"]+"/timeline/"+self.property_name):
-                    os.remove(export_settings["export_path"]+"/timeline/"+self.property_name)
-                else:
-                    os.makedirs(export_settings["export_path"]+"/timeline/"+self.property_name)
+        if not os.path.exists(export_settings["export_path"]+"/timeline/"+self.property_name):
+            os.makedirs(export_settings["export_path"]+"/timeline/"+self.property_name)
         
         for i in range(len(self.results)):
             with open(export_settings["export_path"]+"/timeline/"+self.property_name+"/configuration_"+str(i)+".dat", "w") as file:
@@ -72,7 +69,29 @@ class Results:
                 file.write("# "+self.property_name+"\n")
                 file.write(f"# Configuration {i}\n")
                 file.write("# "+self.info+"\n")
-                for i in range(current_results.shape[0]):
-                    for j in range(current_results.shape[1]):
-                        file.write(str(current_results[i][j])+" ")
-                    file.write("\n")
+                x = current_results.results[1] # shape : (number of pairs/triplets, number of bins)
+                y = current_results.results[0] # shape : (number of pairs/triplets, number of bins)
+                x = x[0] # same x for every pair/triplet
+                y = y.T # shape : (number of bins, number of pairs/triplets)
+                
+                for j in range(x.shape[0]):
+                    file.write(str(x[j])+" ")
+                    for k in range(y.shape[1]):
+                        file.write(str(y[j][k])+" ")
+                    file.write("\n")   
+                
+                debug = 1
+    def write_average_results(self, export_settings):
+        """
+        Writes the average results to a file.
+        """
+        if not os.path.exists(export_settings["export_path"]):
+            os.makedirs(export_settings["export_path"])
+        self.compute_average_results()
+        with open(export_settings["export_path"]+"/"+self.property_name+".dat", "w") as file:
+            file.write("# "+self.property_name+"\n")
+            file.write("# "+self.info+"\n")
+            for i in range(self.average_results.shape[0]):
+                for j in range(self.average_results.shape[1]):
+                    file.write(str(self.average_results[i][j])+" ")
+                file.write("\n")

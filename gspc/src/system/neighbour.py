@@ -92,8 +92,9 @@ class Neighbour:
             filtered_distances = distances[valid_indices]
             
             # add the neighbours to the central atoms
-            for j in filtered_indices:
-                self.atoms[i].add_neighbour(self.atoms[j])
+            for j, k in enumerate(filtered_indices):
+                self.atoms[i].add_neighbour(self.atoms[k])
+                self.atoms[i].add_distance_with_neighbour(filtered_distances[j])
 
             self.atoms[i].filter_neighbours(filtered_distances)
             self.atoms[i].calculate_coordination()

@@ -18,7 +18,10 @@ class PairDistributionFunction:
         Parameters:
         -----------
         - atoms (list): List of Atom objects in the system.
-        - settings (dict): Dictionary containing the settings for the pair distribution function.
+        - box (Box): Box object containing the box dimensions.
+        - configuration (int): Index of the configuration to be analyzed.
+        - cutoffs (Cutoffs): Cutoffs object containing the cutoffs for each pair of elements. 
+        - settings (dict): Dictionary containing the settings for the bond angular distribution.
         """
         self.atoms = atoms
         self.box = box
@@ -28,13 +31,13 @@ class PairDistributionFunction:
         self.r_max = self.settings["r_max"]
         self.r_min = self.settings["r_min"]
         self.n_bins = self.settings["n_bins"]
-        self.dr = (self.r_max - self.r_min) / self.n_bins
-        self.volume = self.box.get_volume(self.configuration)
+        self.dr = (self.r_max - self.r_min) / self.n_bins # bin width
+        self.volume = self.box.get_volume(self.configuration) 
         self.lx, self.ly, self.lz = self.box.get_box_dimensions(self.configuration)
         
         self.elements = np.unique([atom.get_element() for atom in self.atoms])
         
-        self.pairs = list(itertools.combinations_with_replacement(self.elements, 2))
+        self.pairs = settings["pairs"]
         
         self.rdf = np.zeros((len(self.pairs), self.n_bins))
         
@@ -43,18 +46,16 @@ class PairDistributionFunction:
         self.avg_rij = np.zeros(len(self.pairs)) # average distance between first neighbours of each pair
         self.std_rij = np.zeros(len(self.pairs)) # standard deviation of the distance between first neighbours of each pair
         
-        debug = 1
-    
     def compute(self):
         """
         Computes the pair distribution function of the system.
         """
         progress_bar = tqdm(self.pairs, desc="Computing pair distribution function", colour="BLUE", leave=False, ascii=True)
         for pair in progress_bar:
-            progress_bar.set_description(f"Computing pair distribution function for {pair[0]}-{pair[1]}")
+            element_1 = pair['element1']
+            element_2 = pair['element2']
+            progress_bar.set_description(f"Computing pair distribution function for {element_1}-{element_2}")
             index = self.pairs.index(pair)
-            element_1 = pair[0]
-            element_2 = pair[1]
             
             cutoff = self.cutoffs.get_cutoff(element_1, element_2)
             
@@ -76,32 +77,30 @@ class PairDistributionFunction:
                 vdr = self.dr * self.distance[index][i] ** 2
                 self.gr[index][i] = self.rdf[index][i] * normalization_factor / vdr
 
-    def export(self, export_settings):
+    def get_info(self):
         """
-        Exports the pair distribution function to a file.
+        Returns the information of the pair distribution function.
+        """
+        string = f"# "
+        for pair in self.pairs:
+            element_1 = pair['element1']
+            element_2 = pair['element2']
+            string += f"{element_1}-{element_2}\t"
+        return string
+    
+    def get_results(self):
+        """
+        Returns the results of the pair distribution function.
+        """
+        return self.gr, self.distance, self.avg_rij, self.std_rij
+    
+    def get_errors(self):
+        """
+        Returns the errors of the pair distribution function.
         
-        Temporary function to be replaced by the export function of the io module.          
+        # notes: return None for now...
         """
-        file_name = f"pair_distribution_function-config_{self.configuration}.dat"
-        with open(file_name, "w") as file:
-            file.write("# pair_distribution_function\n")
-            file.write("# distance \t")
-            for pair in self.pairs:
-                file.write(f"{pair[0]}-{pair[1]}\t")
-            file.write("\n")
-            file.write("# avg_rij :\t")
-            for pair in self.pairs:
-                file.write(f"{self.avg_rij[self.pairs.index(pair)]:.3f}\t")
-            file.write("\n")
-            file.write("# std_rij :\t")
-            for pair in self.pairs:
-                file.write(f"{self.std_rij[self.pairs.index(pair)]:.3f}\t")
-            file.write("\n")
-            for i in range(1, self.n_bins):
-                file.write(f"{self.distance[0][i]:10.5f}\t")
-                for j in range(len(self.pairs)):
-                    file.write(f"{self.gr[j][i]:10.5f}\t")
-                file.write("\n")
+        return None
                
     @staticmethod
     @njit
