@@ -95,7 +95,7 @@ class BondAngularDistribution:
         """
         Returns the information of the bond angular distribution.
         """
-        string = f"#"
+        string = f""
         for triplet in self.triplets:
             element_1 = triplet["element1"]
             element_2 = triplet["element2"]

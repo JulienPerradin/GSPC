@@ -48,10 +48,11 @@ class StructuralAnalyzer:
                 pair_distribution_function.compute()
                 results_pdf = Results("pair_distribution_function", pair_distribution_function.get_info(), pair_distribution_function.get_results(), pair_distribution_function.get_errors())
                 self.all_results_pdf.add_results(results_pdf)
+                self.all_results_pdf.info = pair_distribution_function.get_info()
                                 
             if property['name'] == "bond_angular_distribution":
                 bond_angular_distribution = BondAngularDistribution(self.atoms, self.box, self.configuration, self.cutoffs, self.settings['bond_angular_distribution'])
                 bond_angular_distribution.compute()
                 results_bad = Results("bond_angular_distribution", bond_angular_distribution.get_info(), bond_angular_distribution.get_results(), bond_angular_distribution.get_errors())
                 self.all_results_bad.add_results(results_bad)
-        
+                self.all_results_bad.info = bond_angular_distribution.get_info()

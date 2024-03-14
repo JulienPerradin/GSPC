@@ -48,7 +48,11 @@ class Results:
         Averages the results.
         """
         avg_result = np.array([result.results[0] for result in self.results])
-        self.average_results = np.mean(avg_result, axis=0)
+        counter_cfg = len(avg_result)
+        if counter_cfg <= 1:
+            self.average_results = avg_result[0]
+        else:
+            self.average_results = np.sum(avg_result, axis=0)/counter_cfg
 
     def get_average_results(self):
         return self.average_results
@@ -75,9 +79,9 @@ class Results:
                 y = y.T # shape : (number of bins, number of pairs/triplets)
                 
                 for j in range(x.shape[0]):
-                    file.write(str(x[j])+" ")
+                    file.write(f"{x[j]:10.5f}"+" ")
                     for k in range(y.shape[1]):
-                        file.write(str(y[j][k])+" ")
+                        file.write(f"{y[j][k]:10.5f}"+" ")
                     file.write("\n")   
                 
                 debug = 1
@@ -91,7 +95,12 @@ class Results:
         with open(export_settings["export_path"]+"/"+self.property_name+".dat", "w") as file:
             file.write("# "+self.property_name+"\n")
             file.write("# "+self.info+"\n")
-            for i in range(self.average_results.shape[0]):
-                for j in range(self.average_results.shape[1]):
-                    file.write(str(self.average_results[i][j])+" ")
+            x = self.results[0].results[1][0] # shape : (number of pairs/triplets, number of bins)
+            y = self.average_results
+            y = y.T # shape : (number of bins, number of pairs/triplets)
+            
+            for j in range(x.shape[0]):
+                file.write(f"{x[j]:10.5f}"+" ")
+                for k in range(y.shape[1]):
+                    file.write(f"{y[j][k]:10.5f}"+" ")
                 file.write("\n")

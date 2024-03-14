@@ -13,7 +13,7 @@
     
     "properties_to_calculate": [
         {"name" : "pair_distribution_function" },
-        {"name" : "bond_angula_distribution" },
+        {"name" : "bond_angular_distribution" },
         {"name" : "connectivities" },
         {"name" : "coordination_number" }
     ],
