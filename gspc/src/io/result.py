@@ -1,40 +1,35 @@
 import numpy as np
-import os
 
-class Result:
-    """
-    Class for storing result of one configuration of a property.
-    
-    Parameters:
-    -----------
-    - name (str): Name of the property.
-    - results (list): List of results.
-    - error (list): List of errors.
-    
-    Attributes:
-    -----------
-    - property_name (str): Name of the property.
-    - results (list): List of results.
-    - error (list): List of errors.
-    
-    """
-    def __init__(self, name, info, results, error):
-        self.property_name = name
+class Results:
+    def __init__(self, name, info):
+        self.property = name
         self.info = info
-        self.results = results
-        self.error = error
-        
-    def add_results(self, results):
-        self.results.append(results)
+        self.timeline_x = np.array([])
+        self.timeline_y = np.array([])
+        self.average = 0
+        self.error = 0
     
-    def add_error(self, error):
-        self.error.append(error)
+    def add_to_timeline(self, value_x, value_y):
+        self.timeline_x = np.append(self.timeline_x, value_x)
+        self.timeline_y = np.append(self.timeline_y, value_y)
     
-    def get_results(self):
-        return self.results
+    def calculate_average(self):
+        self.average = np.mean(self.timeline_y, axis=0)
+    
+    def calculate_error(self):
+        self.error = np.std(self.timeline_y, axis=0)
+    
+    def get_property(self):
+        return self.property
+    
+    def get_info(self):
+        return self.info
+    
+    def get_timeline(self):
+        return self.timeline
+    
+    def get_average(self):
+        return self.average
     
     def get_error(self):
         return self.error
-    
-    def get_property_name(self):
-        return self.property_name

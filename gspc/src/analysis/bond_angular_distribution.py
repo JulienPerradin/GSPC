@@ -51,7 +51,7 @@ class BondAngularDistribution:
         """
         Computes the bond angular distribution of the system.
         """
-        progress_bar = tqdm(self.triplets, desc="Computing bond angular distribution", colour="BLUE", leave=False, ascii=True)
+        progress_bar = tqdm(self.triplets, desc="Computing bond angular distribution", colour="BLUE", leave=False, ascii=True, unit="triplets")
         for triplet in progress_bar:
             element_1 = triplet["element1"]
             element_2 = triplet["element2"]
@@ -108,6 +108,17 @@ class BondAngularDistribution:
         Returns the results of the bond angular distribution.
         """
         return self.bad, self.angle, self.avg_angle, self.std_angle
+    
+    def get_results_by_triplet(self, triplet):
+        """
+        Returns the results of the bond angular distribution for a specific triplet of elements.
+        
+        Parameters:
+        -----------
+        - triplet (dict): Dictionary containing the triplet of elements.
+        """
+        index = self.triplets.index(triplet)
+        return self.bad[index], self.angle[index], self.avg_angle[index], self.std_angle[index]
     
     def get_errors(self):
         """

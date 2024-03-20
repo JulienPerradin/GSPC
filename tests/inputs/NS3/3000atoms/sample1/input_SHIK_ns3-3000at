@@ -1,0 +1,122 @@
+# SHIK NS3  0.25Na2O-0.75SiO2 Sample Code
+
+units           lj
+atom_style      charge
+
+# 1 is Oxygen
+# 2 is Silicon
+# 3 is Sodium
+
+
+region          mybox block 0 35.48 0 35.48 0 35.48 units box
+create_box      3 mybox
+variable        l equal 1750
+variable        m equal 750
+variable        n equal 500
+
+create_atoms   1 random  $l   629 mybox units box
+create_atoms   2 random  $m  729 mybox units box
+create_atoms   3 random  $n  829 mybox units box
+print          "finish creating box and atoms\n"
+
+pair_style      shik/wolf 8.0 10.0   
+
+mass            1 1.0
+mass            2 1.755
+mass            3 1.437
+
+group           go type 1 1
+group           gsi type 2 2
+group           gna type 3 3
+
+variable       t equal 0.3033
+velocity       all create $t 87287
+
+# Binder uses 1.6 fs, that is equivalent to 0.04
+# 0.026 Internal Temperature=300 K
+# 1 Internal Pressure=160 GPa
+
+
+
+set             group go charge -3.540011662 
+set             group gsi charge 6.737574454   
+set             group gna charge 2.283679136  
+#The charge is multiplied by 3.7947 for unit conversion and absorbing the constant and rounded of at sixth decimal place for charge neutrality
+
+
+pair_coeff      1 1 1120.528996 2.892741833 26.13207696 16800.0 0.2 0.2
+pair_coeff      1 2 23107.84764 5.097856735 139.6947857 66.0 0.2 0.2
+pair_coeff      2 2 2797.979165 4.407320018 0.0 3423204.0 0.2 0.2
+pair_coeff      1 3 1127566 6.8986 40.562 16800.0 0.2 0.2
+pair_coeff      2 3 495653 5.4151 0.0 16800.0 0.2 0.2
+pair_coeff      3 3 1476.9 3.4075 0.0 16800.0 0.2 0.2
+
+neighbor        0.3 bin
+neigh_modify    every 1 delay 0 check no
+
+thermo          10
+thermo_style    custom step temp ke pe etotal vol press pxx pyy pzz lx ly lz enthalpy
+timestep        0.04
+
+
+fix             1 all nve/limit 0.1
+run             20000
+unfix           1
+
+reset_timestep  0
+
+
+dump           1 all xyz 1000 pos_3500K.data # Dump the xyz file
+fix            1 all nvt temp 0.3033 0.3033 10
+compute        msd1 all msd com yes
+run            350000
+unfix          1
+undump         1
+
+
+fix            1 all nvt temp 0.3033 0.26 10
+run            100000
+unfix          1
+
+variable 	p equal press
+
+fix            1 all npt temp 0.26 0.26 10 iso $p 0.001 100
+run            50000
+unfix          1
+
+dump           1 all xyz 1000 pos_3000K.data # Dump the xyz file 
+fix            1 all npt temp 0.26 0.26 10 iso 0.001 0.001 100
+compute        msd2 all msd com yes
+run            200000
+unfix          1
+undump         1
+
+dump            2 all xyz 10000 pos_quench.data # Dump the xyz file 
+dump            3 all custom 10000 latadump_nvt_quench.data id type x y z  # dump the coordinates data file in custom format.
+
+fix            1 all npt temp 0.26 0.026 10 iso 0.001 0.0 100
+run            1500000
+unfix          1
+
+undump          2
+undump          3
+
+
+fix            1 all npt temp 0.026 0.026 10 iso 0.0 0.0 100
+run            100000  #nvt run for 2 ns where structure is used for rdf calculation every 10ps
+unfix          1
+
+write_data      NS3_300K_final_rlx_sample1.data
+
+reset_timestep  0
+dump            2 all xyz 500 pos.data # Dump the xyz file 
+dump            3 all custom 100 latadump_nvt_300K_relax.data id type q x y z  
+
+fix            1 all nvt temp 0.026 0.026 10
+run            50000
+unfix          1
+
+
+write_data      NS3_300K_final_nvt_rlx_sample1.data
+
+

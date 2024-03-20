@@ -1,101 +1,62 @@
+from tqdm import tqdm
 import numpy as np
 
-import sys
+from gspc.src.core.atom import Atom
+from gspc.src.core.system import System
 
-from gspc.src.system.system import System
-from gspc.src.system.atom import Atom
-from gspc.src.system.box import Box
+def seek_to_line(file, line_number):
+    file.seek(0) # Move to the beginning of the file
+    current_line = 0
+    
+    # iterate through the file
+    for line in file:
+        if current_line == line_number:
+            return
+        current_line += 1
+        
+    
+    # if the line number is not found
+    file.seek(0,2) # Move to the end of the file
 
-def read_xyz(path_file, number_of_atoms, configuration_range, cutoffs):
+def read_xyz(file_path, frame, frame_size, cutoffs):
     """
-    Reads a XYZ data file and imports its content into the program.
-    
-    Parameters:
-    -----------
-    - path_file (str): Path to the XYZ file.
-    - number_of_atoms (int): Number of atoms in the system.
-    - configuration_range (list): Range of configurations to be read.
-    - cutoffs (list): List of cutoff distances.
-    
-    Returns:
-    --------
-    - system (System): The System object representing the system.
-    
-    Notes:
-    ------
-    - For now, the function only reads the extended XYZ format. 
-      Each configuration must starts with a first line indicating the number of atoms in the system,
-      then a second line with the box dimensions such as "Lattice=Lx 0.0 0.0 0.0 Ly 0.0 0.0 Lz",
-      finally, the atomic positions are given in the following lines such as "element x y z".
-    
-    - If configuration_range is an integer, it reads the specified number of configurations.
-      Currently, configuration_range as a string if not implemented yet. 
+    Read the xyz file and return the frame.
+
+    Parameters
+    ----------
+    file_path : str
+        The path to the xyz file.
+    frame : int
+        The frame number to read.
+
+    Returns
+    -------
+    frame : Frame
+        The frame object.
     """
-    if isinstance(configuration_range, int):
-        # Initialize the variable for configuration, atom count
-        c, n = -1, 0
-        
-        # checkpoint before the atomic informations
-        checkpoint = False
-        
-        # Initialize the system
-        system = System()
-        
-        # Initialize the box
-        lbx, lby, lbz = [], [], []
-        
-        # Open the file and read the content
-        with open(path_file, 'r', encoding="utf-8") as f:
-            data = f.readlines()
-            for i,line in enumerate(data):
-                try:
-                    if line.split()[0] == str(number_of_atoms):
-                        checkpoint = False
-                    # check if the line contains 'Lattice'
-                    if line.split('=')[0] == "Lattice":
-                        c += 1 # increment the number of configuration
-                        n = 0 # reset the atom count
-                        
-                        # read the box dimensions
-                        lattice = line.split("\"")[1] 
-                        lbx.append(float(lattice.split()[0]))
-                        lby.append(float(lattice.split()[4]))
-                        lbz.append(float(lattice.split()[8]))
-                        checkpoint = True
-                except:
-                    print("Failed to read the extended XYZ file.\n Please check the file format and try again.\n Exiting.")
-                    sys.exit(1)
-                try:
-                    # check if checkpoint is True before reading the atomic informations
-                    if checkpoint == True and line[0:7] != "Lattice":
-                        # read the atomic informations
-                        parts = line.split()
-                        x = float(parts[1])
-                        y = float(parts[2])
-                        z = float(parts[3])
-                        
-                        # create the Atom object
-                        position = np.array([x, y, z])
-                        current_atom = Atom(parts[0], n, position, 0, c, cutoffs)
-                        
-                        # add the Atom object to the system
-                        system.add_atom(current_atom)
-                        
-                        # increment the atom count
-                        n += 1
-                except:
-                    # do nothing
-                    pass
-        # create the Box object
-        box = Box(lbx, lby, lbz)
-        
-        # add the Box object to the System object
-        system.box = box
-        
-        # return the System object and the number of configurations
-        return system, c+1
     
-    elif isinstance(configuration_range, str):
-        print("The function is not implemented yet. Please use an integer for the configuration_range. Exiting.")
-        sys.exit(1)
-        
+    system = System()
+    
+    # Open the file
+    with open(file_path, 'r') as f:
+        seek_to_line(f, frame * frame_size) # Move to the frame
+        debug = f.readline() # skip the lattice properties string
+        # Read the atoms
+        for i in tqdm(range(frame_size-2), desc="Reading file", unit="atoms", leave=False, colour="GREEN"):
+            line = f.readline()
+            parts = line.split()
+            
+            element = parts[0]
+            x = float(parts[1])
+            y = float(parts[2])
+            z = float(parts[3])
+            
+            # Create the Atom object
+            position = np.array([x, y, z])
+            current_atom = Atom(element, i, position, 0, frame, cutoffs)
+            
+            system.add_atom(current_atom)
+    f.close()
+    
+    return system
+            

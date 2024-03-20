@@ -1,10 +1,7 @@
 import numpy as np
-
 from numba import njit
-
 from tqdm import tqdm
 
-import itertools
 
 class PairDistributionFunction:
     """
@@ -50,7 +47,7 @@ class PairDistributionFunction:
         """
         Computes the pair distribution function of the system.
         """
-        progress_bar = tqdm(self.pairs, desc="Computing pair distribution function", colour="BLUE", leave=False, ascii=True)
+        progress_bar = tqdm(self.pairs, desc="Computing pair distribution function", colour="BLUE", leave=False, ascii=True, unit="pairs")
         for pair in progress_bar:
             element_1 = pair['element1']
             element_2 = pair['element2']
@@ -93,6 +90,17 @@ class PairDistributionFunction:
         Returns the results of the pair distribution function.
         """
         return self.gr, self.distance, self.avg_rij, self.std_rij
+    
+    def get_results_by_pair(self, pair):
+        """
+        Returns the results of the pair distribution function for a specific pair of elements.
+        
+        Parameters:
+        -----------
+        - pair (dict): Dictionary containing the pair of elements.
+        """
+        index = self.pairs.index(pair)
+        return self.gr[index], self.distance[index], self.avg_rij[index], self.std_rij[index]
     
     def get_errors(self):
         """
