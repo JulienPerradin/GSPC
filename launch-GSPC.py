@@ -4,14 +4,17 @@ import sys
 
 settings = gspc.settings.Settings()
 
-settings.name_of_the_project.set_value("test")
-settings.export_directory.set_value("results")
-settings.path_to_xyz_file.set_value("tests/inputs/sio2-1008at-1configuration/pos10.xyz")
-settings.number_of_atoms.set_value(1008)
+name = "thisisatest"
+settings.name_of_the_project.set_value(name)
+settings.export_directory.set_value(f"results/{name}")
+settings.path_to_xyz_file.set_value("tests/inputs/sio2-96000at-multiple-config/SiO2-96000at-300K-16.667GPa.xyz")
+settings.number_of_atoms.set_value(96000)
 settings.header.set_value(2)
 settings.structure.set_value([
-                {"element": "Si", "number": 336},
-                {"element": "O" , "number": 672},
+                {"element": "Si", "alias": 2, "number": 32000},
+                {"element": "O" , "alias": 1, "number": 64000},
             ])
+settings.temperature.set_value(300) 
+settings.pressure.set_value(10)
 
 gspc.main(settings)

@@ -3,4 +3,6 @@ from gspc.src import utils
 from gspc.src import io
 from gspc.main import main
 
-utils.print_title()
+__version__ = "0.1.0"
+
+utils.print_title(__version__)

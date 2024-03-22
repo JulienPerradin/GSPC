@@ -1,4 +1,4 @@
-def print_title():
+def print_title(__version__):
     title = r'''
                                               
                                               
@@ -10,7 +10,8 @@ MM.    `7MMF'.     `MM   MM       MM.
 `Mb.     MM  Mb     dM   MM       `Mb.     ,' 
   `"bmmmdPY  P"Ybmmd"  .JMML.       `"bmmmd'  
                                               
-                                              
+                              
 '''
     print(title)
+    print(f"__version__ \u279c\t {__version__}\n")
     return None

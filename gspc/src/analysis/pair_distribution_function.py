@@ -111,7 +111,7 @@ class PairDistributionFunction:
         return None
                
     @staticmethod
-    @njit
+    @njit(cache=True, parallel=True, fastmath=True)
     def _compute_rdf(lx=float,
                      ly=float,
                      lz=float,

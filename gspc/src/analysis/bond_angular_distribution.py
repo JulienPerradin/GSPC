@@ -130,7 +130,7 @@ class BondAngularDistribution:
     
     # numba functions
     @staticmethod
-    @njit
+    @njit(cache=True, parallel=True, fastmath=True)
     def _compute_bad(same_element, lx, ly, lz, positions_1, positions_2, positions_3, dtheta, theta_min, theta_max, n_bins, cutoff_12, cutoff_23):
         """
         Computes the bond angular distribution.
