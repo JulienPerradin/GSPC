@@ -37,6 +37,7 @@ def main(settings):
     cutoffs = core.Cutoff(settings.cutoffs.get_value())
     
     # Create the Results object for each structural properties to calculate
+    results_msd = None # Mean Squared Displacement
     results_pdf = None # Pair Distribution Function
     results_bad = None # Bond Angular Distribution
     results_abl = None # Average Bond Length
@@ -45,6 +46,12 @@ def main(settings):
     all_results = [] # List of all Results objects
     
     for prop in settings.properties_to_calculate.get_value():
+        if prop == "mean_squared_displacement":
+            results_msd = io.Results(prop, "all")
+            elements = np.unique([atom['element'] for atom in settings.structure.get_value()])
+            for element in elements:
+                results_msd = io.Results(prop, element)
+            all_results.append(results_msd)
         if prop == 'pair_distribution_function':
             settings_pdf = settings.structural_properties_settings.get_value()['pair_distribution_function']
             results_pdf = []
@@ -153,6 +160,12 @@ def main(settings):
             
             # Calculate the structural properties of the system at the current configuration
             for prop in settings.properties_to_calculate.get_value():
+                if prop == 'mean_squared_displacement':
+                    msd = analysis.MeanSquaredDisplacement(current_atoms)
+                    msd.add_configuration()
+                    for j, element in enumerate(msd.elements):
+                        results_msd[j].add_to_timeline(0, msd.get_msd_element(element))
+                    results_msd[-1].add_to_timeline(0, msd.get_msd_average())
                 if prop == 'pair_distribution_function':
                     pdf = analysis.PairDistributionFunction(
                         current_atoms,

@@ -46,6 +46,7 @@ class Settings:
             self.structure = Parameter("structure", list)
             
             list = [
+                "mean_squared_displacement",
                 "pair_distribution_function",
                 "bond_angular_distribution",
                 "structural_units",
@@ -115,9 +116,10 @@ class Settings:
             self.structure = Parameter("structure", list)
             
             list = [
-                "pair_distribution_function",
-                "bond_angular_distribution",
-                "structural_units",
+                "mean_squared_displacement",
+                # "pair_distribution_function",
+                # "bond_angular_distribution",
+                # "structural_units",
             ]
             self.properties_to_calculate = Parameter("properties_to_calculate", list)
             
