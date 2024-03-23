@@ -1,0 +1,16 @@
+Metadata-Version: 2.1
+Name: gspc
+Version: 0.1.0
+Summary: This module is a tool to analyze the structural properties of glasses from molecular dynamics simulations.
+Home-page: https://github.com/JulienPerradin/gspc
+Author: Julien Perradin
+Author-email: julien.perradin@umontpellier.fr
+License: <Your-License>
+Requires-Python: >=3.9.18
+License-File: LICENCE
+Requires-Dist: numpy>=1.26.4
+Requires-Dist: numba>=0.54.1
+Requires-Dist: tqdm>=4.62.3
+Requires-Dist: datetime>=4.3
+Requires-Dist: scipy>=1.7.3
+Requires-Dist: setuptools>=58.2.0

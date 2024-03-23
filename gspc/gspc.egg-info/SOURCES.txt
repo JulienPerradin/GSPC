@@ -1,0 +1,7 @@
+LICENCE
+setup.py
+gspc.egg-info/PKG-INFO
+gspc.egg-info/SOURCES.txt
+gspc.egg-info/dependency_links.txt
+gspc.egg-info/requires.txt
+gspc.egg-info/top_level.txt

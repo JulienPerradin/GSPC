@@ -21,37 +21,40 @@ class Settings:
         self.load_default_settings(config)
         
     def load_default_settings(self, config):
+        self.multiple_trajectories = Parameter("multiple_trajectories", False)
+        self.name_of_the_project = Parameter("name_of_the_project", "default")
+        self.export_directory = Parameter("export_directory", "export")
+        self.build_fancy_recaps = Parameter("build_fancy_recaps", True)
+        self.build_fancy_plots = Parameter("build_fancy_plots", True)
+        self.path_to_xyz_file = Parameter("path_to_xyz_file", "input.xyz")
+        self.number_of_atoms = Parameter("number_of_atoms", 0)
+        self.number_of_configurations = Parameter("number_of_configurations", 0)
+        self.header = Parameter("header", 0)
+        self.range_of_frames = Parameter("range_of_frames", None)
+        self.timestep = Parameter("timestep", 0.0016)
+        self.lbox = Parameter("lbox", 0.0)
+        self.temperature = Parameter("temperature", 0.0)
+        self.pressure = Parameter("pressure", 0.0)
+        self.version = Parameter("version", "0.0.1")
+        self.quiet = Parameter("quiet", False)
+        
+        list = [
+            "mean_squared_displacement",
+            "pair_distribution_function",
+            "bond_angular_distribution",
+            "structural_units",
+            ]
+        self.properties_to_calculate = Parameter("properties_to_calculate", list)
+        
         if config == "SiO2":
-            self.multiple_trajectories = Parameter("multiple_trajectories", False)
-            self.name_of_the_project = Parameter("name_of_the_project", "default")
-            self.export_directory = Parameter("export_directory", "export")
-            self.build_fancy_recaps = Parameter("build_fancy_recaps", True)
-            self.build_fancy_plots = Parameter("build_fancy_plots", True)
-            self.path_to_xyz_file = Parameter("path_to_xyz_file", "input.xyz")
-            self.number_of_atoms = Parameter("number_of_atoms", 0)
-            self.number_of_configurations = Parameter("number_of_configurations", 0)
-            self.header = Parameter("header", 0)
-            self.range_of_frames = Parameter("range_of_frames", None)
-            self.timestep = Parameter("timestep", 0.0016)
-            self.lbox = Parameter("lbox", 0.0)
-            self.temperature = Parameter("temperature", 0.0)
-            self.pressure = Parameter("pressure", 0.0)
+            
             self.config = Parameter("config", "SiO2")
-            self.version = Parameter("version", "0.0.1")
             
             list = [
                 {"element": "Si", "alias": 2, "number": 0},
                 {"element": "O" , "aliad": 1, "number": 0},
             ]
             self.structure = Parameter("structure", list)
-            
-            list = [
-                "mean_squared_displacement",
-                "pair_distribution_function",
-                "bond_angular_distribution",
-                "structural_units",
-            ]
-            self.properties_to_calculate = Parameter("properties_to_calculate", list)
             
             dict = {
                 "pair_distribution_function": {
@@ -90,23 +93,8 @@ class Settings:
             self.cutoffs = Parameter("cutoffs", list)
         
         elif config == "Na2SiO3":
-            self.multiple_trajectories = Parameter("multiple_trajectories", False)
-            self.name_of_the_project = Parameter("name_of_the_project", "default")
-            self.export_directory = Parameter("export_directory", "export")
-            self.build_fancy_recaps = Parameter("build_fancy_recaps", True)
-            self.build_fancy_plots = Parameter("build_fancy_plots", True)
-            self.path_to_xyz_file = Parameter("path_to_xyz_file", "input.xyz")
-            self.number_of_atoms = Parameter("number_of_atoms", 0)
-            self.number_of_configurations = Parameter("number_of_configurations", 0)
-            self.header = Parameter("header", 0)
-            self.range_of_frames = Parameter("range_of_frames", None)
-            self.timestep = Parameter("timestep", 0.0016)
-            self.lbox = Parameter("lbox", 0.0)
-            self.temperature = Parameter("temperature", 0.0)
-            self.pressure = Parameter("pressure", 0.0)
+
             self.config = Parameter("config", "Na2SiO3")
-            self.version = Parameter("version", "0.0.1")
-            
             
             list = [
                 {"element": "Si", "alias": 2, "number": 0},
@@ -114,14 +102,6 @@ class Settings:
                 {"element": "Na", "alias": 3, "number": 0}
             ]
             self.structure = Parameter("structure", list)
-            
-            list = [
-                "mean_squared_displacement",
-                # "pair_distribution_function",
-                # "bond_angular_distribution",
-                # "structural_units",
-            ]
-            self.properties_to_calculate = Parameter("properties_to_calculate", list)
             
             dict = {
                 "pair_distribution_function": {
@@ -191,26 +171,27 @@ class Settings:
     
     def print_parameters(self):
         """Prints the parameters of the settings."""
-        separator = "\t\t________________________________________________"
-        print(f"\tSETTINGS:")
-        print(f"{separator}")
-        print(f"\t\tPath to input file \u279c\t {self.path_to_xyz_file.get_value()}")
-        print(f"\t\tNumber of configs  \u279c\t {self.number_of_configurations.get_value()}")
-        if self.range_of_frames.get_value() is not None:
-            print(f"\t\tRange of frames    \u279c\t {self.range_of_frames.get_value()}")
-        print(f"\t\tNumber of atoms    \u279c\t {self.number_of_atoms.get_value()}")
-        print(f"{separator}")
-        print(f"\t\tStructure:")
-        for atom in self.structure.get_value():
-            print(f"\t\t Species \u279c\t {atom['element']:2} | Number of atoms \u279c\t {atom['number']}")
-        print(f"{separator}")
-        print(f"\t\tExport directory   \u279c\t {self.export_directory.get_value()}")
-        print(f"{separator}")
-        print(f"\t\tProperties to calculate:")
-        for prop in self.properties_to_calculate.get_value():
-            print(f"\t\t  \u279c\t {prop}")
-        
-        print(f"\n")
+        if self.quiet.get_value() is False:
+            separator = "\t\t________________________________________________"
+            print(f"\tSETTINGS:")
+            print(f"{separator}")
+            print(f"\t\tPath to input file \u279c\t {self.path_to_xyz_file.get_value()}")
+            print(f"\t\tNumber of configs  \u279c\t {self.number_of_configurations.get_value()}")
+            if self.range_of_frames.get_value() is not None:
+                print(f"\t\tRange of frames    \u279c\t {self.range_of_frames.get_value()}")
+            print(f"\t\tNumber of atoms    \u279c\t {self.number_of_atoms.get_value()}")
+            print(f"{separator}")
+            print(f"\t\tStructure:")
+            for atom in self.structure.get_value():
+                print(f"\t\t Species \u279c\t {atom['element']:2} | Number of atoms \u279c\t {atom['number']}")
+            print(f"{separator}")
+            print(f"\t\tExport directory   \u279c\t {self.export_directory.get_value()}")
+            print(f"{separator}")
+            print(f"\t\tProperties to calculate:")
+            for prop in self.properties_to_calculate.get_value():
+                print(f"\t\t  \u279c\t {prop}")
+            
+            print(f"\n")
     
     def read_settings(self, file_path):
         """Reads the settings from a file."""
