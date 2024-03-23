@@ -1,9 +1,7 @@
+# external imports
 import numpy as np
-
 from gspc.src.data import (chemical_symbols, correlation_lengths, atomic_masses)
-
 from tqdm import tqdm
-
 import sys
 
 class Atom:
@@ -44,7 +42,7 @@ class Atom:
         self.configuration = configuration
         self.cutoffs = cutoffs
         self.neighbours = []
-        self.distances_with_neighbours = []
+        self.neighbours_distance = []
         
         # atomic data from the periodic table
         if self.element in chemical_symbols:
@@ -86,7 +84,7 @@ class Atom:
     
     def add_distance_with_neighbour(self, distance):
         """Add a distance to the list of distances with the neighbours of the atom."""
-        self.distances_with_neighbours.append(distance)
+        self.neighbours_distance.append(distance)
         
     def get_correlation_length(self):
         """Returns the correlation length of the atom."""
@@ -131,13 +129,8 @@ class Atom:
                 new_list_distances.append(rij)
                 new_list_element.append(other_atom.element)
                 
-        if self.element == 'Si':
-            counter = len([neighbour for neighbour in new_list_element if neighbour == 'O'])
-            if counter < 4:
-                list = [neighbour for neighbour in self.neighbours if neighbour.element == 'O']
-                hold = 1
         self.neighbours = new_list_neighbours
-        self.distances_with_neighbours = new_list_distances
+        self.neighbours_distance = new_list_distances
     
     def calculate_unwrapped_position(self, box):
         """Calculates the unwrapped position of the atom."""

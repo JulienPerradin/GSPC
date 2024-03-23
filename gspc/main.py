@@ -4,12 +4,12 @@ It processes the input trajectory frame by frame
 and calculates the structural properties of the 
 system.
 """
-# import internal modules
+# internal imports
 from gspc.src import io
 from gspc.src import core
 from gspc.src import analysis
 
-# import the necessary packages
+# external imports
 from tqdm import tqdm
 import numpy as np
 import os

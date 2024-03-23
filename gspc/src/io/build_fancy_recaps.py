@@ -1,3 +1,4 @@
+# external imports
 from datetime import datetime
 
 def build_fancy_recaps(settings, all_results):

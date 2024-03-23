@@ -1,7 +1,6 @@
+# external imports
 import numpy as np
-
 from scipy.spatial import cKDTree
-
 from tqdm import tqdm
 
 class Neighbour:

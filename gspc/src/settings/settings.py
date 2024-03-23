@@ -1,3 +1,4 @@
+# internal imports
 from gspc.src.settings.parameter import Parameter
 
 class Settings:
@@ -18,7 +19,7 @@ class Settings:
         """
         Initializes a Settings object with a list of default Parameter objects.
         
-        Here is the list of parameters that be set:
+        Here is the list of parameters that can be set:
         - name_of_the_project: String
         - export_directory: String
         - build_fancy_recaps: Boolean
@@ -43,21 +44,32 @@ class Settings:
         self.load_default_settings(config)
         
     def load_default_settings(self, config):
-        self.name_of_the_project = Parameter("name_of_the_project", "default")
-        self.export_directory = Parameter("export_directory", "export")
-        self.build_fancy_recaps = Parameter("build_fancy_recaps", True)
-        self.build_fancy_plots = Parameter("build_fancy_plots", True)
-        self.path_to_xyz_file = Parameter("path_to_xyz_file", "input.xyz")
-        self.number_of_atoms = Parameter("number_of_atoms", 0)
-        self.number_of_configurations = Parameter("number_of_configurations", 0)
-        self.header = Parameter("header", 0)
-        self.range_of_frames = Parameter("range_of_frames", None)
-        self.timestep = Parameter("timestep", 0.0016)
-        self.lbox = Parameter("lbox", 0.0)
-        self.temperature = Parameter("temperature", 0.0)
-        self.pressure = Parameter("pressure", 0.0)
-        self.version = Parameter("version", "0.0.1")
-        self.quiet = Parameter("quiet", False)
+        """
+        Loads the default settings for a given configuration.
+        
+        Parameters:
+        -----------
+        - config: String representing the configuration to load. 
+                  Currently, only "SiO2" and "Na2SiO3" are supported.
+        
+        """
+        self.name_of_the_project        = Parameter("name_of_the_project", "default")   # Name of the project that will be used for the output directory
+        self.export_directory           = Parameter("export_directory", "export")       # Parent directory where the output files will be saved in the project directory
+        self.build_fancy_recaps         = Parameter("build_fancy_recaps", True)         # Build fancy recaps of the results into a single file
+        self.build_fancy_plots          = Parameter("build_fancy_plots", False)         # Build fancy plots of the results into a single file
+        self.path_to_xyz_file           = Parameter("path_to_xyz_file", "input.xyz")    # Path to the XYZ file containing the atomic coordinates
+        self.number_of_atoms            = Parameter("number_of_atoms", 0)               # Number of atoms in the system
+        self.number_of_configurations   = Parameter("number_of_configurations", 0)      # Number of configurations in the XYZ file
+        self.header                     = Parameter("header", 0)                        # Number of lines in the header of the XYZ file
+        self.range_of_frames            = Parameter("range_of_frames", None)            # Range of frames to be analyzed
+        self.timestep                   = Parameter("timestep", 0.0016)                 # Timestep of the simulation
+        self.lbox                       = Parameter("lbox", 0.0)                        # Box length
+        self.temperature                = Parameter("temperature", 0.0)                 # Temperature of the system
+        self.pressure                   = Parameter("pressure", 0.0)                    # Pressure of the system
+        self.version                    = Parameter("version", "0.1.0")                 # Version of the software
+        self.quiet                      = Parameter("quiet", False)                     # Do not print any settings
+        self.verbose                    = Parameter("verbose", "None")                  # Print additional information: "None", "Performance"
+        self.overwrite_by_default       = Parameter("overwrite_by_default", False)      # Overwrite the output directory by default
         
         list = [
             "mean_squared_displacement",
@@ -73,7 +85,7 @@ class Settings:
             
             list = [
                 {"element": "Si", "alias": 2, "number": 0},
-                {"element": "O" , "aliad": 1, "number": 0},
+                {"element": "O" , "alias": 1, "number": 0},
             ]
             self.structure = Parameter("structure", list)
             
@@ -169,27 +181,6 @@ class Settings:
                 ]
             self.cutoffs = Parameter("cutoffs", list)
 
-    def add_parameter(self, parameter):
-        """Adds a Parameter object to the settings."""
-        self.parameters.append(parameter)
-
-    def get_parameters(self):
-        """Returns the list of Parameter objects in the settings."""
-        return self.parameters
-
-    def get_parameter_value(self, name):
-        """Returns the value of a requested parameter in the settings."""
-        name_wrong = True
-        for param in self.parameters:
-            if name == param.name:
-                name_wrong = False
-                return param.value
-        if name_wrong:
-            print(
-                "Failed to get parameter value. Please check the name of the Parameter object."
-            )
-            return None
-    
     def print_parameters(self):
         """Prints the parameters of the settings."""
         if self.quiet.get_value() is False:
@@ -213,18 +204,3 @@ class Settings:
                 print(f"\t\t  \u279c\t {prop}")
             
             print(f"\n")
-    
-    def read_settings(self, file_path):
-        """Reads the settings from a file."""
-        import json
-        
-        print(f"\tINFO: starting analysis with parameter file\n\t\u279c\t\t{file_path}\n")
-        with open(file_path, "r") as file:
-            content = json.load(file)
-        if content is not None:
-            self.parameters = []
-            for name, value in content.items():
-                parameter = Parameter(name, value)
-                self.parameters.append(parameter)
-        else:
-            print(f"\tERROR: failed to read settings from file\n\t\u279c\t\t{file_path}.\n")

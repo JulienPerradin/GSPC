@@ -1,9 +1,7 @@
+# external imports
 import numpy as np
-
 from numba import njit
-
 from tqdm import tqdm
-
 import itertools
 
 class BondAngularDistribution:
