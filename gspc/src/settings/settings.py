@@ -195,7 +195,7 @@ class Settings:
             print(f"{separator}")
             print(f"\t\tStructure:")
             for atom in self.structure.get_value():
-                print(f"\t\t Species \u279c\t {atom['element']:2} | Number of atoms \u279c\t {atom['number']}")
+                print(f"\t\t Species \u279c\t {atom['element']:2}\t|\tNumber of atoms \u279c\t {atom['number']}")
             print(f"{separator}")
             print(f"\t\tExport directory   \u279c\t {self.export_directory.get_value()}")
             print(f"{separator}")

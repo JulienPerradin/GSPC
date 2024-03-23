@@ -1,12 +1,14 @@
-# external imports
 from tqdm import tqdm
 import numpy as np
 
-# internal imports
 from gspc.src.core.atom import Atom
 from gspc.src.core.system import System
 
 def seek_to_line(file, line_number):
+    if line_number == 0:
+        file.readline() # Skip the first line
+        return
+    
     file.seek(0) # Go to the beginning of the file
     
     current_line = 0
@@ -20,7 +22,7 @@ def seek_to_line(file, line_number):
     # if the line number is not found, raise an error
     raise ValueError(f"Line number {line_number} not found in the file.")
 
-def read_xyz(file_path, frame, frame_size, cutoffs):
+def read_and_create_system(file_path, frame, frame_size, cutoffs):
     """
     Read the xyz file and return the frame as a System object.
     
@@ -67,4 +69,3 @@ def read_xyz(file_path, frame, frame_size, cutoffs):
     
     # End reading the file and return the System object
     return system
-            

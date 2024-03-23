@@ -1,4 +1,3 @@
-# external imports
 import numpy as np
 import os
 
@@ -54,8 +53,14 @@ class Results:
         Add a new frame to the timeline.
         """
         if self.counter_frames == 0:
-            self.timeline_x = value_x
-            self.timeline_y = value_y
+            if isinstance(value_x, (int, float)):
+                self.timeline_x = np.array([value_x])
+            else:
+                self.timeline_x = value_x
+            if isinstance(value_y, (int, float)):
+                self.timeline_y = np.array([value_y])
+            else:
+                self.timeline_y = value_y
         else:
             self.timeline_x = np.vstack((self.timeline_x, value_x))
             self.timeline_y = np.vstack((self.timeline_y, value_y))
@@ -123,18 +128,16 @@ class Results:
         else:
             self.to_return = self.timeline_y
         
-        # Create the filename based on the information
+        # Create the filename based on the information provided 
+        # TODO make this work for clstr module
         if type(self.info) == dict:
-            # make the info a more readable string for pair distribution functions
             if len(self.info) == 2:
                 filename = f"{self.info['element1']}-{self.info['element2']}.dat"
                 self.info = f"{self.info['element1']}-{self.info['element2']}"
-            # make the info a more readable string for bond angular distributions
             elif len(self.info) == 3:
                 filename = f"{self.info['element1']}-{self.info['element2']}-{self.info['element3']}.dat"
                 self.info = f"{self.info['element1']}-{self.info['element2']}-{self.info['element3']}"
         else:
-            # create the filename with the information provided
             filename = f"{self.info}.dat"
         
         # Write the results to the file
