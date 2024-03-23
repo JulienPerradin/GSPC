@@ -80,6 +80,9 @@ class StructuralUnits:
                     
             self.oxygen_coordination_number = np.array(self.oxygen_coordination_number)
             
+            self.silicon_coordination_number_histogram = np.histogram(self.silicon_coordination_number,  bins=[2,3,4,5,6,7,8,9])
+            self.oxygen_coordination_number_histogram = np.histogram(self.oxygen_coordination_number, bins=[0,1,2,3,4,5,6])
+            
             self.silicon_average_coordination_number = np.mean(self.silicon_coordination_number)
             self.oxygen_average_coordination_number = np.mean(self.oxygen_coordination_number)
             
@@ -176,6 +179,8 @@ class StructuralUnits:
                 "proportion_of_OSi2": self.bridging_oxygen / len(self.oxygen) * 100,
                 "proportion_of_OSi3": len(self.list_tricluster_oxygen) / len(self.oxygen) * 100,
                 "proportion_of_OSi4": len(self.list_quadricluster_oxygen) / len(self.oxygen) * 100,
+                "silicon_coordination_number_histogram": self.silicon_coordination_number_histogram,
+                "oxygen_coordination_number_histogram": self.oxygen_coordination_number_histogram,
                 "proportion_of_q0": self.q0 / len(self.list_SiO4) * 100,
                 "proportion_of_q1": self.q1 / len(self.list_SiO4) * 100,
                 "proportion_of_q2": self.q2 / len(self.list_SiO4) * 100,
@@ -254,11 +259,17 @@ class StructuralUnits:
             self.oxygen_coordination_number = np.array(self.oxygen_coordination_number)
 
             self.sodium_coordination_number = []
+            
             for atom in self.sodium:
                 counter = len([neighbour for neighbour in atom.get_neighbours() if neighbour.get_element() == "O"])
                 self.sodium_coordination_number.append(counter)
             
-            self.sodium_coordination_number = np.array(self.sodium_coordination_number)                    
+            
+            self.sodium_coordination_number = np.array(self.sodium_coordination_number)      
+            
+            self.oxygen_coordination_number_histogram = np.histogram(self.oxygen_coordination_number, bins=[0,1,2,3,4,5,6])
+            self.silicon_coordination_number_histogram = np.histogram(self.silicon_coordination_number, bins=[2,3,4,5,6,7,8,9])
+            self.sodium_coordination_number_histogram = np.histogram(self.sodium_coordination_number, bins=[2,3,4,5,6,7,8,9,10,11])        
             
             self.silicon_average_coordination_number = np.mean(self.silicon_coordination_number)
             self.oxygen_average_coordination_number = np.mean(self.oxygen_coordination_number)
@@ -358,6 +369,9 @@ class StructuralUnits:
                 "proportion_of_OSi3": len(self.list_tricluster_oxygen) / len(self.oxygen) * 100,
                 "proportion_of_OSi4": len(self.list_quadricluster_oxygen) / len(self.oxygen) * 100,
                 "sodium_average_coordination_number": self.sodium_average_coordination_number,
+                "silicon_coordination_number_histogram": self.silicon_coordination_number_histogram,
+                "oxygen_coordination_number_histogram": self.oxygen_coordination_number_histogram,
+                "sodium_coordination_number_histogram": self.sodium_coordination_number_histogram,
                 "proportion_of_q0": self.q0 / len(self.list_SiO4) * 100,
                 "proportion_of_q1": self.q1 / len(self.list_SiO4) * 100,
                 "proportion_of_q2": self.q2 / len(self.list_SiO4) * 100,
@@ -384,9 +398,9 @@ class StructuralUnits:
         Determines the system based on the elements in the system.
         """
         elements = np.unique([atom.get_element() for atom in self.atoms])
-        if "Si" in elements and "O" in elements:
+        if "Si" in elements and "O" in elements and len(elements)==2:
             return "SiO2"
-        elif "Si" in elements and "O" in elements and "Na" in elements:
+        elif "Si" in elements and "O" in elements and "Na" in elements and len(elements)==3:
             return "Na2SiO3"
         else:
             raise ValueError("The system is not recognized.")

@@ -81,7 +81,7 @@ class Results:
             filename = f"{self.info}.dat"
         
         with open(os.path.join(export_directory,self.property,filename), 'w') as f:
-            f.write(f"# {self.property} of {self.info}\n")
+            f.write(f"# {self.property.replace('_',' ')} \u279c {self.info.replace('_',' ')}\n")
             if self.counter_frames > 1:
                 for x, y in zip(self.x_values, self.average):
                     f.write(f"{x:10.6f}\t{y:10.6f}\n")

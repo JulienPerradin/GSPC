@@ -19,4 +19,8 @@ settings.structure.set_value([
 settings.temperature.set_value(300) 
 settings.pressure.set_value(0)
 
+# settings.range_of_frames.set_value([0, 4])
+settings.properties_to_calculate.set_value([
+    "structural_units"])
+
 gspc.main(settings)

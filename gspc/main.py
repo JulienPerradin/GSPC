@@ -70,7 +70,7 @@ def main(settings):
             all_results += results_bad + results_aba
         if prop == 'structural_units':
             elements = np.unique([atom['element'] for atom in settings.structure.get_value()])
-            if ("Si" in elements and "O" in elements):
+            if ("Si" in elements and "O" in elements and len(elements) == 2):
                 results_su = [
                     io.Results("structural_units","silicon_average_coordination_number"),
                     io.Results("structural_units","proportion_of_SiO3"),
@@ -83,6 +83,8 @@ def main(settings):
                     io.Results("structural_units","proportion_of_OSi2"),
                     io.Results("structural_units","proportion_of_OSi3"),
                     io.Results("structural_units","proportion_of_OSi4"),
+                    io.Results("structural_units","silicon_coordination_number_histogram"),
+                    io.Results("structural_units","oxygen_coordination_number_histogram"),
                     io.Results("structural_units","q0"),
                     io.Results("structural_units","q1"),
                     io.Results("structural_units","q2"),
@@ -101,7 +103,7 @@ def main(settings):
                     io.Results("structural_units","edge_sharing_octahedra"),
                     io.Results("structural_units","face_sharing_octahedra"),
                 ]
-            elif ("Si" in elements and "O" in elements and "Na" in elements):
+            elif ("Si" in elements and "O" in elements and "Na" in elements and len(elements) == 3):
                 results_su = [
                     io.Results("structural_units","silicon_average_coordination_number"),
                     io.Results("structural_units","proportion_of_SiO3"),
@@ -115,6 +117,9 @@ def main(settings):
                     io.Results("structural_units","proportion_of_OSi3"),
                     io.Results("structural_units","proportion_of_OSi4"),
                     io.Results("structural_units","sodium_average_coordination_number"),
+                    io.Results("structural_units","silicon_coordination_number_histogram"),
+                    io.Results("structural_units","oxygen_coordination_number_histogram"),
+                    io.Results("structural_units","sodium_coordination_number_histogram"),
                     io.Results("structural_units","q0"),
                     io.Results("structural_units","q1"),
                     io.Results("structural_units","q2"),
@@ -198,7 +203,10 @@ def main(settings):
                     structure_results = cor.calculate()
                     counter = 0
                     for k,v in structure_results.items():
-                        results_su[counter].add_to_timeline(0, v)
+                        if isinstance(v, float):
+                            results_su[counter].add_to_timeline(0, v)
+                        else:
+                            results_su[counter].add_to_timeline(v[1], v[0]) # v[1] is the bins, v[0] is the values
                         counter += 1
     else:
         for i in tqdm(range(n_config), desc="Iterating over configurations", unit="configurations", leave=False, colour="YELLOW"):
@@ -254,7 +262,10 @@ def main(settings):
                     structure_results = cor.calculate()
                     counter = 0
                     for k,v in structure_results.items():
-                        results_su[counter].add_to_timeline(0, v)
+                        if isinstance(v, float):
+                            results_su[counter].add_to_timeline(0, v)
+                        else:
+                            results_su[counter].add_to_timeline(v[1], v[0]) # v[1] is the bins, v[0] is the values
                         counter += 1
         
     # Writing the results into the export directory and specific files
