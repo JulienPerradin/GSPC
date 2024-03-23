@@ -17,11 +17,32 @@ class Settings:
     def __init__(self, config="SiO2"):
         """
         Initializes a Settings object with a list of default Parameter objects.
+        
+        Here is the list of parameters that be set:
+        - name_of_the_project: String
+        - export_directory: String
+        - build_fancy_recaps: Boolean
+        - build_fancy_plots: Boolean
+        - path_to_xyz_file: String
+        - number_of_atoms: Integer
+        - number_of_configurations: Integer
+        - header: Integer
+        - range_of_frames: List of Integers
+        - timestep: Float
+        - lbox: Float
+        - temperature: Float
+        - pressure: Float
+        - version: String
+        - quiet: Boolean
+        - properties_to_calculate: List of Strings
+        - config: String
+        - structure: List of Dictionaries
+        - structural_properties_settings: Dictionary
+        - cutoffs: List of Dictionaries
         """
         self.load_default_settings(config)
         
     def load_default_settings(self, config):
-        self.multiple_trajectories = Parameter("multiple_trajectories", False)
         self.name_of_the_project = Parameter("name_of_the_project", "default")
         self.export_directory = Parameter("export_directory", "export")
         self.build_fancy_recaps = Parameter("build_fancy_recaps", True)
