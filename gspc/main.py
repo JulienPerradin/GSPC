@@ -147,70 +147,70 @@ def main(settings):
     else:
         start = 0
         end = n_config
-        for i in tqdm(range(start, end), desc="Iterating over configurations", unit="configurations", leave=False, colour="YELLOW"):
-            # Create the System object at the current configuration
-            system = io.read_xyz(traj_file, i, n_atoms+n_header, cutoffs)
+
+    if "mean_squared_displacement" in settings.properties_to_calculate.get_value():
+        msd = analysis.MeanSquaredDisplacement(settings)
+    for i in tqdm(range(start, end), desc="Iterating over configurations", unit="configurations", leave=False, colour="YELLOW"):
+        # Create the System object at the current configuration
+        system = io.read_and_create_system(traj_file, i, n_atoms+n_header, cutoffs)
+        
+        # Set the box of the system
+        system.box = box
+        settings.lbox.set_value(system.box.get_box_dimensions(i))
+        # Wrap the positions of the system within the simulation box
+        system.wrap_positions()
+        
+        # Get positions and mask of the system at the current configuration
+        current_positions, mask = system.get_positions_at_configuration(i)
+        
+        # Get atoms and neighbours of the system at the current configuration
+        current_atoms = system.get_atoms_at_configuration(i)
+        current_neighbours = core.Neighbour(current_atoms, i, current_positions, mask)
+        current_neighbours.calculate_neighbours(system.box, cutoffs)
+        system.add_neighbours(current_neighbours)
+        
+        # Calculate the structural properties of the system at the current configuration
+        for prop in settings.properties_to_calculate.get_value():
+            if prop == 'mean_squared_displacement':
+                msd.set_atoms(current_atoms)
+                msd.compute_msd()
+            if prop == 'pair_distribution_function':
+                pdf = analysis.PairDistributionFunction(
+                    current_atoms,
+                    system.box,
+                    i,
+                    cutoffs,
+                    settings.structural_properties_settings.get_value()['pair_distribution_function']
+                )
+                pdf.compute()
+                for j, pair in enumerate(settings_pdf['pairs']):
+                    results_pair = pdf.get_results_by_pair(pair)
+                    results_pdf[j].add_to_timeline(results_pair[1], results_pair[0])
+                    results_abl[j].add_to_timeline(pdf.std_rij[j], pdf.avg_rij[j])
             
-            # Set the box of the system
-            system.box = box
-            settings.lbox.set_value(system.box.get_box_dimensions(i))
-            # Wrap the positions of the system within the simulation box
-            system.wrap_positions()
-            
-            # Get positions and mask of the system at the current configuration
-            current_positions, mask = system.get_positions_at_configuration(i)
-            
-            # Get atoms and neighbours of the system at the current configuration
-            current_atoms = system.get_atoms_at_configuration(i)
-            current_neighbours = core.Neighbour(current_atoms, i, current_positions, mask)
-            current_neighbours.calculate_neighbours(system.box, cutoffs)
-            system.add_neighbours(current_neighbours)
-            
-            # Calculate the structural properties of the system at the current configuration
-            for prop in settings.properties_to_calculate.get_value():
-                if prop == 'mean_squared_displacement':
-                    msd = analysis.MeanSquaredDisplacement(current_atoms)
-                    msd.add_configuration()
-                    for j, element in enumerate(msd.elements):
-                        results_msd[j].add_to_timeline(0, msd.get_msd_element(element))
-                    results_msd[-1].add_to_timeline(0, msd.get_msd_average())
-                if prop == 'pair_distribution_function':
-                    pdf = analysis.PairDistributionFunction(
-                        current_atoms,
-                        system.box,
-                        i,
-                        cutoffs,
-                        settings.structural_properties_settings.get_value()['pair_distribution_function']
-                    )
-                    pdf.compute()
-                    for j, pair in enumerate(settings_pdf['pairs']):
-                        results_pair = pdf.get_results_by_pair(pair)
-                        results_pdf[j].add_to_timeline(results_pair[1], results_pair[0])
-                        results_abl[j].add_to_timeline(pdf.std_rij[j], pdf.avg_rij[j])
-                
-                if prop == 'bond_angular_distribution':
-                    bad = analysis.BondAngularDistribution(
-                        current_atoms,
-                        system.box,
-                        i,
-                        cutoffs,
-                        settings.structural_properties_settings.get_value()['bond_angular_distribution']
-                    )
-                    bad.compute()
-                    for j, triplet in enumerate(settings_bad['triplets']):
-                        results_triplet = bad.get_results_by_triplet(triplet)
-                        results_bad[j].add_to_timeline(results_triplet[1], results_triplet[0])
-                        results_aba[j].add_to_timeline(bad.std_angle[j], bad.avg_angle[j])
-                if prop == 'structural_units':
-                    cor = analysis.StructuralUnits(current_atoms)
-                    structure_results = cor.calculate()
-                    counter = 0
-                    for k,v in structure_results.items():
-                        if isinstance(v, float):
-                            results_su[counter].add_to_timeline(0, v)
-                        else:
-                            results_su[counter].add_to_timeline(v[1], v[0]) # v[1] is the bins, v[0] is the values
-                        counter += 1
+            if prop == 'bond_angular_distribution':
+                bad = analysis.BondAngularDistribution(
+                    current_atoms,
+                    system.box,
+                    i,
+                    cutoffs,
+                    settings.structural_properties_settings.get_value()['bond_angular_distribution']
+                )
+                bad.compute()
+                for j, triplet in enumerate(settings_bad['triplets']):
+                    results_triplet = bad.get_results_by_triplet(triplet)
+                    results_bad[j].add_to_timeline(results_triplet[1], results_triplet[0])
+                    results_aba[j].add_to_timeline(bad.std_angle[j], bad.avg_angle[j])
+            if prop == 'structural_units':
+                cor = analysis.StructuralUnits(current_atoms)
+                structure_results = cor.calculate()
+                counter = 0
+                for k,v in structure_results.items():
+                    if isinstance(v, float):
+                        results_su[counter].add_to_timeline(0, v)
+                    else:
+                        results_su[counter].add_to_timeline(v[1], v[0]) # v[1] is the bins, v[0] is the values
+                    counter += 1
         
     # Writing the results into the export directory and specific files
     for result in all_results:

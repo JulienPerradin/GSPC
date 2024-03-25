@@ -48,7 +48,7 @@ class Atom:
         if self.element in chemical_symbols:
             index = np.where(self.element == chemical_symbols)[0].astype(np.int32)
             self.correlation_length = correlation_lengths[index][0]
-            self.atomic_mass = atomic_masses[index][0]
+            self.mass = atomic_masses[index][0]
         else:
             print(f"Element {self.element} not found in the periodic table.")
             print("Failed to initialize the Atom. Exiting.")
@@ -92,7 +92,7 @@ class Atom:
     
     def get_atomic_mass(self):
         """Returns the atomic mass of the atom."""
-        return self.atomic_mass
+        return self.mass
     
     
     def calculate_coordination(self):

@@ -62,7 +62,8 @@ class Settings:
         self.number_of_configurations   = Parameter("number_of_configurations", 0)      # Number of configurations in the XYZ file
         self.header                     = Parameter("header", 0)                        # Number of lines in the header of the XYZ file
         self.range_of_frames            = Parameter("range_of_frames", None)            # Range of frames to be analyzed
-        self.timestep                   = Parameter("timestep", 0.0016)                 # Timestep of the simulation
+        self.timestep                   = Parameter("timestep", 0.0016)                 # Timestep of the simulation [ps]
+        self.print_level                = Parameter("print_level", 1)                   # Print level of the simulation
         self.lbox                       = Parameter("lbox", 0.0)                        # Box length
         self.temperature                = Parameter("temperature", 0.0)                 # Temperature of the system
         self.pressure                   = Parameter("pressure", 0.0)                    # Pressure of the system

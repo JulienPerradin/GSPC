@@ -18,9 +18,10 @@ settings.structure.set_value([
             ])
 settings.temperature.set_value(300) 
 settings.pressure.set_value(0)
+settings.print_level.set_value(500)
 
-# settings.range_of_frames.set_value([0, 4])
+settings.range_of_frames.set_value([0, 4])
 settings.properties_to_calculate.set_value([
-    "structural_units"])
+    "mean_squared_displacement",])
 
 gspc.main(settings)
