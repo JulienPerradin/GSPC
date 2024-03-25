@@ -22,6 +22,6 @@ settings.print_level.set_value(500)
 
 settings.range_of_frames.set_value([0, 4])
 settings.properties_to_calculate.set_value([
-    "mean_squared_displacement",])
+    "structural_units",])
 
 gspc.main(settings)

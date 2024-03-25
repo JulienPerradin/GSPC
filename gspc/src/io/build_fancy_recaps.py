@@ -57,6 +57,8 @@ MM.    `7MMF'.     `MM   MM       MM.
         f.write(f"# Header of the xyz file          \u279c\t {settings.header.get_value()}\n")
         f.write(f"# Timestep [ps]                   \u279c\t {settings.timestep.get_value()}\n")
         f.write(f"# Temperature [K]                 \u279c\t {settings.temperature.get_value()}\n")
+        f.write(f"# Density [g/cm^3]                \u279c\t {settings.density.get_value()}\n")
+        f.write(f"# Volume [Angstrom^3]             \u279c\t {settings.volume.get_value()}\n")
         f.write(f"# Pressure [GPa]                  \u279c\t {settings.pressure.get_value()}\n")
         f.write(f"# Export directory                \u279c\t {export_directory}\n")
         f.write(f"# Date and time of this recaps    \u279c\t {datetime.now()}\n\n")

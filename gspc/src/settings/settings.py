@@ -67,6 +67,8 @@ class Settings:
         self.lbox                       = Parameter("lbox", 0.0)                        # Box length
         self.temperature                = Parameter("temperature", 0.0)                 # Temperature of the system
         self.pressure                   = Parameter("pressure", 0.0)                    # Pressure of the system
+        self.density                    = Parameter("density", 0.0)                     # Density of the system
+        self.volume                     = Parameter("volume", 0.0)                      # Volume of the system
         self.version                    = Parameter("version", "0.1.0")                 # Version of the software
         self.quiet                      = Parameter("quiet", False)                     # Do not print any settings
         self.verbose                    = Parameter("verbose", "None")                  # Print additional information: "None", "Performance"

@@ -32,7 +32,7 @@ def main(settings):
     # Create the Box object and append size for each frame
     box = core.Box()
     io.read_lattices_properties(box, traj_file)
-    
+      
     # Create the Cutoffs object
     cutoffs = core.Cutoff(settings.cutoffs.get_value())
     
@@ -140,7 +140,7 @@ def main(settings):
                 ]
             all_results += results_su
         
-    # Loop over the configurations
+    # Setting up the loop
     if settings.range_of_frames.get_value() is not None:
         start = settings.range_of_frames.get_value()[0]
         end = settings.range_of_frames.get_value()[1]
@@ -148,8 +148,11 @@ def main(settings):
         start = 0
         end = n_config
 
+    # Initialize the Mean Squared Displacement object cause it is a dynamical property
     if "mean_squared_displacement" in settings.properties_to_calculate.get_value():
         msd = analysis.MeanSquaredDisplacement(settings)
+    
+    # Loop over the configurations
     for i in tqdm(range(start, end), desc="Iterating over configurations", unit="configurations", leave=False, colour="YELLOW"):
         # Create the System object at the current configuration
         system = io.read_and_create_system(traj_file, i, n_atoms+n_header, cutoffs)
@@ -168,6 +171,11 @@ def main(settings):
         current_neighbours = core.Neighbour(current_atoms, i, current_positions, mask)
         current_neighbours.calculate_neighbours(system.box, cutoffs)
         system.add_neighbours(current_neighbours)
+        
+        # Calculate the density and the volume of the system at the current configuration
+        density, volume = system.calculate_density_and_volume(i)
+        settings.density.set_value(density)
+        settings.volume.set_value(volume)
         
         # Calculate the structural properties of the system at the current configuration
         for prop in settings.properties_to_calculate.get_value():

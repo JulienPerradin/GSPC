@@ -173,14 +173,28 @@ class System:
                 map(
                     lambda atom: atom.element,
                     filter(
-                        lambda atom: hasattr(atom, "configuration")
-                        and atom.configuration == 0,
+                        lambda atom: hasattr(atom, "configuration"),
                         self.atoms,
                     ),
                 )
             )
         )
         return np.unique(filtered_elements, return_counts=True)
+
+    def get_unique_masses(self):
+        """Returns the unique masses present in the system along with their counts."""
+        filtered_masses = np.array(
+            list(
+                map(
+                    lambda atom: atom.mass,
+                    filter(
+                        lambda atom: hasattr(atom, "configuration"),
+                        self.atoms,
+                    ),
+                )
+            )
+        )
+        return np.unique(filtered_masses, return_counts=True)
 
     def wrap_positions(self):
         """Wraps atomic positions inside the simulation box using periodic boundary conditions."""
@@ -197,11 +211,26 @@ class System:
                 # Apply periodic boundary conditions for each dimension
                 atom.position[i] = np.mod(atom.position[i] + box_size[i], box_size[i])
 
-    def compute_system_mass(self):
-        """Returns the molecular mass of the system."""
-        filtered_atoms = self.get_atoms_at_configuration(0)
-        mass = 0
-        for atom in filtered_atoms:
-            mass += atom.atomic_mass
+    def calculate_density_and_volume(self, configuration):
+        """
+        Calculates the density and volume of the system.
+        """
+        masses = self.get_unique_masses()
+        # Conversion factors
+        conversion_au_to_g = 1.66053906660e-24
+        conversion_angstrom_to_cm = 1e-8
+        
+        total_mass = 0
+        for i in range(len(masses[0])):
+            # Calculate the contribution of each element
+            total_mass += (masses[0][i] * masses[1][i] * conversion_au_to_g)
 
-        return mass
+        # Calculate the volume of the system
+        box_size = self.box.get_box_dimensions(configuration)
+        volume = self.box.get_volume(configuration)
+        converted_volume = np.prod(box_size) * conversion_angstrom_to_cm**3
+        
+        # Calculate the density of the system
+        density = total_mass / converted_volume
+        
+        return density, volume
