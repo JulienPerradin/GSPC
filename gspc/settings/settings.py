@@ -1,5 +1,5 @@
 # internal imports
-from .parameter import Parameter
+from .parameter import Parameter, PDFParameter, BADParameter
 
 # external imports
 import importlib
@@ -45,6 +45,7 @@ class Settings:
         self.number_of_frames : Parameter = Parameter("number_of_frames", 0)
         self.header : Parameter = Parameter("header", 0)
         self.range_of_frames : Parameter = Parameter("range_of_frames", None)
+        self.frames_to_analyse : Parameter = Parameter("frames_to_analyse", 0)
         self.timestep : Parameter = Parameter("timestep", 0.0016)
         self.lbox : Parameter = Parameter("lbox", 0)
         self.temperature : Parameter = Parameter("temperature", 300)
@@ -72,6 +73,9 @@ class Settings:
         ]
         
         self.properties : Parameter = Parameter("properties", list_properties)
+        
+        self.pdf_settings : PDFParameter = PDFParameter(nbins=600, rmax=10.0)
+        self.bad_settings : BADParameter = BADParameter(nbins=600, theta_max=180.0)
         
     def print_settings(self) -> None:
         """

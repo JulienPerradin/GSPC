@@ -4,6 +4,7 @@ This file contains all the methods / functions that are specific to SiO2 oxide.
 # external imports
 import  numpy as np
 from    tqdm import tqdm
+from    numba import njit
 
 # internal imports
 from ..core.atom            import Atom
@@ -11,25 +12,103 @@ from ..core.box             import Box
 from ..utils.generate_color_gradient import generate_color_gradient
 
 
-# List of supported elements for the extension SiOz
+# List of supported elements for the extension SiO2
 LIST_OF_SUPPORTED_ELEMENTS = ["Si", "O"]
 
 class Silicon(Atom):
     def __init__(self, element, id, position, frame, cutoffs, extension) -> None:
         super().__init__(element, id, position, frame, cutoffs, extension)
-        self.number_of_edges = 0 
+        self.number_of_corners : int = 0
+        self.number_of_edges : int = 0 
+        self.number_of_faces : int = 0
+        self.qi_species : int = 0
+    
+    def get_number_of_corners(self) -> int:
+        """
+        Return the number of corner sharings
+        """
+        return self.number_of_corners
     
     def get_number_of_edges(self) -> int:
         """
-        Return the number of edges sharing
+        Return the number of edge sharings
         """
         return self.number_of_edges
+
+    def get_number_of_faces(self) -> int:
+        """
+        Return the number of face sharings
+        """
+        return self.number_of_faces
+    
+    def get_qi_species(self) -> int:
+        """
+        Return the Qi species
+        """
+        return self.qi_species
     
     def calculate_coordination(self) -> int:
         """
-        Calculate the coordination number of the atom (ie the number of first neighbours) for the extension SiOz
+        Calculate the coordination number of the atom (ie the number of first neighbours) for the extension SiO2
         """
         self.coordination = len([neighbour for neighbour in self.neighbours if neighbour.get_element() == "O"])
+        
+    def calculate_angles_with_neighbours(self, box: Box) -> dict:
+        r"""
+        Calculate and sort the angles between the atom and its neighbours.
+        
+        Parameters:
+        ----------
+            - box (Box) : Box object.
+        
+        Returns:
+        --------
+            - dict : List of angles between the atom and its neighbours.
+        """
+        angles = {}
+        angles_OSiO = []
+        angles_SiSiSi = []
+        
+        for neighbour_1 in self.neighbours:
+            for neighbour_2 in self.neighbours:
+                if neighbour_1 != neighbour_2:
+                    if neighbour_1.get_element() == "O" and neighbour_2.get_element() == "O":
+                        angle = self.calculate_angle(neighbour_1, neighbour_2, box)
+                        angles_OSiO.append(angle)
+                    if neighbour_1.get_element() == "Si" and neighbour_2.get_element() == "Si":
+                        angle = self.calculate_angle(neighbour_1, neighbour_2, box)
+                        angles_SiSiSi.append(angle)
+        
+        angles["OSiO"] = angles_OSiO
+        angles["SiSiSi"] = angles_SiSiSi
+        
+        return angles
+    
+    def calculate_distances_with_neighbours(self) -> dict:
+        r"""
+        Calculate and sort the distances between the atom and its neighbours.
+            
+        Returns:
+        --------
+            - dict : List of distances between the atom and its neighbours.
+        """
+        distances = {}
+        distances_SiO = []
+        distances_SiSi = []
+        
+        for counter, neighbour in enumerate(self.long_range_neighbours):
+            if neighbour.get_element() == "O":
+                distance = self.long_range_distances[counter]
+                distances_SiO.append(distance)
+            if neighbour.get_element() == "Si":
+                distance = self.long_range_distances[counter]
+                distances_SiSi.append(distance)
+                
+        distances["SiO"] = distances_SiO
+        distances["SiSi"] = distances_SiSi
+        
+        return distances
+                            
             
 
 class Oxygen(Atom):
@@ -38,9 +117,63 @@ class Oxygen(Atom):
     
     def calculate_coordination(self) -> int:
         """
-        Calculate the coordination number of the atom (ie the number of first neighbours) for the extension SiOz
+        Calculate the coordination number of the atom (ie the number of first neighbours) for the extension SiO2
         """
         self.coordination = len([neighbour for neighbour in self.neighbours if neighbour.get_element() == "Si"])
+        
+    def calculate_angles_with_neighbours(self, box: Box) -> dict:
+        r"""
+        Calculate the angles between the atom and its neighbours.
+        
+        Parameters:
+        ----------
+            - box (Box) : Box object.
+        
+        Returns:
+        --------
+            - dict : List of angles between the atom and its neighbours.
+        """
+        angles = {}
+        angles_SiOSi = []
+        angles_OOO = []
+        
+        for neighbour_1 in self.neighbours:
+            for neighbour_2 in self.neighbours:
+                if neighbour_1 != neighbour_2:
+                    if neighbour_1.get_element() == "O" and neighbour_2.get_element() == "O":
+                        angle = self.calculate_angle(neighbour_1, neighbour_2, box)
+                        angles_OOO.append(angle)
+                    if neighbour_1.get_element() == "Si" and neighbour_2.get_element() == "Si":
+                        angle = self.calculate_angle(neighbour_1, neighbour_2, box)
+                        angles_SiOSi.append(angle)
+        
+        angles["OOO"] = angles_OOO
+        angles["SiOSi"] = angles_SiOSi
+        
+        return angles
+
+    def calculate_distances_with_neighbours(self) -> dict:
+        r"""
+        Calculate and sort the distances between the atom and its neighbours.
+            
+        Returns:
+        --------
+            - dict : List of distances between the atom and its neighbours.
+        """
+        distances = {}
+        # distances_OSi = [] # NOTE: not used because it's already calculate in the Silicon class: distances_SiO.
+        distances_OO = []
+        
+        for counter, neighbour in enumerate(self.long_range_neighbours):
+            if neighbour.get_element() == "Si":
+                continue
+            if neighbour.get_element() == "O":
+                distance = self.long_range_distances[counter]
+                distances_OO.append(distance)
+                
+        distances["OO"] = distances_OO
+        
+        return distances
                 
 def transform_into_subclass(atom:Atom) -> object:
     """
@@ -55,17 +188,16 @@ def transform_into_subclass(atom:Atom) -> object:
 
 def get_default_settings() -> dict:
     """
-    Method that load the default parameters for extension SiOz.
+    Method that load the default parameters for extension SiO2.
     """
     # internal imports
     from ..settings.parameter import Parameter
     
     # Structure of the system
     list_of_elements = [
-                {"element": "Si", "alias": 2, "number": 0},
-                {"element": "O" , "alias": 1, "number": 0}
+                {"element": "Si", "number": 0},
+                {"element": "O" , "number": 0}
             ]
-            
     
     # Pair cutoffs for the clusters
     list_of_cutoffs = [
@@ -76,28 +208,16 @@ def get_default_settings() -> dict:
     
     # Settings
     dict_settings = {
-        "extension": Parameter("extension", "SiOz"),
+        "extension": Parameter("extension", "SiO2"),
         "structure": Parameter("structure", list_of_elements),
         "cutoffs": Parameter("cutoffs", list_of_cutoffs),
     }
     
     return dict_settings
 
-def calculate_structural_units(atoms) -> dict:
+def calculate_structural_units(atoms) -> None:
     """
-    Calculate the following properties.
-    
-    Returns:
-    --------
-        - SiO4      : list of SiO4 tetrahedra
-        - SiO5      : list of SiO5 pentahedra
-        - SiO6      : list of SiO6 octahedra
-        - SiO7      : list of SiO7 eptahedra 
-        - OSi1      : list of OSi1
-        - OSi2      : list of OSi2
-        - OSi3      : list of OSi3
-        - OSi4      : list of OSi4
-        - ES_SiO6   : proportion of edge-sharing in SiO6 units
+    Calculate the number of SiO_z and OSi_k units for each atom in the system.
     """
     
     # Initialize the lists 
@@ -146,6 +266,15 @@ def calculate_structural_units(atoms) -> dict:
             
     _debug_histogram_proportion_OSik = np.histogram(coordination_OSiz, bins=[1,2,3,4,5], density=True) 
     
+    # Calculate the Qi species (ie number of bridging oxygens for SiO4 units)
+    for silicon in SiO4:
+        bridging_oxygens = [neighbour for neighbour in silicon.get_neighbours() if neighbour.get_element() == "O"]
+        counter = 0
+        for oxygen in bridging_oxygens:
+            if oxygen in OSi2 or oxygen in OSi3 or oxygen in OSi4:
+                counter += 1
+        silicon.qi_species = counter
+    
     # Calculate the number of edge-sharing (2 oxygens shared by 2 silicons)
     for silicon in silicons:
         unique_bond = []
@@ -158,22 +287,13 @@ def calculate_structural_units(atoms) -> dict:
         uniques, counts = np.unique(unique_bond, return_counts=True)
         
         for connectivity in counts:
+            if connectivity == 1: # 1 oxygen is shared by 'silicon' and 'second_silicon'
+                silicon.number_of_corners += 1
             if connectivity == 2: # 2 oxygens are shared by 'silicon' and 'second_silicon'
                 silicon.number_of_edges += 1
+            if connectivity == 3: # 3 oxygens are shared by 'silicon' and 'second_silicon'
+                silicon.number_of_faces += 1
 
         if silicon.number_of_edges == 2:
             ES_SiO6.append(silicon)
     
-    dict_results = {
-        "SiO4" :  SiO4,
-        "SiO5" :  SiO5,
-        "SiO6" :  SiO6,
-        "SiO7" :  SiO7,
-        "OSi1" :  OSi1,
-        "OSi2" :  OSi2,
-        "OSi3" :  OSi3,
-        "OSi4" :  OSi4,
-        "ES_SiO6" :  ES_SiO6
-        }
-    
-    return dict_results

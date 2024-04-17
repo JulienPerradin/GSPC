@@ -54,6 +54,12 @@ class System:
         # Set the cutoffs of the system.
         self.cutoffs : object = Cutoff(settings.cutoffs.get_value()) # Cutoffs of the system
         
+        # Set the structural attributes
+        self.structural_units : dict = {}   # Structural units of the system
+        self.angles : dict = {}             # Bond angular distribution of the system
+        self.distances : dict = {}          # Pair distribution function of the system
+        
+        
     def add_atom(self, atom) -> None:
         r"""
         Add an Atom object to the list of atoms.
@@ -62,7 +68,7 @@ class System:
         --------
             - None.
         """
-        module = importlib.import_module(f"clstr.extensions.{self.settings.extension.get_value()}")
+        module = importlib.import_module(f"gspc.extensions.{self.settings.extension.get_value()}")
         transformed_atom = module.transform_into_subclass(atom)
         self.atoms.append(transformed_atom)
     
@@ -140,7 +146,7 @@ class System:
         """
         filtered_atoms = list(
                 filter(
-                    lambda atom: hasattr(atom, "frame", "element")
+                    lambda atom: hasattr(atom, "frame")
                     and atom.frame == self.frame
                     and atom.element == element,
                     self.atoms,
@@ -283,9 +289,191 @@ class System:
             - None.
         """
         
-        module = importlib.import_module(f"clstr.extensions.{extension}")
+        module = importlib.import_module(f"gspc.extensions.{extension}")
         
         self.structural_units = module.calculate_structural_units(self.get_atoms())
+        
+    def calculate_bond_angular_distribution(self) -> None:
+        r"""
+        Determine the bond angular distribution of the system.
+        
+        Returns:
+        --------
+            - None.
+        """
+        
+        if self.settings.quiet.get_value() == False:
+            progress_bar = tqdm(self.atoms, desc="Calculating bond angular distribution ...", colour="#00ffff", leave=False, unit="atom")
+            color_gradient = generate_color_gradient(len(self.atoms))
+        else:
+            progress_bar = self.atoms
+        
+        for atom in progress_bar:
+            # Update the progress bar
+            if self.settings.quiet.get_value() == False:
+                progress_bar.set_description(f"Calculating bond angular distribution {atom.id} ...")
+                progress_bar.colour = "#%02x%02x%02x" % color_gradient[atom.id]
+                
+            dict_angles = atom.calculate_angles_with_neighbours(self.box)
+            for key, value in dict_angles.items():
+                if key in self.angles:
+                    self.angles[key].extend(value)
+                else:
+                    self.angles[key] = value
+        
+                    
+        # Calculate the bond angular distribution
+        nbins = self.settings.bad_settings.get_nbins()
+        theta_max = self.settings.bad_settings.get_theta_max()
+        self.angles['theta'] = None # Initialize the theta values
+        for key, value in self.angles.items():
+            if key == 'theta':
+                continue
+            self.angles[key], bins = np.histogram(value, bins=nbins, range=(0, theta_max))
+            self.angles['theta'] = bins[:-1]
+            self.angles[key] = self.angles[key] / (np.sum(self.angles[key]) * 180 / nbins)
+            
+        
+    def calculate_long_range_neighbours(self):
+        r"""
+        Calculate the nearest neighbours of all the atom in the system.        
+        - NOTE: this method is extension dependant.
+        
+        Returns:
+        --------
+            - None.
+        """
+        
+        # Wrap all the positions inside the simulation box first
+        self.wrap_atomic_positions()
+        
+        # Get the simulation box size
+        box_size = self.box.get_box_dimensions(self.frame)
+        
+        # Get all the atomic positions
+        positions, mask = self.get_positions()
+        
+        # Get the maximum value of the cutoffs of the system
+        max_cutoff = self.settings.pdf_settings.get_rmax()
+        
+        # Calculate the tree with the pbc applied
+        tree_with_pbc = cKDTree(positions, boxsize=box_size)
+        
+        # Set the progress bar
+        if self.settings.quiet.get_value() == False:
+            color_gradient = generate_color_gradient(len(positions))
+            progress_bar = tqdm(range(len(positions)), desc="Fetching long range neighbours ...", colour="#00ffff", leave=False, unit="atom")
+        else:
+            progress_bar = range(len(positions))
+        
+        # Loop over the atomic positions
+        for i in progress_bar:
+            # Update progress bar
+            if self.settings.quiet.get_value() == False:
+                progress_bar.set_description(f"Fetching long range neighbours {i} ...")
+                progress_bar.colour = "#%02x%02x%02x" % color_gradient[i]
+            
+            # Process with pbc applied
+            # Query the neighbouring atoms within the cutoff distance
+            index = tree_with_pbc.query_ball_point(positions[i], max_cutoff)
+            
+            # Calculate the distance with k nearest neighbours
+            distances, indices = tree_with_pbc.query(positions[i], k=len(index))
+            
+            # Remove self from the list of neighbours
+            distances = distances[1:]
+            indices = indices[1:]
+            
+            # Check if result is a list or a int
+            if isinstance(indices, int):
+                # indices is an int, turn indices into a list of a single int
+                indices = [indices]
+            
+            # Check if results is a list of a int
+            if isinstance(distances, int):
+                # distances is an int, turn distances into a list of a single int
+                distances = [distances]
+            
+            # Add the nearest neighbours to central atom
+            for counter, j in enumerate(indices):
+                self.atoms[i].add_long_range_neighbour(self.atoms[j])
+                self.atoms[i].add_long_range_distance(distances[counter])
+            
+    def calculate_pair_distribution_function(self):
+        r"""
+        Determine the pair distribution function of the system.
+        
+        Returns:
+        --------
+            - None.
+        """
+        
+        self.settings.pdf_settings.check_rmax(self.box, self.frame)
+        
+        self.calculate_long_range_neighbours()
+        
+        if self.settings.quiet.get_value() == False:
+            progress_bar = tqdm(self.atoms, desc="Calculating pair distribution function ...", colour="#00ffff", leave=False, unit="atom")
+            color_gradient = generate_color_gradient(len(self.atoms))
+        else:
+            progress_bar = self.atoms
+        
+        for atom in progress_bar:
+            # Update the progress bar
+            if self.settings.quiet.get_value() == False:
+                progress_bar.set_description(f"Calculating pair distribution function {atom.id} ...")
+                progress_bar.colour = "#%02x%02x%02x" % color_gradient[atom.id]
+                
+            dict_distances = atom.calculate_distances_with_neighbours()
+            for key, value in dict_distances.items():
+                if key in self.distances:
+                    self.distances[key].extend(value)
+                else:
+                    self.distances[key] = value
+                    
+        # Calculate the pair distribution function
+        nbins = self.settings.pdf_settings.get_nbins()
+        rmax = self.settings.pdf_settings.get_rmax()
+        self.distances['r'] = None
+        for key, value in self.distances.items():
+            if key == 'r':
+                continue
+            self.distances[key], bins = np.histogram(value, bins=nbins, range=(0, rmax))
+            self.distances['r'] = bins[:-1]
+            self.distances[key] = self.distances[key] / 2 # divide by 2 to avoid double counting
+            same_species, species = self.decrypt_key(key)
+            n_atoms_norm = 1
+            for s in species:
+                n_atoms_norm *= len(self.get_atoms_by_element(s))
+            if same_species:
+                n_atoms_norm -= 1
+            normalization_factor = self.box.get_volume(self.frame) / (4.0 * np.pi * n_atoms_norm)
+            for i in range(1, nbins):
+                vdr = self.distances['r'][i] ** 2
+                self.distances[key][i] = self.distances[key][i] * normalization_factor / vdr
+                    
     
-    
-    
+    def decrypt_key(self, key) -> bool:
+        r"""
+        Decrypt a key of a dictionary.
+        
+        Parameters:
+        -----------
+            - key (str) : Key to decrypt.
+        
+        Returns:
+        --------
+            - bool : True if the key is same species, False otherwise.
+        """
+        import re
+        
+        species = []
+        
+        matchs = re.findall(r'[A-Z][a-z]?', key)
+        for match in matchs:
+            if len(match) == 2 and match[1].isupper():
+                species.extend(match)
+            else:
+                species.append(match)
+                
+        return species[0] == species[1], species 

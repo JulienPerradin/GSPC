@@ -1,6 +1,7 @@
 # internal imports
 from ..data import (chemical_symbols, atomic_masses)
 from .cutoff import Cutoff
+from .box import Box
 
 # external imports
 import  numpy as np
@@ -72,6 +73,8 @@ class Atom:
         # Initialize neighbours attributes 
         self.neighbours : list = [] # first neighbours (pbc applied)
         self.coordination : int = 0 # number of neighbours around the atom (pbc applied)
+        self.long_range_neighbours : list = [] # long range neighbours (pbc applied)
+        self.long_range_distances : list = [] # long range distances with long range neighbours (pbc applied)
         
     #____________GETTER METHODS____________
     
@@ -144,6 +147,26 @@ class Atom:
             - int : Coordination number of the Atom.
         """
         return self.coordination
+    
+    def get_long_range_neighbours(self) -> list:
+        r"""
+        Return the list of long range neighbours of the Atom.
+        
+        Returns:
+        --------
+            - list : List of the long range neighbours of the Atom.
+        """
+        return self.long_range_neighbours
+    
+    def get_long_range_distances(self) -> list:
+        r"""
+        Return the list of distances to the long range neighbours of the Atom.
+        
+        Returns:
+        --------
+            - list : List of the distances to the long range neighbours of the Atom.
+        """
+        return self.long_range_distances
 
     #____________NEIGHBOURS METHODS____________
     
@@ -160,6 +183,34 @@ class Atom:
             - None.
         """
         self.neighbours.append(neighbour)
+    
+    def add_long_range_neighbour(self, neighbour) -> None:
+        r"""
+        Add a long range neighbour to the list of neighbours of the Atom.
+        
+        Parameters:
+        -----------
+            - neighbour (Atom) : Atom object to append to the list of long range neighbours.
+            
+        Returns:
+        --------
+            - None.
+        """
+        self.long_range_neighbours.append(neighbour)
+    
+    def add_long_range_distance(self, distance) -> None:
+        r"""
+        Add the distance to a long range neighbour to the list of distances.
+        
+        Parameters:
+        -----------
+            - distance (float) : Distance to append to the list of distances.
+            
+        Returns:
+        --------
+            - None.
+        """
+        self.long_range_distances.append(distance)
     
     def filter_neighbours(self, distances) -> None:
         r"""
@@ -194,3 +245,27 @@ class Atom:
                 new_list_distances.append(current_distance)
 
         self.neighbours = new_list_neighbours
+        
+# ------------------ Structural properties ------------------
+
+    def calculate_angle(self, neighbour_1, neighbour_2, box: Box) -> float:
+        r"""
+        Calculate the angle between the atom and two neighbours.
+        
+        Parameters:
+        -----------
+            - neighbour_1 (Atom) : First neighbour.
+            - neighbour_2 (Atom) : Second neighbour.
+            - box (Box) : The simulation box.
+        
+        Returns:
+        --------
+            - float : Angle between the atom and the two neighbours.
+        """
+        box_dimensions = box.get_box_dimensions(self.frame)
+        vector_1 = box.minimum_image_distance(box_dimensions, self.position, neighbour_1.get_position())
+        vector_2 = box.minimum_image_distance(box_dimensions, self.position, neighbour_2.get_position())
+        
+        angle = np.arccos(np.dot(vector_1, vector_2) / (np.linalg.norm(vector_1) * np.linalg.norm(vector_2)))
+        
+        return np.degrees(angle)

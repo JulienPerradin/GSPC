@@ -1,3 +1,7 @@
+# external imports
+import numpy as np
+from numba import njit
+
 class Box:
     r"""
     Represents a simulation box in three-dimensional space at each frame of the trajectory.
@@ -71,4 +75,29 @@ class Box:
         --------
             - list: Dimensions of the box [length_x, length_y, length_z].
         """
-        return [self.length_x[configuration], self.length_y[configuration], self.length_z[configuration]]
+        return np.array([self.length_x[configuration], self.length_y[configuration], self.length_z[configuration]])
+
+    @staticmethod
+    @njit(fastmath=True, cache=True)
+    def minimum_image_distance(box_dimensions: np.array, position_1: np.array, position_2: np.array) -> np.ndarray:
+        r"""
+        Calculate the minimum image distance between two points in the box.
+
+        Parameters:
+        -----------
+            - position_1 (np.ndarray): Position of the first point.
+            - position_2 (np.ndarray): Position of the second point.
+            - configuration (int): Index of the configuration.
+
+        Returns:
+        --------
+            - np.ndarray: Minimum image distance between the two points.
+        """
+        box = box_dimensions
+        dx = position_1[0] - position_2[0]
+        dy = position_1[1] - position_2[1]
+        dz = position_1[2] - position_2[2]
+        dx -= round(dx / box[0]) * box[0]
+        dy -= round(dy / box[1]) * box[1]
+        dz -= round(dz / box[2]) * box[2]
+        return np.array([dx, dy, dz])
