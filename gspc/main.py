@@ -61,6 +61,33 @@ def main(settings):
     # Keep track of the previous runs if overwrite_results is set to False
     overwrite_results = settings.overwrite_results.get_value()
     
+    # Create the results objects
+    # TODO complete the list of results objects # PRIO1
+    results_pdf = {}
+    results_bad = {}
+    results_msd = {}
+    results_sru = {}
+    
+    # Generate the keys for the results objects
+    keys_pdf = module.return_keys('pair_distribution_function')
+    keys_bad = module.return_keys('bond_angular_distribution')
+    keys_msd = module.return_keys('mean_square_displacement')
+    keys_sru = module.return_keys('structural_units')
+    
+    # Create the results objects
+    for key in keys_pdf:
+        results_pdf[key] = io.DistResult("pair_distribution_function", key, start)
+        results_pdf[key].write_file_header(settings._output_directory, end-start)
+    for key in keys_bad:
+        results_bad[key] = io.DistResult("bond_angular_distribution", key, start)
+        results_bad[key].write_file_header(settings._output_directory, end-start)
+    # for key in keys_msd:
+    #     results_msd[key] = io.Result("mean_square_displacement", key, start)
+    #     results_msd[key].write_file_header(settings._output_directory, end-start)
+    # for key in keys_sru:
+    #     results_sru[key] = io.Result("structural_units", key, start)
+    #     results_sru[key].write_file_header(settings._output_directory, end-start)
+    
     # Loop over the frames in the trajectory
     for i in progress_bar:
         # Update the progress bar
@@ -69,7 +96,28 @@ def main(settings):
             progress_bar.colour = "#%02x%02x%02x" % color_gradient[i-start]
             
         # Create the System object at the current frame
-        system = io.read_and_create_system(input_file, i, n_atoms+n_header, settings, cutoffs, start, end)
+        if i == start:
+            system, reference_positions = io.read_and_create_system(input_file, i, n_atoms+n_header, settings, cutoffs, start, end)
+            for atom in system.atoms:
+                for ref in reference_positions:
+                    if atom.id == ref.id:
+                        atom.set_reference_position(ref)
+                        # next atom
+                        break
+        else:
+            system, current_positions = io.read_and_create_system(input_file, i, n_atoms+n_header, settings, cutoffs, start, end)
+            for atom in system.atoms:
+                for cur in current_positions:
+                    if atom.id == cur.id:
+                        atom.set_current_position(cur)
+                        # next atom
+                        break
+            for atom in system.atoms:
+                for ref in reference_positions:
+                    if atom.id == ref.id:
+                        atom.set_reference_position(ref)
+                        # next atom
+                        break
         system.frame = i
         
         # Set the Box object to the System object
@@ -79,11 +127,11 @@ def main(settings):
         # Calculate the nearest neighbours of all atoms in the system
         system.calculate_neighbours()
         
+        # Calculate the mean square displacement
+        # system.calculate_mean_square_displacement()
+        
         # Calculate the structural units of the system
         system.calculate_structural_units(settings.extension.get_value())
-        
-        _debug_list_si = [atom for atom in system.atoms if atom.get_element() == "Si"]
-        _debug_list_o  = [atom for atom in system.atoms if atom.get_element() == "O"]
         
         # Calculate the bond angular distribution
         system.calculate_bond_angular_distribution()
@@ -91,4 +139,18 @@ def main(settings):
         # Calculate the pair distribution function
         system.calculate_pair_distribution_function()        
         
-        DEBUG = True
+        # Add the results to the timeline
+        for key in keys_pdf:
+            results_pdf[key].add_to_timeline(i, system.distances['r'], system.distances[key])
+        for key in keys_bad:
+            results_bad[key].add_to_timeline(i, system.angles['theta'], system.angles[key])
+        
+        
+    for key in keys_pdf:
+        results_pdf[key].calculate_average_distribution()
+        results_pdf[key].append_results_to_file()
+    for key in keys_bad:
+        results_bad[key].calculate_average_distribution()
+        results_bad[key].append_results_to_file()
+    
+    DEBUG = True

@@ -11,6 +11,7 @@ import  inspect
 from .cutoff import Cutoff
 from ..utils.generate_color_gradient import generate_color_gradient
 
+        
 class System:
     r"""
     Represents a system of atoms and provides methods for analyzing and manipulating the system.
@@ -274,7 +275,9 @@ class System:
             
             self.atoms[i].filter_neighbours(distances)
             self.atoms[i].calculate_coordination()
-    
+            
+# ---------------------- Structural properties calculation methods ---------------------- #            
+
     def calculate_structural_units(self, extension) -> None:
         r"""
         Determine the structural units and other structural properties.
@@ -332,7 +335,16 @@ class System:
             self.angles[key], bins = np.histogram(value, bins=nbins, range=(0, theta_max))
             self.angles['theta'] = bins[:-1]
             self.angles[key] = self.angles[key] / (np.sum(self.angles[key]) * 180 / nbins)
-            
+    
+    def get_bond_angular_distribution(self) -> dict:
+        r"""
+        Return the bond angular distribution of the system.
+        
+        Returns:
+        --------
+            - dict : Bond angular distribution of the system.
+        """
+        return self.angles
         
     def calculate_long_range_neighbours(self):
         r"""
@@ -450,8 +462,7 @@ class System:
             normalization_factor = self.box.get_volume(self.frame) / (4.0 * np.pi * n_atoms_norm)
             for i in range(1, nbins):
                 vdr = self.distances['r'][i] ** 2
-                self.distances[key][i] = self.distances[key][i] * normalization_factor / vdr
-                    
+                self.distances[key][i] = self.distances[key][i] * normalization_factor / vdr            
     
     def decrypt_key(self, key) -> bool:
         r"""
@@ -476,4 +487,36 @@ class System:
             else:
                 species.append(match)
                 
-        return species[0] == species[1], species 
+        return species[0] == species[1], species
+    
+    def get_pair_distribution_function(self) -> dict:
+        r"""
+        Return the pair distribution function of the system.
+        
+        Returns:
+        --------
+            - dict : Pair distribution function of the system.
+        """
+        return self.distances
+    
+    def calculate_mean_square_displacement(self) -> None:
+        r"""
+        Calculate the mean square displacement of the system.
+        
+        Returns:
+        --------
+            - None.
+        """
+        if self.settings.quiet.get_value() == False:
+            progress_bar = tqdm(self.atoms, desc="Calculating mean square displacement ...", colour="#00ffff", leave=False, unit="atom")
+            color_gradient = generate_color_gradient(len(self.atoms))
+        else:
+            progress_bar = self.atoms
+        
+        for atom in progress_bar:
+            # Update the progress bar
+            if self.settings.quiet.get_value() == False:
+                progress_bar.set_description(f"Calculating mean square displacement {atom.id} ...")
+                progress_bar.colour = "#%02x%02x%02x" % color_gradient[atom.id]
+                
+            atom.calculate_mean_square_displacement()

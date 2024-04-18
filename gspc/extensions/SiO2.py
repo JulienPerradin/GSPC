@@ -215,6 +215,34 @@ def get_default_settings() -> dict:
     
     return dict_settings
 
+def return_keys(property: str) -> list:
+    """
+    Return the keys needed for the results dictionary.
+    """
+    if property == "pair_distribution_function":
+        return ["SiO", "SiSi", "OO"]
+    elif property == "bond_angular_distribution":
+        return ["SiOSi", "SiSiSi", "OSiO", "OOO"]
+    elif property == "mean_square_displacement":
+        return ["Si", "O", "total"]
+    elif property == "structural_units":
+        return ["SiO4", 
+                "SiO5", 
+                "SiO6", 
+                "SiO7", 
+                "OSi1", 
+                "OSi2", 
+                "OSi3", 
+                "OSi4",
+                "CS_SiO6", 
+                "ES_SiO6",
+                "FS_SiO6", 
+                "Qi_species", 
+                "propertion_corners", 
+                "proportion_edges", 
+                "proportion_faces"]
+    # TODO: add the other properties
+
 def calculate_structural_units(atoms) -> None:
     """
     Calculate the number of SiO_z and OSi_k units for each atom in the system.

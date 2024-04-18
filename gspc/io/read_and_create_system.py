@@ -4,7 +4,7 @@ import numpy as np
 import importlib
 
 # internal imports
-from ..core.atom import Atom
+from ..core.atom import Atom, ReferencePosition, CurrentPosition
 from ..core.system import System
 from ..data import chemical_symbols
 
@@ -65,6 +65,11 @@ def read_and_create_system(file_path, frame, frame_size, settings, cutoffs, star
     
     header = settings.header.get_value()
     
+    if frame == start:
+        reference_positions = []
+    else:
+        current_positions = []
+    
     # Open the file
     with open(file_path, "r") as f:
         seek_to_line(f, frame * frame_size) # Go to the beginning of the frame
@@ -101,6 +106,14 @@ def read_and_create_system(file_path, frame, frame_size, settings, cutoffs, star
                 
                 # Add the atom to the system
                 system.add_atom(current_atom)
+                
+                if frame == start:
+                    reference_position = ReferencePosition(position, element, i)
+                    reference_positions.append(reference_position)
+                else:
+                    current_position = CurrentPosition(position, element, i, frame)
+                    current_positions.append(current_position) 
+                    
             elif element not in module.LIST_OF_SUPPORTED_ELEMENTS and element in chemical_symbols:
                 sum_skipped += 1
                 if element not in atom_skipped:
@@ -135,4 +148,7 @@ def read_and_create_system(file_path, frame, frame_size, settings, cutoffs, star
                     f.write(f"\u279c {k} : {v}\n")
 
     # End reading the file and return the System object
-    return system
+    if frame == start:
+        return system, reference_positions
+    else:
+        return system, current_positions

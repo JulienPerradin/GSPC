@@ -6,6 +6,130 @@ from .box import Box
 # external imports
 import  numpy as np
 import  sys
+from    dataclasses import dataclass
+
+@dataclass
+class ReferencePosition:
+    r"""
+    Represents a reference position of an atom in the system at the first frame.
+    
+    Attributes:
+    -----------
+        - position (np.array): Position of the atom.
+        - element (str): Element of the atom.
+        - id (int): Id of the atom.
+    """
+    def __init__(self, position, element, id) -> None:
+        r"""
+        Initializes a ReferencePosition object.
+        
+        Parameters:
+        -----------
+            - position (np.array): Position of the atom.
+            - element (str): Element of the atom.
+            - id (int): Id of the atom.
+        """
+        self.position : np.array = position
+        self.element : str = element
+        self.id : int = id
+    
+    def get_position(self) -> np.array:
+        r"""
+        Return the position of the atom.
+        
+        Returns:
+        --------
+            - np.array: Position of the atom.
+        """
+        return self.position
+    
+    def get_element(self) -> str:
+        r"""
+        Return the element of the atom.
+        
+        Returns:
+        --------
+            - str: Element of the atom.
+        """
+        return self.element
+    
+    def get_id(self) -> int:
+        r"""
+        Return the id of the atom.
+        
+        Returns:
+        --------
+            - int: Id of the atom.
+        """
+        return self.id
+    
+@dataclass
+class CurrentPosition:
+    r"""
+    Represents the non-wrapped current position of an atom in the system at a given frame.
+    
+    Attributes:
+    -----------
+        - position (np.array): Position of the atom.
+        - element (str): Element of the atom.
+        - id (int): Id of the atom.
+        - frame (int): Frame number.
+    """
+    def __init__(self, position, element, id, frame) -> None:
+        r"""
+        Initializes a CurrentPosition object.
+        
+        Parameters:
+        -----------
+            - position (np.array): Position of the atom.
+            - element (str): Element of the atom.
+            - id (int): Id of the atom.
+            - frame (int): Frame number.
+        """
+        self.position : np.array = position
+        self.element : str = element
+        self.id : int = id
+        self.frame : int = frame
+    
+    def get_position(self) -> np.array:
+        r"""
+        Return the position of the atom.
+        
+        Returns:
+        --------
+            - np.array: Position of the atom.
+        """
+        return self.position
+    
+    def get_element(self) -> str:
+        r"""
+        Return the element of the atom.
+        
+        Returns:
+        --------
+            - str: Element of the atom.
+        """
+        return self.element
+    
+    def get_id(self) -> int:
+        r"""
+        Return the id of the atom.
+        
+        Returns:
+        --------
+            - int: Id of the atom.
+        """
+        return self.id
+    
+    def get_frame(self) -> int:
+        r"""
+        Return the frame number.
+        
+        Returns:
+        --------
+            - int: Frame number.
+        """
+        return self.frame
 
 class Atom:
     r"""
@@ -75,6 +199,10 @@ class Atom:
         self.coordination : int = 0 # number of neighbours around the atom (pbc applied)
         self.long_range_neighbours : list = [] # long range neighbours (pbc applied)
         self.long_range_distances : list = [] # long range distances with long range neighbours (pbc applied)
+        
+        # Initialize the mean square displacement attributes
+        self.reference_position = None # ReferencePosition object
+        self.current_position = None # CurrentPosition object
         
     #____________GETTER METHODS____________
     
@@ -269,3 +397,31 @@ class Atom:
         angle = np.arccos(np.dot(vector_1, vector_2) / (np.linalg.norm(vector_1) * np.linalg.norm(vector_2)))
         
         return np.degrees(angle)
+    
+    def set_reference_position(self, reference_position: ReferencePosition) -> None:
+        r"""
+        Set the reference position of the atom.
+        
+        Parameters:
+        -----------
+            - reference_position (ReferencePosition) : Reference position of the atom.
+        
+        Returns:
+        --------
+            - None.
+        """
+        self.reference_position = reference_position
+        
+    def set_current_position(self, current_position: CurrentPosition) -> None:
+        r"""
+        Set the current position of the atom.
+        
+        Parameters:
+        -----------
+            - current_position (CurrentPosition) : Current position of the atom.
+        
+        Returns:
+        --------
+            - None.
+        """
+        self.current_position = current_position
