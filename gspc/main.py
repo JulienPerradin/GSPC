@@ -84,10 +84,11 @@ def main(settings):
     # for key in keys_msd:
     #     results_msd[key] = io.Result("mean_square_displacement", key, start)
     #     results_msd[key].write_file_header(settings._output_directory, end-start)
-    # for key in keys_sru:
-    #     results_sru[key] = io.Result("structural_units", key, start)
-    #     results_sru[key].write_file_header(settings._output_directory, end-start)
-    
+    for dict_key in keys_sru:
+        for key in dict_key:
+            results_sru[key] = io.PropResult(key, dict_key[key], start)
+            results_sru[key].write_file_header(settings._output_directory, end-start)
+            DEBUG = False    
     # Loop over the frames in the trajectory
     for i in progress_bar:
         # Update the progress bar
@@ -144,6 +145,10 @@ def main(settings):
             results_pdf[key].add_to_timeline(i, system.distances['r'], system.distances[key])
         for key in keys_bad:
             results_bad[key].add_to_timeline(i, system.angles['theta'], system.angles[key])
+        # for key in keys_msd:
+        #     results_msd[key].add_to_timeline(i, system.msd[key])
+        for key in keys_sru:
+            results_sru[key].add_to_timeline(i, system.sru[key])
         
         
     for key in keys_pdf:

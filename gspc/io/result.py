@@ -132,7 +132,7 @@ class PropResult(Result):
         super().__init__(property, info, init_frame)
         self.filepath : str = ""
         
-    def add_to_timeline(self, frame: int, value: float) -> None:
+    def add_to_timeline(self, frame: int, value: dict) -> None:
         """
         Appends a data point to the timeline.
         """
@@ -143,9 +143,13 @@ class PropResult(Result):
         Calculates the average proportion based on the timeline data.
         """
         for frame, value in self.timeline.items():
-            self.result += value
+            for key, val in value.items():
+                if key not in self.result:
+                    self.result[key] = 0.
+                self.result[key] += val
         
-        self.result /= len(self.timeline)
+        for key in self.result.keys():
+            self.result[key] /= len(self.timeline)        
         
     def write_file_header(self, path_to_directory: str, number_of_frames: int) -> None:
         """
@@ -172,8 +176,12 @@ class PropResult(Result):
         Appends the results to the output file.
         """
         with open(self.filepath, 'a') as output:
-            for frame, value in self.timeline.items():
-                output.write(f"{frame} {value}\n")
+            output.write("# ")
+            for key, value in self.result.items():
+                output.write(f"{key}:^8")
+            output.write("\n")
+            for key, value in self.result.items():
+                output.write(f"{value:^3.5f} ")
         output.close()
         
     

@@ -226,21 +226,13 @@ def return_keys(property: str) -> list:
     elif property == "mean_square_displacement":
         return ["Si", "O", "total"]
     elif property == "structural_units":
-        return ["SiO4", 
-                "SiO5", 
-                "SiO6", 
-                "SiO7", 
-                "OSi1", 
-                "OSi2", 
-                "OSi3", 
-                "OSi4",
-                "CS_SiO6", 
-                "ES_SiO6",
-                "FS_SiO6", 
-                "Qi_species", 
-                "propertion_corners", 
-                "proportion_edges", 
-                "proportion_faces"]
+        return [{"SiOz" : ["SiO4", "SiO5", "SiO6", "SiO7" ]},
+                {"OSiz" : ["OSi1", "OSi2", "OSi3", "OSi4" ]},
+                {"connectivity_SiO4" : ["CS_SiO4", "ES_SiO4", "FS_SiO4" ]},
+                {"connectivity_SiO5" : ["CS_SiO5", "ES_SiO5", "FS_SiO5" ]},
+                {"connectivity_SiO6" : ["CS_SiO6", "ES_SiO6", "FS_SiO6" ]},
+                {"connectivity" : ["proportion_corners", "proportion_edges", "proportion_faces"]}
+            ]
     # TODO: add the other properties
 
 def calculate_structural_units(atoms) -> None:
