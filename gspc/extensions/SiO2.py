@@ -108,8 +108,6 @@ class Silicon(Atom):
         distances["SiSi"] = distances_SiSi
         
         return distances
-                            
-            
 
 class Oxygen(Atom):
     def __init__(self, element, id, position, frame, cutoffs, extension) -> None:
@@ -249,7 +247,11 @@ def calculate_structural_units(atoms) -> None:
     OSi2 = []
     OSi3 = []
     OSi4 = []
-    ES_SiO6 = []
+    CS_SiO4, ES_SiO4, FS_SiO4 = [], [], []
+    CS_SiO5, ES_SiO5, FS_SiO5 = [], [], []
+    CS_SiO6, ES_SiO6, FS_SiO6 = [], [], []
+    proportion_corners, proportion_edges, proportion_faces = [], [], []
+    
     
     silicons = [atom for atom in atoms if atom.get_element() == "Si"]
     oxygens  = [atom for atom in atoms if atom.get_element() == "O" ]
@@ -314,6 +316,60 @@ def calculate_structural_units(atoms) -> None:
             if connectivity == 3: # 3 oxygens are shared by 'silicon' and 'second_silicon'
                 silicon.number_of_faces += 1
 
-        if silicon.number_of_edges == 2:
-            ES_SiO6.append(silicon)
+        if silicon.coordination == 4:
+            CS_SiO4.append(silicon.number_of_corners)
+            ES_SiO4.append(silicon.number_of_edges)
+            FS_SiO4.append(silicon.number_of_faces)
+        if silicon.coordination == 5:
+            CS_SiO5.append(silicon.number_of_corners)
+            ES_SiO5.append(silicon.number_of_edges)
+            FS_SiO5.append(silicon.number_of_faces)
+        if silicon.coordination == 6:
+            CS_SiO6.append(silicon.number_of_corners)
+            ES_SiO6.append(silicon.number_of_edges)
+            FS_SiO6.append(silicon.number_of_faces)
+        
+        proportion_corners.append(silicon.number_of_corners)
+        proportion_edges.append(silicon.number_of_edges)
+        proportion_faces.append(silicon.number_of_faces)
+    
+    # Perform the average
+    proportion_corners = np.sum(proportion_corners) / len(silicons)
+    proportion_edges = np.sum(proportion_edges) / len(silicons)
+    proportion_faces = np.sum(proportion_faces) / len(silicons)
+    nSiO4 = len(SiO4)
+    nSiO5 = len(SiO5)
+    nSiO6 = len(SiO6)
+    nSiO7 = len(SiO7)
+    SiO4 = len(SiO4) / len(silicons)
+    SiO5 = len(SiO5) / len(silicons)
+    SiO6 = len(SiO6) / len(silicons)
+    SiO7 = len(SiO7) / len(silicons)
+    OSi1 = len(OSi1) / len(oxygens)
+    OSi2 = len(OSi2) / len(oxygens)
+    OSi3 = len(OSi3) / len(oxygens)
+    OSi4 = len(OSi4) / len(oxygens)
+    CS_SiO4 = np.sum(CS_SiO4)/nSiO4
+    ES_SiO4 = np.sum(ES_SiO4)/nSiO4
+    FS_SiO4 = np.sum(FS_SiO4)/nSiO4
+    CS_SiO5 = np.sum(CS_SiO5)/nSiO5
+    ES_SiO5 = np.sum(ES_SiO5)/nSiO5
+    FS_SiO5 = np.sum(FS_SiO5)/nSiO5
+    CS_SiO6 = np.sum(CS_SiO6)/nSiO6
+    ES_SiO6 = np.sum(ES_SiO6)/nSiO6
+    FS_SiO6 = np.sum(FS_SiO6)/nSiO6
+    
+    results = {
+        "SiOz" : [SiO4, SiO5, SiO6, SiO7],
+        "OSiz" : [OSi1, OSi2, OSi3, OSi4],
+        "connectivity_SiO4" : [CS_SiO4, ES_SiO4, FS_SiO4],
+        "connectivity_SiO5" : [CS_SiO5, ES_SiO5, FS_SiO5],
+        "connectivity_SiO6" : [CS_SiO6, ES_SiO6, FS_SiO6],
+        "connectivity" : [proportion_corners, proportion_edges, proportion_faces]
+    }
+    
+    _debug_check_SiOz = np.sum(results["SiOz"])
+    _debug_check_OSiz = np.sum(results["OSiz"])
+    
+    return results
     

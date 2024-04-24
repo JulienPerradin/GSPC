@@ -147,9 +147,10 @@ def main(settings):
             results_bad[key].add_to_timeline(i, system.angles['theta'], system.angles[key])
         # for key in keys_msd:
         #     results_msd[key].add_to_timeline(i, system.msd[key])
-        for key in keys_sru:
-            results_sru[key].add_to_timeline(i, system.sru[key])
-        
+        for d in keys_sru:
+            key = list(d.keys())[0]
+            sub_keys = d[key]
+            results_sru[key].add_to_timeline(i, sub_keys, system.structural_units[key])
         
     for key in keys_pdf:
         results_pdf[key].calculate_average_distribution()
@@ -157,5 +158,8 @@ def main(settings):
     for key in keys_bad:
         results_bad[key].calculate_average_distribution()
         results_bad[key].append_results_to_file()
-    
+    for d in keys_sru:
+        key = list(d.keys())[0]
+        results_sru[key].calculate_average_proportion()
+        results_sru[key].append_results_to_file()
     DEBUG = True

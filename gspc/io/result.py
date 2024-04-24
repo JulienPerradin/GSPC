@@ -131,25 +131,26 @@ class PropResult(Result):
     def __init__(self, property: str, info: str, init_frame: int) -> None:
         super().__init__(property, info, init_frame)
         self.filepath : str = ""
+        self.result : dict = {}
         
-    def add_to_timeline(self, frame: int, value: dict) -> None:
+    def add_to_timeline(self, frame: int, keys: list, values: list) -> None:
         """
         Appends a data point to the timeline.
         """
-        self.timeline[frame] = value
+        for key, val in zip(keys,values):
+            if key not in self.timeline:
+                self.timeline[key] = []
+            self.timeline[key].append(val)
         
     def calculate_average_proportion(self) -> None:
         """
         Calculates the average proportion based on the timeline data.
         """
-        for frame, value in self.timeline.items():
-            for key, val in value.items():
-                if key not in self.result:
-                    self.result[key] = 0.
-                self.result[key] += val
+        for key, value in self.timeline.items():
+            self.result[key] = sum(value)
         
         for key in self.result.keys():
-            self.result[key] /= len(self.timeline)        
+            self.result[key] /= len(self.timeline[key])        
         
     def write_file_header(self, path_to_directory: str, number_of_frames: int) -> None:
         """
@@ -160,7 +161,7 @@ class PropResult(Result):
             - path_to_directory (str) : The path to the output directory.
             - number_of_frames (int) : The number of frames in the trajectory used in the averaging.
         """
-        filename = f"{self.property}-{self.info}.dat"
+        filename = f"{self.property}.dat"
         if not os.path.exists(path_to_directory):
             os.makedirs(path_to_directory)
             
@@ -175,10 +176,11 @@ class PropResult(Result):
         """
         Appends the results to the output file.
         """
+        DEBUG=False
         with open(self.filepath, 'a') as output:
             output.write("# ")
             for key, value in self.result.items():
-                output.write(f"{key}:^8")
+                output.write(f"{key:^8}")
             output.write("\n")
             for key, value in self.result.items():
                 output.write(f"{value:^3.5f} ")
