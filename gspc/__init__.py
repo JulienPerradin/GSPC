@@ -5,6 +5,6 @@ from . import settings
 from . import utils
 from .main import main
 
-__version__ = "0.0.2"
+__version__ = "0.0.3"
 
 utils.print_title(__version__)
