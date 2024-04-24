@@ -341,6 +341,10 @@ def calculate_structural_units(atoms) -> None:
     nSiO5 = len(SiO5)
     nSiO6 = len(SiO6)
     nSiO7 = len(SiO7)
+    if nSiO4 == 0: nSiO4 = 1
+    if nSiO5 == 0: nSiO5 = 1
+    if nSiO6 == 0: nSiO6 = 1
+    if nSiO7 == 0: nSiO7 = 1
     SiO4 = len(SiO4) / len(silicons)
     SiO5 = len(SiO5) / len(silicons)
     SiO6 = len(SiO6) / len(silicons)
