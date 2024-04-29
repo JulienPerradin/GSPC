@@ -86,18 +86,23 @@ def main(settings):
 
     # Create the results objects
     for key in keys_pdf:
-        results_pdf[key] = io.DistResult("pair_distribution_function", key, start)
-        results_pdf[key].write_file_header(settings._output_directory, end - start)
+        results_pdf[key] = io.DistResult(
+            "pair_distribution_function", key, start)
+        results_pdf[key].write_file_header(
+            settings._output_directory, end - start)
     for key in keys_bad:
-        results_bad[key] = io.DistResult("bond_angular_distribution", key, start)
-        results_bad[key].write_file_header(settings._output_directory, end - start)
-    # for key in keys_msd:
-    #     results_msd[key] = io.Result("mean_square_displacement", key, start)
-    #     results_msd[key].write_file_header(settings._output_directory, end-start)
+        results_bad[key] = io.DistResult(
+            "bond_angular_distribution", key, start)
+        results_bad[key].write_file_header(
+            settings._output_directory, end - start)
+    for key in keys_msd:
+        results_msd[key] = io.Result("mean_square_displacement", key, start)
+        results_msd[key].write_file_header(settings._output_directory, end-start)
     for dict_key in keys_sru:
         for key in dict_key:
             results_sru[key] = io.PropResult(key, dict_key[key], start)
-            results_sru[key].write_file_header(settings._output_directory, end - start)
+            results_sru[key].write_file_header(
+                settings._output_directory, end - start)
             DEBUG = False
     # Loop over the frames in the trajectory
     for i in progress_bar:
@@ -115,6 +120,7 @@ def main(settings):
                 for ref in reference_positions:
                     if atom.id == ref.id:
                         atom.set_reference_position(ref)
+                        atom.set_current_position(ref)
                         # next atom
                         break
         else:
@@ -143,7 +149,7 @@ def main(settings):
         system.calculate_neighbours()
 
         # Calculate the mean square displacement
-        # system.calculate_mean_square_displacement()
+        system.calculate_mean_square_displacement()
 
         # Calculate the structural units of the system
         system.calculate_structural_units(settings.extension.get_value())
@@ -159,16 +165,20 @@ def main(settings):
             results_pdf[key].add_to_timeline(
                 i, system.distances["r"], system.distances[key]
             )
+
         for key in keys_bad:
             results_bad[key].add_to_timeline(
                 i, system.angles["theta"], system.angles[key]
             )
-        # for key in keys_msd:
-        #     results_msd[key].add_to_timeline(i, system.msd[key])
+
+        for key in keys_msd:
+            results_msd[key].add_to_timeline(i, system.msd[key])
+
         for d in keys_sru:
             key = list(d.keys())[0]
             sub_keys = d[key]
-            results_sru[key].add_to_timeline(i, sub_keys, system.structural_units[key])
+            results_sru[key].add_to_timeline(
+                i, sub_keys, system.structural_units[key])
 
     for key in keys_pdf:
         results_pdf[key].calculate_average_distribution()
@@ -176,9 +186,11 @@ def main(settings):
     for key in keys_bad:
         results_bad[key].calculate_average_distribution()
         results_bad[key].append_results_to_file()
+    for key in keys_msd:
+        results_msd[key].calculate_average_distribution()
+        results_msd[key].append_results_to_file()
     for d in keys_sru:
         key = list(d.keys())[0]
         results_sru[key].calculate_average_proportion()
         results_sru[key].append_results_to_file()
     DEBUG = True
-

@@ -186,4 +186,70 @@ class PropResult(Result):
                 output.write(f"{value:^3.5f} ")
         output.close()
         
+class MSDResult(Result):
+    r"""
+    Represents a MSD Result.
+    
+    Attributes
+    ----------
+        - property (str) : The structural property name.
+        - info (str) : Additional informations about the property.
+        - init_frame (int) : The initial frame number.
+        - timeline (dict) : The timeline of the property.
+        - result (float) : The final result averaged over the number of frames.
+        - error (float) : The error of the final result.
+        - filepath (str) : the path to the output file.
+    """ 
+    def __init__(self, property: str, info: str, init_frame: int) -> None:
+        super().__init__(property, info, init_frame)
+        self.filepath : str = ""
+        self.result : dict = {}
+    
+    def add_to_timeline(self, frame: int, values: dict):
+        """
+        Appends a data point to the timeline.
+        """
+        self.timeline[frame] = values
+    
+    def calculate_average_msd(self) -> None:
+        # TODO implement this method #PRIO1
+        pass
+    
+    def write_file_header(self, path_to_directory: str, number_of_frames: int) -> None:
+        """
+        Initializes the output file with a header.
+        
+        Parameters:
+        -----------
+            - path_to_directory (str) : The path to the output directory.
+            - number_of_frames (int) : The number of frames in the trajectory used in the averaging.
+        """
+        filename = f"{self.property}.dat"
+        if not os.path.exists(path_to_directory):
+            os.makedirs(path_to_directory)
+            
+        self.filepath = os.path.join(path_to_directory, filename)
+        
+        with open(self.filepath, 'w') as output:
+            output.write(f"# {self.property} {self.info} \u279c {number_of_frames} frames averaged.\n")
+            # TODO add more information to the header such as the cutoff values, etc. #PRIO2
+        output.close()
+        
+    def append_results_to_file(self) -> None:
+        """
+        Appends the results to the output file.
+        
+        Parameters:
+        -----------
+            - path_to_directory (str) : The path to the output directory.
+        """
+        DEBUG=False
+        with open(self.filepath, 'a') as output:
+            output.write("# ")
+            for key, value in self.result.items():
+                output.write(f"{key:^8}")
+            output.write("\n")
+            for key, value in self.result.items():
+                output.write(f"{value:^3.5f} ")
+        output.close()
     
