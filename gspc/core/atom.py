@@ -455,9 +455,6 @@ class Atom:
         rp = self.reference_position
         cp = self.current_position
 
-        rp = np.array(rp)
-        cp = np.array(cp)
-
-        dist = np.linalg.norm(cp - rp)
+        dist = np.linalg.norm(cp.position - rp.position)
 
         return dist

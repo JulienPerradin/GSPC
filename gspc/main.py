@@ -96,7 +96,7 @@ def main(settings):
         results_bad[key].write_file_header(
             settings._output_directory, end - start)
     for key in keys_msd:
-        results_msd[key] = io.Result("mean_square_displacement", key, start)
+        results_msd[key] = io.MSDResult("mean_square_displacement", key, start)
         results_msd[key].write_file_header(settings._output_directory, end-start)
     for dict_key in keys_sru:
         for key in dict_key:
@@ -104,6 +104,7 @@ def main(settings):
             results_sru[key].write_file_header(
                 settings._output_directory, end - start)
             DEBUG = False
+            
     # Loop over the frames in the trajectory
     for i in progress_bar:
         # Update the progress bar
@@ -123,10 +124,14 @@ def main(settings):
                         atom.set_current_position(ref)
                         # next atom
                         break
+                    
+            system.init_mean_square_displacement()
         else:
+            store_msd = system.msd  
             system, current_positions = io.read_and_create_system(
                 input_file, i, n_atoms + n_header, settings, cutoffs, start, end
             )
+            system.msd = store_msd
             for atom in system.atoms:
                 for cur in current_positions:
                     if atom.id == cur.id:
@@ -149,7 +154,7 @@ def main(settings):
         system.calculate_neighbours()
 
         # Calculate the mean square displacement
-        system.calculate_mean_square_displacement()
+        if i != start: system.calculate_mean_square_displacement()
 
         # Calculate the structural units of the system
         system.calculate_structural_units(settings.extension.get_value())
@@ -171,8 +176,9 @@ def main(settings):
                 i, system.angles["theta"], system.angles[key]
             )
 
-        for key in keys_msd:
-            results_msd[key].add_to_timeline(i, system.msd[key])
+        if i != start:
+            for key in keys_msd:
+                results_msd[key].add_to_timeline(i, system.msd[key])
 
         for d in keys_sru:
             key = list(d.keys())[0]

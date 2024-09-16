@@ -64,7 +64,8 @@ class System:
         # Set the structural attributes
         self.structural_units: dict = {}  # Structural units of the system
         self.angles: dict = {}  # Bond angular distribution of the system
-        self.distances: dict = {}  # Pair distribution function of the system
+        self.distances: dict = {}  # Pair distribution function of the system 
+        self.msd: dict = {} # Mean square displacement of the system
 
     def add_atom(self, atom) -> None:
         r"""
@@ -549,6 +550,37 @@ class System:
         """
         return self.distances
 
+    def calculate_mass_per_species(self) -> dict:
+        r"""
+        Returns a dictionary containing the total mass of each species in the system.
+        
+        Returns:
+        --------
+            - dict : Dictionary containing the total mass of each species in the system.
+        """
+        mass = {}
+        for atom in self.atoms:
+            if atom.element in mass:
+                mass[atom.element] += atom.atomic_mass
+            else:
+                mass[atom.element] = atom.atomic_mass
+        return mass
+    
+    def init_mean_square_displacement(self) -> None:
+        r"""
+        Initialize the mean square displacement of the system.
+        
+        Returns:
+        --------
+            - None.
+        """
+        # Create key for each species of the system
+        species = self.get_unique_element()
+        for s in species[0]:
+            self.msd[s] = 0.0
+        self.msd["total"] = 0.0
+    
+
     def calculate_mean_square_displacement(self) -> None:
         r"""
         Calculate the mean square displacement of the system.
@@ -577,5 +609,14 @@ class System:
                 )
                 progress_bar.colour = "#%02x%02x%02x" % color_gradient[atom.id]
 
-            atom.calculate_mean_square_displacement()
+            dist = atom.calculate_mean_square_displacement()
+            
+            # Add the mean square displacement to the corresponding species
+            self.msd[atom.element] += dist**2
+            self.msd['total'] += dist**2
+            
+        HOLD = 1
+            
+            
+            
 
