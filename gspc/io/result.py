@@ -211,10 +211,18 @@ class MSDResult(Result):
         """
         self.timeline[frame] = values
     
-    def calculate_average_msd(self) -> None:
-        # TODO implement this method #PRIO1
-        pass
-    
+    def calculate_average_msd(self, mass) -> None:
+        r"""
+        Normalizes the MSD values by their mass
+        """
+        for f in self.timeline.keys():
+            for key, value in self.timeline[f].items():
+                if f not in self.result:
+                    self.result[f] = {}
+                if key not in self.result[f]:
+                    self.result[f][key] = 0.
+                self.result[f][key] += value/mass[key]
+                                
     def write_file_header(self, path_to_directory: str, number_of_frames: int) -> None:
         """
         Initializes the output file with a header.
@@ -235,7 +243,7 @@ class MSDResult(Result):
             # TODO add more information to the header such as the cutoff values, etc. #PRIO2
         output.close()
         
-    def append_results_to_file(self) -> None:
+    def append_results_to_file(self, dt, printlevel) -> None:
         """
         Appends the results to the output file.
         
@@ -243,13 +251,20 @@ class MSDResult(Result):
         -----------
             - path_to_directory (str) : The path to the output directory.
         """
-        DEBUG=False
+
         with open(self.filepath, 'a') as output:
-            output.write("# ")
-            for key, value in self.result.items():
+            keys = self.result[1].keys()   
+                         
+            output.write("#\tframe\ttime\t")
+            for key in keys:
                 output.write(f"{key:^8}")
             output.write("\n")
-            for key, value in self.result.items():
-                output.write(f"{value:^3.5f} ")
+            
+            for f in self.result.keys():
+                output.write(f"{f:^4}\t{f*(dt/printlevel):^3.5e}\t")
+                for key, value in self.result[f].items():
+                    output.write(f"{value:^3.5f} ")
+                output.write("\n")
         output.close()
     
+        DEBUG=False

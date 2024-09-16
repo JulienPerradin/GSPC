@@ -75,13 +75,11 @@ def main(settings):
     # TODO complete the list of results objects # PRIO1
     results_pdf = {}
     results_bad = {}
-    results_msd = {}
     results_sru = {}
 
     # Generate the keys for the results objects
     keys_pdf = module.return_keys("pair_distribution_function")
     keys_bad = module.return_keys("bond_angular_distribution")
-    keys_msd = module.return_keys("mean_square_displacement")
     keys_sru = module.return_keys("structural_units")
 
     # Create the results objects
@@ -95,9 +93,8 @@ def main(settings):
             "bond_angular_distribution", key, start)
         results_bad[key].write_file_header(
             settings._output_directory, end - start)
-    for key in keys_msd:
-        results_msd[key] = io.MSDResult("mean_square_displacement", key, start)
-        results_msd[key].write_file_header(settings._output_directory, end-start)
+    results_msd = io.MSDResult("mean_square_displacement", key, start)
+    results_msd.write_file_header(settings._output_directory, end-start)
     for dict_key in keys_sru:
         for key in dict_key:
             results_sru[key] = io.PropResult(key, dict_key[key], start)
@@ -177,8 +174,7 @@ def main(settings):
             )
 
         if i != start:
-            for key in keys_msd:
-                results_msd[key].add_to_timeline(i, system.msd[key])
+            results_msd.add_to_timeline(i, system.msd)
 
         for d in keys_sru:
             key = list(d.keys())[0]
@@ -192,9 +188,8 @@ def main(settings):
     for key in keys_bad:
         results_bad[key].calculate_average_distribution()
         results_bad[key].append_results_to_file()
-    for key in keys_msd:
-        results_msd[key].calculate_average_distribution()
-        results_msd[key].append_results_to_file()
+    results_msd.calculate_average_msd(system.calculate_mass_per_species())
+    results_msd.append_results_to_file(settings.msd_settings.get_dt(), settings.msd_settings.get_printlevel())
     for d in keys_sru:
         key = list(d.keys())[0]
         results_sru[key].calculate_average_proportion()

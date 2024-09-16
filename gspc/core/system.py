@@ -217,20 +217,6 @@ class System:
                 # Apply periodic boundary conditions for each dimension
                 atom.position[i] = np.mod(atom.position[i] + box_size[i], box_size[i])
 
-    def compute_mass(self) -> float:
-        r"""
-        Return the mass of the system in atomic unit.
-
-        Returns:
-        --------
-            - float : Total mass of the system.
-        """
-        mass = 0
-        for atom in self.atoms:
-            mass += atom.atomic_mass
-
-        return mass
-
     def calculate_neighbours(self) -> None:
         r"""
         Calculate the nearest neighbours of all the atom in the system.
@@ -559,11 +545,14 @@ class System:
             - dict : Dictionary containing the total mass of each species in the system.
         """
         mass = {}
+        mass['total'] = 0
         for atom in self.atoms:
             if atom.element in mass:
                 mass[atom.element] += atom.atomic_mass
+                mass["total"] += atom.atomic_mass
             else:
                 mass[atom.element] = atom.atomic_mass
+        
         return mass
     
     def init_mean_square_displacement(self) -> None:
@@ -615,8 +604,3 @@ class System:
             self.msd[atom.element] += dist**2
             self.msd['total'] += dist**2
             
-        HOLD = 1
-            
-            
-            
-

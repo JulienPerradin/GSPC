@@ -194,4 +194,45 @@ class BADParameter:
         else:
             self.theta_max = new_theta_max
             
+class MSDParameter:
+    r"""
+    The MSDParameter class represents the parameters for the Mean Square Displacement.
     
+    Attributes:
+    -----------
+        - dt (float) : Time step.
+        - printlevel (int) : Print level.
+    """
+    def __init__(self, dt:float, printlevel:int) -> None:
+        self.dt : float = dt
+        self.printlevel : int = printlevel
+        
+    def get_dt(self) -> float:
+        """
+        Return the time step.
+        """
+        return self.dt
+    
+    def get_printlevel(self) -> int:
+        """
+        Return the print level.
+        """
+        return self.printlevel
+
+    def set_dt(self, new_dt: float) -> None:
+        """
+        Set a new value for the time step.
+        """
+        if new_dt < 0:
+            raise ValueError(f"Invalid value for 'dt': {new_dt}")
+        else:
+            self.dt = new_dt
+    
+    def set_printlevel(self, new_printlevel: int) -> None:
+        """
+        Set a new value for the print level.
+        """
+        if new_printlevel <= 0:
+            raise ValueError(f"Invalid value for 'printlevel': {new_printlevel}")
+        else:
+            self.printlevel = new_printlevel

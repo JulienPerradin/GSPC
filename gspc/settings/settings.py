@@ -1,5 +1,5 @@
 # internal imports
-from .parameter import Parameter, PDFParameter, BADParameter
+from .parameter import Parameter, PDFParameter, BADParameter, MSDParameter
 
 # external imports
 import importlib
@@ -76,6 +76,7 @@ class Settings:
         
         self.pdf_settings : PDFParameter = PDFParameter(nbins=600, rmax=10.0)
         self.bad_settings : BADParameter = BADParameter(nbins=600, theta_max=180.0)
+        self.msd_settings : MSDParameter = MSDParameter(dt=0.0016, printlevel=1)
         
     def print_settings(self) -> None:
         """
