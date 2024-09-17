@@ -103,6 +103,8 @@ class Settings:
         max_attr_length = max(len(prop) for prop in self.properties.get_value())
         for prop in self.properties.get_value():
             settings_output += f"\t\t\t\u279c {prop}\n"
+            # TODO : add the detail of the properties like : 
+            #        -> mean_square_displacement : dt, printlevel
             
         settings_output += "\n"
         if self.quiet.get_value() == False:

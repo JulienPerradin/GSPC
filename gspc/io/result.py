@@ -137,20 +137,35 @@ class PropResult(Result):
         """
         Appends a data point to the timeline.
         """
-        for key, val in zip(keys,values):
-            if key not in self.timeline:
-                self.timeline[key] = []
-            self.timeline[key].append(val)
+        if self.property == "hist_polyhedricity":
+            values = np.array(values)
+            if frame not in self.timeline:
+                self.timeline[frame] = values
+            
+        else:
+            for key, val in zip(keys,values):
+                if key not in self.timeline:
+                    self.timeline[key] = []
+                self.timeline[key].append(val)
         
     def calculate_average_proportion(self) -> None:
         """
         Calculates the average proportion based on the timeline data.
         """
-        for key, value in self.timeline.items():
-            self.result[key] = sum(value)
-        
-        for key in self.result.keys():
-            self.result[key] /= len(self.timeline[key])        
+        if self.property == "hist_polyhedricity":
+            # average the histograms
+            for key, value in self.timeline.items():
+                if len(self.result) == 0:
+                    self.result = value
+                else:
+                    self.result += value
+            self.result /= len(self.timeline)
+        else:
+            for key, value in self.timeline.items():
+                self.result[key] = sum(value)
+            
+            for key in self.result.keys():
+                self.result[key] /= len(self.timeline[key])        
         
     def write_file_header(self, path_to_directory: str, number_of_frames: int) -> None:
         """
@@ -177,13 +192,27 @@ class PropResult(Result):
         Appends the results to the output file.
         """
         DEBUG=False
-        with open(self.filepath, 'a') as output:
-            output.write("# ")
-            for key, value in self.result.items():
-                output.write(f"{key:^8}")
-            output.write("\n")
-            for key, value in self.result.items():
-                output.write(f"{value:^3.5f} ")
+        if self.property == 'hist_polyhedricity':
+            with open(self.filepath, "a") as output:
+                # write headers
+                output.write("# ")
+                for i in range(len(self.info)):
+                    output.write(f"{self.info[i]:^8}\t")
+                output.write('\n')
+                # write the histograms
+                for i in range(self.result.shape[1]):
+                    for j in range(self.result.shape[0]):
+                        output.write(f"{self.result[j,i]:.5f} ")
+                    output.write("\n")
+                    
+        else:
+            with open(self.filepath, 'a') as output:
+                output.write("# ")
+                for key, value in self.result.items():
+                    output.write(f"{key:^8}\t")
+                output.write("\n")
+                for key, value in self.result.items():
+                    output.write(f"{value:^3.5f} ")
         output.close()
         
 class MSDResult(Result):
@@ -253,18 +282,22 @@ class MSDResult(Result):
         """
 
         with open(self.filepath, 'a') as output:
-            keys = self.result[1].keys()   
+            if len(self.result) > 1:
+                keys = self.result[1].keys()  
                          
-            output.write("#\tframe\ttime\t")
-            for key in keys:
-                output.write(f"{key:^8}")
-            output.write("\n")
-            
-            for f in self.result.keys():
-                output.write(f"{f:^4}\t{f*(dt/printlevel):^3.5e}\t")
-                for key, value in self.result[f].items():
-                    output.write(f"{value:^3.5f} ")
+                output.write("#\tframe\ttime\t")
+                for key in keys:
+                    output.write(f"{key:^8}")
                 output.write("\n")
+                
+                for f in self.result.keys():
+                    output.write(f"{f:^4}\t{f*(dt/printlevel):^3.5e}\t")
+                    for key, value in self.result[f].items():
+                        output.write(f"{value:^3.5f} ")
+                    output.write("\n")
+            else:
+                output.write("# trajectory too short to calculate MSD\n")
+                
         output.close()
     
         DEBUG=False

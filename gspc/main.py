@@ -73,34 +73,37 @@ def main(settings):
 
     # Create the results objects
     # TODO complete the list of results objects # PRIO1
-    results_pdf = {}
-    results_bad = {}
-    results_sru = {}
-
-    # Generate the keys for the results objects
-    keys_pdf = module.return_keys("pair_distribution_function")
-    keys_bad = module.return_keys("bond_angular_distribution")
-    keys_sru = module.return_keys("structural_units")
-
-    # Create the results objects
-    for key in keys_pdf:
-        results_pdf[key] = io.DistResult(
-            "pair_distribution_function", key, start)
-        results_pdf[key].write_file_header(
-            settings._output_directory, end - start)
-    for key in keys_bad:
-        results_bad[key] = io.DistResult(
-            "bond_angular_distribution", key, start)
-        results_bad[key].write_file_header(
-            settings._output_directory, end - start)
-    results_msd = io.MSDResult("mean_square_displacement", key, start)
-    results_msd.write_file_header(settings._output_directory, end-start)
-    for dict_key in keys_sru:
-        for key in dict_key:
-            results_sru[key] = io.PropResult(key, dict_key[key], start)
-            results_sru[key].write_file_header(
+    if "pair_distribution_function" in settings.properties.get_value():
+        results_pdf = {}
+        keys_pdf = module.return_keys("pair_distribution_function")
+        for key in keys_pdf:
+            results_pdf[key] = io.DistResult(
+                "pair_distribution_function", key, start)
+            results_pdf[key].write_file_header(
                 settings._output_directory, end - start)
-            DEBUG = False
+    
+    if "bond_angular_distribution" in settings.properties.get_value():
+        results_bad = {}
+        keys_bad = module.return_keys("bond_angular_distribution")
+        for key in keys_bad:
+            results_bad[key] = io.DistResult(
+                "bond_angular_distribution", key, start)
+            results_bad[key].write_file_header(
+                settings._output_directory, end - start)
+            
+    if "structural_units" in settings.properties.get_value():
+        results_sru = {}
+        keys_sru = module.return_keys("structural_units")
+        for dict_key in keys_sru:
+            for key in dict_key:
+                results_sru[key] = io.PropResult(key, dict_key[key], start)
+                results_sru[key].write_file_header(
+                    settings._output_directory, end - start)
+
+    if "mean_square_displacement" in settings.properties.get_value():
+        results_msd = io.MSDResult("mean_square_displacement", key, start)
+        results_msd.write_file_header(settings._output_directory, end-start)
+    
             
     # Loop over the frames in the trajectory
     for i in progress_bar:
@@ -151,47 +154,56 @@ def main(settings):
         system.calculate_neighbours()
 
         # Calculate the mean square displacement
-        if i != start: system.calculate_mean_square_displacement()
+        if "mean_square_displacement" in settings.properties.get_value():
+            if i != start: 
+                system.calculate_mean_square_displacement()
+                results_msd.add_to_timeline(i, system.msd)
 
         # Calculate the structural units of the system
-        system.calculate_structural_units(settings.extension.get_value())
+        if "structural_units" in settings.properties.get_value():
+            system.calculate_structural_units(settings.extension.get_value())
+            # Add the results to the timeline
+            for d in keys_sru:
+                key = list(d.keys())[0]
+                sub_keys = d[key]
+                results_sru[key].add_to_timeline(i, sub_keys, system.structural_units[key])
 
         # Calculate the bond angular distribution
-        system.calculate_bond_angular_distribution()
+        if "bond_angular_distribution" in settings.properties.get_value():
+            system.calculate_bond_angular_distribution()
+            # Add the results to the timeline
+            for key in keys_bad:
+                results_bad[key].add_to_timeline(
+                    i, system.angles["theta"], system.angles[key]
+                )
 
         # Calculate the pair distribution function
-        system.calculate_pair_distribution_function()
+        if "pair_distribution_function" in settings.properties.get_value():
+            system.calculate_pair_distribution_function()
+            # Add the results to the timeline
+            for key in keys_pdf:
+                results_pdf[key].add_to_timeline(
+                    i, system.distances["r"], system.distances[key]
+                )
 
-        # Add the results to the timeline
+
+    if 'pair_distribution_function' in settings.properties.get_value():
         for key in keys_pdf:
-            results_pdf[key].add_to_timeline(
-                i, system.distances["r"], system.distances[key]
-            )
-
+            results_pdf[key].calculate_average_distribution()
+            results_pdf[key].append_results_to_file()
+    
+    if 'bond_angular_distribution' in settings.properties.get_value():  
         for key in keys_bad:
-            results_bad[key].add_to_timeline(
-                i, system.angles["theta"], system.angles[key]
-            )
-
-        if i != start:
-            results_msd.add_to_timeline(i, system.msd)
-
+            results_bad[key].calculate_average_distribution()
+            results_bad[key].append_results_to_file()
+    if 'mean_square_displacement' in settings.properties.get_value():
+        results_msd.calculate_average_msd(system.calculate_mass_per_species())
+        results_msd.append_results_to_file(settings.msd_settings.get_dt(), settings.msd_settings.get_printlevel())
+    if 'structural_units' in settings.properties.get_value():
         for d in keys_sru:
             key = list(d.keys())[0]
-            sub_keys = d[key]
-            results_sru[key].add_to_timeline(
-                i, sub_keys, system.structural_units[key])
-
-    for key in keys_pdf:
-        results_pdf[key].calculate_average_distribution()
-        results_pdf[key].append_results_to_file()
-    for key in keys_bad:
-        results_bad[key].calculate_average_distribution()
-        results_bad[key].append_results_to_file()
-    results_msd.calculate_average_msd(system.calculate_mass_per_species())
-    results_msd.append_results_to_file(settings.msd_settings.get_dt(), settings.msd_settings.get_printlevel())
-    for d in keys_sru:
-        key = list(d.keys())[0]
-        results_sru[key].calculate_average_proportion()
-        results_sru[key].append_results_to_file()
+            results_sru[key].calculate_average_proportion()
+            results_sru[key].append_results_to_file()
+            
+    # END OF MAIN FUNCTION
     DEBUG = True

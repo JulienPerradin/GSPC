@@ -299,8 +299,10 @@ class System:
         """
 
         module = importlib.import_module(f"gspc.extensions.{extension}")
+        
+        box = self.box.get_box_dimensions(self.frame)
 
-        self.structural_units = module.calculate_structural_units(self.get_atoms())
+        self.structural_units = module.calculate_structural_units(self.get_atoms(), box)
 
     def calculate_bond_angular_distribution(self) -> None:
         r"""
@@ -604,3 +606,13 @@ class System:
             self.msd[atom.element] += dist**2
             self.msd['total'] += dist**2
             
+    def calculate_neutron_structure_factor(self) -> None:
+        r"""
+        Calculate the neutron structure factor of the system.
+
+        Returns:
+        --------
+            - None.
+        """
+        # TODO : implement the neutron structure factor calculation #PRIO1
+        pass
