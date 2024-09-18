@@ -1,5 +1,5 @@
 # internal imports
-from ..data import chemical_symbols, atomic_masses
+from ..data import chemical_symbols, atomic_masses, correlation_lengths
 from .cutoff import Cutoff
 from .box import Box
 
@@ -7,6 +7,7 @@ from .box import Box
 import numpy as np
 import sys
 from dataclasses import dataclass
+from numba import njit
 
 
 @dataclass
@@ -194,6 +195,7 @@ class Atom:
         if self.element in chemical_symbols:
             index = np.where(self.element == chemical_symbols)[0].astype(int)
             self.atomic_mass: float = atomic_masses[index][0]
+            self.correlation_length: float = correlation_lengths[index][0]
         else:
             print(f"\tERROR: Element {self.element} not found in the periodic table.")
             print(

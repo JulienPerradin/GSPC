@@ -7,6 +7,7 @@ import importlib
 from ..core.atom import Atom, ReferencePosition, CurrentPosition
 from ..core.system import System
 from ..data import chemical_symbols
+from ..data import correlation_lengths
 
 def seek_to_line(file, line_number) -> None:
     r"""

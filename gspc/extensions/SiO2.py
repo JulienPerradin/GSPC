@@ -284,6 +284,9 @@ def return_keys(property: str) -> list:
             {"polyhedricity": ["tetrahedra", "pentahedra", "square based pyramid", "triangular bipyramid", "octahedra"]},
             {"hist_polyhedricity": ["bins", "hist_SiO4", "hist_SiO5", "hist_SiO5_allSQP", "hist_SiO5_sqp", "hist_SiO5_allTBP", "hist_SiO5_tBP", "hist_SiO6"]},
         ]
+    elif property == "neutron_structure_factor":
+        return ["Si-Si", "Si-O", "O-O", "total"]
+    
     # TODO: add the other properties
 
 

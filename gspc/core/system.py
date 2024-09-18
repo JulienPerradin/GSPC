@@ -2,6 +2,8 @@
 import numpy as np
 from tqdm import tqdm
 from scipy.spatial import cKDTree
+from numba import njit, prange
+from numba_progress import ProgressBar #NOTE: uncomment while debugging
 import importlib
 import os
 import re
@@ -606,7 +608,7 @@ class System:
             self.msd[atom.element] += dist**2
             self.msd['total'] += dist**2
             
-    def calculate_neutron_structure_factor(self) -> None:
+    def calculate_neutron_structure_factor(self, pairs) -> None:
         r"""
         Calculate the neutron structure factor of the system.
 
@@ -614,5 +616,183 @@ class System:
         --------
             - None.
         """
-        # TODO : implement the neutron structure factor calculation #PRIO1
-        pass
+        
+        # Calculate all possible pairs of the system: 
+        #   a-b, a-a, b-b, total
+        #   a-b, a-c, b-c, a-a, b-b, c-c, total 
+        #   etc.
+        
+        # NOTE: not sure if three species are possible
+        
+        if self.settings.quiet.get_value() == False:
+            progress_bar = tqdm(
+                pairs,
+                desc="Calculating neutron structure factor ...",
+                colour="#00ffff",
+                leave=False,
+                unit="pair",
+            )
+            color_gradient = generate_color_gradient(len(pairs))
+        else:
+            progress_bar = pairs
+            
+        tpol = (2 * np.pi) / (self.box.get_box_dimensions(self.frame)[0]) # NOTE: assuming box is cubic
+        
+        # generate the q vectors
+        x_ = np.arange(tpol, 6, tpol)
+        y_ = np.arange(tpol, 6, tpol)
+        z_ = np.arange(tpol, 6, tpol)
+        x__ = x_*-1
+        y__ = y_*-1
+        z__ = z_*-1
+        x__ = np.flip(x__)
+        y__ = np.flip(y__)
+        z__ = np.flip(z__)
+        x__ = np.append(x__,0)
+        y__ = np.append(y__,0)
+        z__ = np.append(z__,0)
+        x_ = np.concatenate((x__,x_))
+        y_ = np.concatenate((y__,y_))
+        z_ = np.concatenate((z__,z_))
+        qx, qy, qz = np.meshgrid(x_, y_, z_, indexing='ij')
+        
+        assert np.all(qx[:, 0, 0] == x_)
+        assert np.all(qy[0, :, 0] == y_)
+        assert np.all(qz[0, 0, :] == z_)
+        
+        q_norm = np.sqrt(qx**2 + qy**2 + qz**2)
+        q_norm_unique = np.unique(q_norm)
+        q_norm_1D = np.reshape(q_norm_unique, len(q_norm_unique))
+        are_greater_than_10 = q_norm_1D > 10.
+        q_norm_1D = np.delete(q_norm_1D, np.where(are_greater_than_10)[0])
+        
+        # Calculate the neutron structure factor
+        qsin = {}
+        qcos = {}
+        correlation_lentgh = {}
+        
+        number_of_atoms = np.sum(self.get_unique_element()[1])
+        
+        for species in self.get_unique_element()[0]:
+            qsin[species] = np.zeros_like(qx)
+            qcos[species] = np.zeros_like(qx)
+        
+            atoms = self.get_atoms_by_element(species)
+            
+            correlation_lentgh[species] = atoms[0].correlation_length
+            
+            positions = np.array([atom.position for atom in atoms])
+            
+            if self.settings.quiet.get_value() == False:
+                with ProgressBar(total=len(positions), leave=False, colour='#00ffff', unit='atom', desc=species) as progress:
+                    cosd, sind = self._calculate_neutron_structure_factor(qx, qy, qz, positions, progress)
+            else:
+                cosd, sind = self._calculate_neutron_structure_factor(qx, qy, qz, positions, progress)
+            
+            qcos[species] += cosd
+            qsin[species] += sind
+                    
+        structure_factor = {}
+        f = {}
+        
+        structure_factor['q'] = q_norm_1D
+            
+        for i, pair in enumerate(progress_bar):
+            # Update the progress bar
+            if self.settings.quiet.get_value() == False:
+                progress_bar.set_description(
+                    f"Calculating neutron structure factor {pair} ..."
+                )
+                progress_bar.colour = "#%02x%02x%02x" % color_gradient[i]
+
+            structure_factor[pair] = np.zeros_like(q_norm_1D)
+            
+            try : 
+                species1, species2 = pair.split('-')
+                
+                if species1 == species2:
+                    f[pair] = (qcos[species1]**2 + qsin[species1]**2) / number_of_atoms
+                else:
+                    A = (qcos[species1] + qcos[species2])**2 
+                    B = (qsin[species1] + qsin[species2])**2
+                    C = qcos[species1]**2 + qsin[species1]**2
+                    D = qcos[species2]**2 + qsin[species2]**2
+                    f[pair] = (A + B - C - D) / (2*number_of_atoms)
+                    
+            except ValueError:
+                # pair = "total"
+
+                f[pair] = np.zeros_like(qx)
+                
+                for species in self.get_unique_element()[0]:
+                    f[pair] += (correlation_lentgh[species]**2 * f[f'{species}-{species}'])
+                
+                try:
+                    f[pair] += 2 * correlation_lentgh[self.get_unique_element()[0][0]] * correlation_lentgh[self.get_unique_element()[0][1]] * f[f'{self.get_unique_element()[0][0]}-{self.get_unique_element()[0][1]}']
+                except:
+                    f[pair] += 2 * correlation_lentgh[self.get_unique_element()[0][0]] * correlation_lentgh[self.get_unique_element()[0][1]] * f[f'{self.get_unique_element()[0][1]}-{self.get_unique_element()[0][0]}']
+                    
+                normalization = (self.get_unique_element()[1][0] * correlation_lentgh[self.get_unique_element()[0][0]]**2 + self.get_unique_element()[1][1] * correlation_lentgh[self.get_unique_element()[0][1]]**2) / number_of_atoms       
+            
+                f[pair] /= normalization
+                
+        # Build the structure factor histogram
+        if self.settings.quiet.get_value() == False:
+            progress_bar = tqdm(
+                range(len(q_norm_1D)-1),
+                desc="Building the structure factor histogram ...",
+                colour="#00ffff",
+                leave=False,
+                unit="pair",
+            )
+            color_gradient = generate_color_gradient(len(q_norm_1D)-1)
+        else:
+            progress_bar = range(len(q_norm_1D)-1)
+        for i in progress_bar:
+            # Update progress bar
+            if self.settings.quiet.get_value() == False:
+                progress_bar.colour = "#%02x%02x%02x" % color_gradient[i]
+                
+            if q_norm_1D[i] == 0. or q_norm_1D[i] > 10.:
+                continue
+            lower_bound = q_norm_1D[i]
+            upper_bound = q_norm_1D[i+1]
+            
+            q_lower = lower_bound <= q_norm
+            q_upper = q_norm < upper_bound
+            q = (q_lower & q_upper)
+            elements_to_sum = np.where(q)
+            
+            for pair in structure_factor.keys():
+                if pair == "q":
+                    continue
+                
+                temp = f[pair][elements_to_sum]
+                average = np.mean(temp)
+                structure_factor[pair][i] += average
+            
+        self.q = structure_factor['q']
+        self.nsf = structure_factor
+        
+    @staticmethod
+    @njit(parallel=True, nogil=True)
+    def _calculate_neutron_structure_factor(qx, qy, qz, positions, progress_proxy):
+        r"""
+        Calculate the neutron structure factor of the atom.
+
+        Returns:
+        --------
+            - nsf (float) : The neutron structure factor of the atom.
+        """
+        qcos, qsin = np.zeros_like(qx), np.zeros_like(qx)
+        for i in prange(len(positions)):
+            position = positions[i]
+            dot  = qx*position[0] + qy*position[1] + qz*position[2]
+            sind = np.sin(dot)
+            cosd = np.cos(dot)
+            qcos += cosd
+            qsin += sind
+            progress_proxy.update(1)
+            
+        
+        return qcos, qsin

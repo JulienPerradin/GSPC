@@ -103,6 +103,15 @@ def main(settings):
     if "mean_square_displacement" in settings.properties.get_value():
         results_msd = io.MSDResult("mean_square_displacement", key, start)
         results_msd.write_file_header(settings._output_directory, end-start)
+        
+    if "neutron_structure_factor" in settings.properties.get_value():
+        results_nsf = {}
+        keys_nsf = module.return_keys("neutron_structure_factor")
+        for key in keys_nsf:
+            results_nsf[key] = io.DistResult(
+                "neutron_structure_factor", key, start)
+            results_nsf[key].write_file_header(
+                settings._output_directory, end - start)
     
             
     # Loop over the frames in the trajectory
@@ -185,6 +194,15 @@ def main(settings):
                 results_pdf[key].add_to_timeline(
                     i, system.distances["r"], system.distances[key]
                 )
+        
+        if "neutron_structure_factor" in settings.properties.get_value():
+            system.calculate_neutron_structure_factor(keys_nsf)
+            # Add the results to the timeline
+            for key in keys_nsf:
+                results_nsf[key].add_to_timeline(
+                    i, system.q, system.nsf[key]
+                )
+            
 
 
     if 'pair_distribution_function' in settings.properties.get_value():
@@ -204,6 +222,10 @@ def main(settings):
             key = list(d.keys())[0]
             results_sru[key].calculate_average_proportion()
             results_sru[key].append_results_to_file()
+    if 'neutron_structure_factor' in settings.properties.get_value():
+        for key in keys_nsf:
+            results_nsf[key].calculate_average_distribution()
+            results_nsf[key].append_results_to_file()
             
     # END OF MAIN FUNCTION
     DEBUG = True

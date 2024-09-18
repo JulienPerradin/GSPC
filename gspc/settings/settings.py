@@ -70,6 +70,7 @@ class Settings:
             'pair_distribution_function',
             'bond_angular_distribution',
             'structural_units',
+            'neutron_structure_factor',
         ]
         
         self.properties : Parameter = Parameter("properties", list_properties)
