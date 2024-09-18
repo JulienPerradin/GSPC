@@ -2,14 +2,14 @@ from setuptools import setup, find_packages
 
 setup(
     name='gspc',
-    version='0.0.4',
+    version='0.0.5',
     packages=find_packages(),
     install_requires=[
         'numpy',
         'pandas',
         'matplotlib',
         'numba',
-        'numba-progress'
+        'numba-progress',
         'scipy'
     ],
     author='Julien Perradin',

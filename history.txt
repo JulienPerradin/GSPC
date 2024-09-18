@@ -1,0 +1,4677 @@
+    1  ll
+    2  git clone –depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
+    3  git clone –depth=1 https://github.com/romkatv/powerlevel10k.git
+    4  git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k\necho 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
+    5  ll
+    6  nvim .zshrc
+    7  source .zshrc
+    8  p10k configure
+    9  ll
+   10  ls
+   11  source .zshrc
+   12  ncim .zshrc
+   13  nvim
+   14  nvim .zshrc
+   15  source .zshrc
+   16  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+   17  nvim .zshrc
+   18  source .zshrc
+   19  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/themes/powerlevel10k
+   20  cd .oh-my-zsh
+   21  ll
+   22  cd themes
+   23  ll
+   24  cd ../../
+   25  ll
+   26  cd powerlevel10k
+   27  ll
+   28  cd ../
+   29  ll
+   30  p10k configure
+   31  ll
+   32  man ls
+   33  ll
+   34  nvim .p10k.zsh
+   35  nvim .zshrc
+   36  source .zshrc
+   37  ll
+   38  git clone https://github.com/zsh-users/zsh-autosuggestions
+   39  cd zsh-autosuggestions
+   40  ll
+   41  ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+   42  cd ../
+   43  ll
+   44  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+   45  ll
+   46  cd ../
+   47  ll
+   48  cd 
+   49  ll
+   50  cd -
+   51  ll
+   52  cd plugins
+   53  ll
+   54  cd zsh-autosuggestions
+   55  ll
+   56  cd ../zsh-syntax-highlighting
+   57  ll
+   58  nvim ~/.zshrc
+   59  source ~/.zshrc
+   60  cd 
+   61  npm i -g diff-so-fancy
+   62  npm install -g npm@10.4.0npm install -g npm@10.4.0
+   63  npm install -g npm@10.4.0
+   64  sudo npm install -g npm@10.4.0
+   65  npm fund
+   66  npm i -g diff-so-fancy
+   67  sudo npm i -g diff-so-fancy
+   68  git config –global core.pager “diff-so-fancy | less –tabs=4 -RFX”
+   69  sudo apt install bat
+   70  ll
+   71  git diff
+   72  git
+   73  git config –global core.pager “diff-so-fancy | less –tabs=4 -RFX”
+   74  cd zsh-autosuggestions
+   75  git config –global core.pager “diff-so-fancy | less –tabs=4 -RFX”
+   76  cd 
+   77  ll
+   78  git config –global color.ui true
+   79  git config global color.ui true
+   80  git config color.ui true
+   81  git clone –depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+   82  git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf\n~/.fzf/install
+   83  git config –-global core.pager “diff-so-fancy | less –-tabs=4 -RFX”
+   84  git config --global core.pager “diff-so-fancy | less -tabs=4 -RFX”
+   85  git config --global color.ui true
+   86  git config --global core.pager "diff-so-fancy | less --tabs=4 -RFX"
+   87  git config --global interactive.diffFilter "diff-so-fancy --patch"
+   88  git config --global color.ui true
+   89  git diff
+   90  cd zsh-autosuggestions
+   91  cd s
+   92  z post
+   93  ll
+   94  cd 
+   95  z Devel
+   96  ll
+   97  clear
+   98  cd Documents
+   99  ll
+  100  cd These
+  101  ll
+  102  cd workspaces
+  103  ll
+  104  cd wip
+  105  ll
+  106  clear
+  107  nvim .bashrc
+  108  . ./z/z.sh
+  109  z De
+  110  ll
+  111  z coding_club
+  112  ll
+  113  cd ../
+  114  cd 
+  115  z coding_club
+  116  z /home/perraju/Documents/These
+  117  ll
+  118  cd coding_club
+  119  ll
+  120  cd ../
+  121  cd coding_club
+  122  cd 
+  123  z /home/perraju/Documents/These/coding_club
+  124  ll
+  125  cd ../
+  126  ll
+  127  tree
+  128  tree -d
+  129  clear
+  130  ll
+  131  cd ../
+  132  ll
+  133  cd These
+  134  ll
+  135  mkdir Maniplab-2024
+  136  cd Maniplab-2024
+  137  unzip Maniplab-2024.zip
+  138  ll
+  139  rm *.zi
+  140  rm *.zip
+  141  ll
+  142  mv Maniplab-2024/* .
+  143  rm Maniplab-2024 -r
+  144  ll
+  145  code .
+  146  ssh jperradin@vega.coulomb.univ-montp2.fr
+  147  ll
+  148  cat ~/.bashrc
+  149  ssh -L 2222:aule.coulomb.univ-montp2.fr:22 jperradin@vega.coulomb.univ-montp2.fr
+  150  sshfs jperradin@localhost:/home/jperradin/ -p 2222 /home/perraju/rsync-ssh/
+  151  ll
+  152  cd rsync-ssh
+  153  ll
+  154  cd Documents
+  155  ll
+  156  cd Maniplab
+  157  ll
+  158  cd LAMMPS
+  159  ll
+  160  cp exemple-input-lammps-sio2-96000at.in ~/Documents/These/Maniplab-2024/lammps
+  161  nvim .zshrc
+  162  source .zshrc
+  163  sshtunnel
+  164  sshrsync
+  165  cd rsync-ssh
+  166  ll
+  167  cd $WORK
+  168  ll
+  169  cat ~/.zr
+  170  cat ~/.zshrc
+  171  clear
+  172  sshtunnel
+  173  cat zsh-autosuggestions
+  174  cat .zshrc
+  175  sshfs jperradin@localhost:/home/jperradin/ -p 2222 /home/perraju/rsync-ssh/
+  176  cd rsync-ssh/
+  177  ll
+  178  cd Documents
+  179  ll
+  180  cd workspaces
+  181  ll
+  182  cp density-calc.ods /home/perraju/Documents/These/\n
+  183  clear
+  184  z T
+  185  ll
+  186  z The
+  187  ll
+  188  nvim .zshrc
+  189  source .zshrc
+  190  ll
+  191  z /home/perraju/Documents/These
+  192  ll
+  193  open density-calc.ods
+  194  z /home/perraju/Documents/These/Maniplab-2024/lammps
+  195  ll
+  196  cd 
+  197  clear
+  198  ll
+  199  cd lammps/ll
+  200  cd lammps-quip-plumed/ll
+  201  cd lammps-quip-plumed/
+  202  ll
+  203  cd ../
+  204  rm lammps-quip-plumed -r
+  205  ll
+  206  cd lammps
+  207  ll
+  208  clear
+  209  cd lammps
+  210  ll
+  211  tree
+  212  tree -d
+  213  cd ../
+  214  ll
+  215  rm lammps -rf
+  216  git clone -b release https://github.com/lammps/lammps.git lammps
+  217  cd lammps
+  218  ll
+  219  code .
+  220  z /home/perraju/
+  221  z /home/perraju/Documents/These
+  222  ll
+  223  cd Ma
+  224  cd Maniplab-2024
+  225  ll
+  226  cd lammps
+  227  ll
+  228  /home/perraju/lammps/build/lmp -i template-input.lammps
+  229  cd 
+  230  ll
+  231  fdfind
+  232  find /path/to/search -type d -exec du -h --max-depth=1 {} + | sort -rh
+  233  find ./ -type d -exec du -h --max-depth=1 {} + | sort -rh
+  234  clear
+  235  z /home/perraju/Documents/These
+  236  ll
+  237  find ./ -type d -exec du -h --max-depth=1 {} + | sort -rh
+  238  ll
+  239  ls -d
+  240  ls -d *
+  241  ld
+  242  ls -v | xargs du -hs
+  243  cd workspaces
+  244  ls -v | xargs du -hs
+  245  rm myGSPC20230213.tar.gz
+  246  cd wip
+  247  ll
+  248  du -hs
+  249  ls -v | xargs du -hs
+  250  cd import/
+  251  ll
+  252  cd LAMMPS
+  253  ll
+  254  cd ../
+  255  ll
+  256  cd ../
+  257  ll
+  258  cd ../
+  259  ll
+  260  cd percolation
+  261  ll
+  262  cd ../
+  263  rm percolation -r
+  264  cd o
+  265  cd ovito
+  266  ll
+  267  ovito d3.87.xyz
+  268  ~/ovito-basic-3.10.1-x86_64/bin/ovito d3.87.xyz
+  269  ll
+  270  cd ..
+  271  rm ovito -r
+  272  ll
+  273  cd oldGSPC
+  274  ll
+  275  cd ..
+  276  rm oldGSPC -rf
+  277  ll
+  278  cd LAMMPS
+  279  ll
+  280  find ./
+  281  find ./ | xargs du -hs
+  282  du -hs
+  283  cd ../
+  284  ll
+  285  cd ../../
+  286  ll
+  287  ls -v | xargs du -hs
+  288  cd Cours
+  289  ll
+  290  cd ClusterMuse
+  291  ll
+  292  cd ../
+  293  ls | xargs du -hs
+  294  cd Master2
+  295  ll
+  296  ls | xargs du -hs
+  297  cd Semestre2
+  298  ls | xargs du -hs
+  299  cd Stage
+  300  ls | xargs du -hs
+  301  ll
+  302  cd ../
+  303  ll
+  304  cd ../
+  305  ll
+  306  cd ../
+  307  ll
+  308  cd ../
+  309  ll
+  310  tar -czvf Cours.tgz Cours
+  311  clear
+  312  ls -v | xargs du -hs
+  313  ls -v | xargs du -hs | sort
+  314  ll
+  315  rm Cours.tgz
+  316  ll
+  317  sudo apt install pigz
+  318  tar --use-compress-program=pigz -cvf /media/perraju/pj-drive/BACKUP-laptop/Cours.tar.gz Cours/
+  319  pwd
+  320  du -hs
+  321  ll
+  322  rm Cours -rf
+  323  cp /media/perraju/pj-drive/BACKUP-laptop/Cours.tar.gz .
+  324  cd 
+  325  ll
+  326  rm /media/perraju/pj-drive/BACKUP-laptop/Cours.tar.gz
+  327  tar --use-compress-program=pigz -cvf /media/perraju/pj-drive/BACKUP-laptop/archive-home-20240228.tar.gz /home/perraju
+  328  z lammps
+  329  ll
+  330  source
+  331  source ~/intel/oneapi/setvars.sh
+  332  mpirun -n 8 ~/lammps/build/lmp -i template-input.lammps
+  333  ll
+  334  z /home/perraju/
+  335  z /home/perraju/Documents/These
+  336  ll
+  337  cd Maniplab-2024
+  338  ll
+  339  nautilus .
+  340  cd lammps
+  341  ll
+  342  mv 96000at-SiO2_300K_final_nvt_rlx-sample-01B.data 384at-SiO2_300K_final_nvt_rlx-sample-01.data
+  343  ll
+  344  ~/ovito-basic-3.10.1-x86_64/bin/ovito 384at-SiO2_300K_final_nvt_rlx-sample-01.data
+  345  ll
+  346  tar --use-compress-program=pigz -czf data.tar.gz *
+  347  tar --use-compress-program=pigz -cvf data.tar.gz *
+  348  ll
+  349  clear
+  350  sshtunnel
+  351  grep rsync .zshrc
+  352  sshfs jperradin@localhost:/home/jperradin/Documents/workspaces/post-processing/ -p 2222 /home/perraju/rsync-ssh/
+  353  cd rsync-ssh
+  354  ll
+  355  code .
+  356  sudo code .
+  357  cd results/figures/article
+  358  ls
+  359  xmgrace figure5-correlation_length.agr
+  360  cd ../
+  361  cd ../sio2-96000at-1x
+  362  xmgrace criticalo
+  363  cd 1a
+  364  xmgrace correlation-length.agr
+  365  find ./ -type f -name "generateRecaps.py"
+  366  nvim .zshrc
+  367  znap source marlonrichert/zsh-autocomplete
+  368  znap pull
+  369  sudo apt-get remove neovim
+  370  ll
+  371  which nvim
+  372  sudo snap remove nvim
+  373  ll
+  374  rm dotfiles* -r
+  375  rm dotfiles* -rf
+  376  clear
+  377  sudo snap install neovim
+  378  sudo snap install nvim
+  379  sudo snap install nvim --classic
+  380  nvim
+  381  ll
+  382  cd .config
+  383  ll
+  384  cd nvim
+  385  ll
+  386  cd ../
+  387  rm nvim -rf
+  388  mkdir nvim
+  389  cd ../
+  390  nvim
+  391  cd ~/.config/nvim
+  392  ll
+  393  nvim init.lua
+  394  ll
+  395  cd ../../
+  396  ll
+  397  rm lazygit* -rf
+  398  ll
+  399  LAZYGIT_VERSION=$(curl -s "https://api.github.com/repos/jesseduffield/lazygit/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')\ncurl -Lo lazygit.tar.gz "https://github.com/jesseduffield/lazygit/releases/latest/download/lazygit_${LAZYGIT_VERSION}_Linux_x86_64.tar.gz"\ntar xf lazygit.tar.gz lazygit\nsudo install lazygit /usr/local/bin
+  400  ll
+  401  sudo apt-get install ripgrep
+  402  ripgrep
+  403  nvim --version
+  404  nvim
+  405  cd ../
+  406  cd perraju
+  407  ll
+  408  cd .config
+  409  ll
+  410  cd nvim
+  411  ll
+  412  cd ../
+  413  rm nvim -rf
+  414  git clone https://github.com/LazyVim/starter ~/.config/nvim
+  415  rm -rf ~/.config/nvim/.git
+  416  nvim
+  417  cd nvim
+  418  nvim
+  419  nvim init.lua
+  420  z /home/perraju/Documents/These/workspaces/wip/code
+  421  ll
+  422  clear
+  423  ll
+  424  ls -al
+  425  clear 
+  426  ll
+  427  cd ../
+  428  ll
+  429  cd ../
+  430  ll
+  431  cd ../
+  432  ll
+  433  cd ..
+  434  ll
+  435  cd Fun
+  436  ll
+  437  mkdir gspc
+  438  cd gspc
+  439  ll
+  440  nvim
+  441  clear
+  442  python __main__.py
+  443  python3 __main__.py
+  444  conda activate base
+  445  :q
+  446  cat .bashrc
+  447  cat ~/..bashrc
+  448  cat ~/.bashrc
+  449  nvim ~/.zshrc
+  450  source ~/.zsh
+  451  source ~/.zshrc
+  452  nvim
+  453  clear
+  454  python __main__.py
+  455  nvim
+  456  git clone https://github.com/github/copilot.vim.git \\n  ~/.config/nvim/pack/github/start/copilot.vim
+  457  ll
+  458  nvim
+  459  clear
+  460  python __main__.py
+  461  docker pull node
+  462  ll
+  463  node --version 
+  464  git clone https://github.com/github/copilot.vim.git \\n  ~/.config/nvim/pack/github/start/copilot.vim
+  465  cd /home/perraju/.config/nvim/pack/github/start/copilot.vim
+  466  ll
+  467  cd .././
+  468  cd ../
+  469  ll
+  470  cd ../
+  471  ll
+  472  cd ../
+  473  ll
+  474  tree pack
+  475  rm pack -rf
+  476  ll
+  477  nvim
+  478  z gspc
+  479  ll
+  480  nvim
+  481  clear
+  482  :q
+  483  z nvim
+  484  ll
+  485  nvim
+  486  cd ../../.local/share/nvim/lazy/solarized-osaka
+  487  ls
+  488  nvim
+  489  cd -
+  490  nvim
+  491  z gspc
+  492  ll
+  493  nvim
+  494  typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+  495  :q
+  496  r
+  497  :q
+  498  clear
+  499  python __main__.py
+  500  clear
+  501  python __main__.py
+  502  clear
+  503  z nvim
+  504  nvim
+  505  clear
+  506  nvim
+  507  clear
+  508  nvim .zshrc
+  509  z gspc
+  510  z nvim
+  511  ll
+  512  cd ../
+  513  nvim nvim/README.md
+  514  cp nvim nvim.bak -r
+  515  ll
+  516  cd ../
+  517  ll
+  518  rm travis-src-210521 -r
+  519  rm vmd-1.9.4a55 -r
+  520  rm vmd-1.9.4a55 -rf
+  521  ll
+  522  ls -v | xargs du -hs
+  523  rm zsh-autosuggestions -rf
+  524  ll
+  525  cd Repos
+  526  ll
+  527  cd ../
+  528  ll
+  529  rm start_lammps.sh
+  530  ll
+  531  cd st
+  532  cd storage
+  533  ll
+  534  cd ../
+  535  rm storage -rf
+  536  ll
+  537  cd chktex
+  538  ll
+  539  cd ../
+  540  ll
+  541  rm chktex -rf
+  542  ll
+  543  rm pyMolDyn pypy3.9-v7.3.9-linux64 QUIP -rf
+  544  ll
+  545  cat install.sh
+  546  rm install.sh
+  547  ll
+  548  rm eduroam-linux-UdM-eduroam-UM-2021-2022.py
+  549  ll
+  550  cd g
+  551  ll
+  552  znap source marlonrichert/zsh-autocomplete
+  553  nvim .zshrc
+  554  cd Repos
+  555  ll
+  556  cd marlonrichert
+  557  ll
+  558  cd ../
+  559  ll
+  560  git clone https://github.com/zsh-users/zsh-autosuggestions ./zsh-users/zsh-autosuggestions
+  561  nvim ~/.zshrc
+  562  source ~/.zshrc
+  563  nvim ~/.zshrc
+  564  source ~/.zshrc
+  565  ll
+  566  znap install zsh-users/zsh-autosuggestions
+  567  clear
+  568  znap install zsh-users/zsh-autosuggestions
+  569  znap install zsh-users/zsh-syntax-highlighting
+  570  ll
+  571  cd zsh-users
+  572  ll
+  573  znap install zsh-users/zsh-auto-suggestions
+  574  ll
+  575  cd zsh-auto
+  576  cd zsh-autosuggestions
+  577  ll
+  578  ./install_test_zsh.sh
+  579  ll
+  580  cd ../
+  581  ll
+  582  rm zsh-auto* -rf
+  583  ll
+  584  cd 
+  585  nvim .zsh
+  586  nvim .zshrc
+  587  source .zshrc
+  588  znap install
+  589  znap install zsh-users/zsh-auto-suggestions
+  590  nvim .zshrc
+  591  source .zshrc
+  592  znap install zsh-users/zsh-completions
+  593  znap install zsh-users/zsh-history-substring-search
+  594  znap install zsh-users/zsh-async
+  595  znap install mafredri/zsh-async
+  596  znap install zdharma/fast-syntax-highlighting
+  597  znap install zsh-users/zsh-autosuggestions 
+  598  cd Repos
+  599  ll
+  600  nvim ~/.zshrc
+  601  r
+  602  nvim ~/.zshrc
+  603  clear
+  604  ll
+  605  fdfind
+  606  fdfind --maxdepth=1
+  607  fdfind --maxdepth=2
+  608  fdfind --maxdepth=2 | grep /
+  609  source ~/.zshrc
+  610  ls
+  611  z nsc
+  612  z gspc
+  613  ll
+  614  python __main__.py
+  615  clear
+  616  fzf 
+  617  cd ../
+  618  ll
+  619  cd ../
+  620  ll
+  621  cd These
+  622  ll
+  623  cd workspaces/wip/code/clstr
+  624  ll
+  625  cd ../
+  626  rm clstr -rf
+  627  git clone https://github.com/JulienPerradin/clstr.git
+  628  git clone git@github.com:JulienPerradin/clstr.git
+  629  cd clstr
+  630  ll
+  631  fdfind ./ -type f -name "*.py"
+  632  fdfind --type f --hidden --exclude .git | fzf
+  633  fdfind --type f --hidden --exclude .git | fzf | xargs nvim
+  634  cd ../
+  635  fdfind --type f --hidden --exclude .git | fzf | xargs nvim
+  636  clear
+  637  sudo apt-get update
+  638  sudo nvim /etc/apt/sources.list
+  639  cd /etc/apt/sources.list.d
+  640  ls
+  641  nvim gierens.list
+  642  nvim brave-browser-release.list
+  643  nvim gierens.list
+  644  sudo nvim gierens.list
+  645  sudo nvim nodesource.list
+  646  cat brave-browser-release.list
+  647  sudo nvim gierens.list
+  648  sudo nvim nodesource.list
+  649  sudo apt-get u
+  650  sudo apt-get update
+  651  sudo apt-get upgrade
+  652  cd 
+  653  clear
+  654  z /home/perraju/Documents/These/Maniplab-2024/lammps
+  655  ll
+  656  cd ../
+  657  ll
+  658  mkdir ovito-sessions-exampel
+  659  mv ovito-sessions-exampel ovito-sessions-example
+  660  cd lammps
+  661  ll
+  662  nvim ~/.zshrc
+  663  ~/ovito-basic-3.10.1-x86_64/bin/ovito
+  664  nvim ~/.zshrc
+  665  ovito pos_3000K.data
+  666  source ~/.zshrc
+  667  clear
+  668  ovito pos_3000K.data
+  669  ll
+  670  z /home/perraju/Documents/These/Maniplab-2024/lammps
+  671  clear
+  672  ll
+  673  nvim
+  674  nvim 
+  675  nvim
+  676  cat log.lammps | grep pos_3000K
+  677  nl log.lammps | grep pos_3000K
+  678  nvim
+  679  z /home/perraju/Documents/These/Maniplab-2024/lammps
+  680  code thermo_3000K.dat
+  681  awk '{print $1,$11}' thermo_3000K.dat
+  682  awk '{print $1,$11}' thermo_3000K.dat > thermo_3000K
+  683  mv thermo_3000K thermo_3000K.dat
+  684  python convert_lammps_to_xyz.py pos_3000K.data boxes
+  685  nvim convert_lammps_to_xyz.py
+  686  python convert_lammps_to_xyz.py pos_3000K.data boxes
+  687  nvim convert_lammps_to_xyz.py
+  688  python convert_lammps_to_xyz.py
+  689  python convert_lammps_to_xyz.py pos_3000K.data boxes
+  690  ovito pos_3000K.data.xyz
+  691  clear
+  692  :q
+  693  z ^[C
+  694  z lammps
+  695  ll
+  696  cd ../
+  697  ll
+  698  nvim
+  699  ssh -L 2222:aule.coulomb.univ-montp2.fr:22 jperradin@vega.coulomb.univ-montp2.fr
+  700  ssh jperradin@vega.coulomb.univ-montp2.fr
+  701  nvim
+  702  ll
+  703  cp template_input_lammps.lammps correction_input_lammps.lammps
+  704  nvim
+  705  cat correction_input_lammps.lammps
+  706  nvim 
+  707  ll
+  708  vi correction_input_lammps.lammps
+  709  nvim 
+  710  nvim
+  711  which lmp
+  712  nvim ~/.zshrc
+  713  source ~/.zshrc
+  714  ll
+  715  mkdir test
+  716  cd test
+  717  cp ../correction_input_lammps.lammps .
+  718  lmp -i correction_input_lammps.lammps
+  719  ll
+  720  nvim correction_input_lammps.lammps
+  721  nvim
+  722  lmp -i correction_input_lammps.lammps
+  723  ll
+  724  rm log.lammps
+  725  ll
+  726  mv correction_input_lammps.lammps ../correction_input_lammps.lammps
+  727  cd ../
+  728  ll
+  729  rm test -r
+  730  ll
+  731  nvim
+  732  ll
+  733  cd local
+  734  ll
+  735  cd lammps
+  736  ll
+  737  mv convert_lammps_to_xyz.py ../
+  738  ll
+  739  rm *
+  740  ll
+  741  mv ../convert_lammps_to_xyz.py .
+  742  ll
+  743  cp ../../template_input_lammps.lammps .
+  744  cp ../../correction_input_lammps.lammps .
+  745  ll
+  746  cd ../../
+  747  ll
+  748  rm correction_input_lammps.lammps template_input_lammps.lammps 
+  749  ll
+  750  cd local
+  751  ll
+  752  cd ovito-sessions-example
+  753  ll
+  754  cd ../
+  755  rm ovito-sessions-example -r
+  756  ll
+  757  mv lammps/* .
+  758  rm lammps -r
+  759  ll
+  760  nvim
+  761  mv convert_lammps_to_xyz.py convert_single_file_lammps_to_xyz.py
+  762  ll
+  763  nvim
+  764  sudo apt install python3-venv
+  765  nvim
+  766  clear
+  767  ll
+  768  nvim convert_all_files_lammps_to_xyz.py
+  769  python convert_all_files_lammps_to_xyz.py
+  770  nvim convert_all_files_lammps_to_xyz.py
+  771  ll
+  772  python
+  773  python convert_all_files_lammps_to_xyz.py
+  774  ll
+  775  ssh jperradin@vega.coulomb.univ-montp2.fr
+  776  ll
+  777  cd ../../
+  778  ll
+  779  cd TP_Python
+  780  ll
+  781  cd seance-4
+  782  ll
+  783  open ../has201h.prof.pdf
+  784  clear
+  785  nvim
+  786  cd section20
+  787  ll
+  788  python test07
+  789  python test07.py
+  790  python test08.py
+  791  nvim test09.py
+  792  python test01.py
+  793  python test09.py
+  794  sshtunnel
+  795  sshrsync
+  796  cd ~/rsync-ssh
+  797  ll
+  798  cp benchmark.tgz ../Documents/These/Maniplab-2024/local
+  799  ls
+  800  ll
+  801  tar -xzvf benchmark.tgz
+  802  ll
+  803  rm benchmark.tgz
+  804  mv benchmark/* .
+  805  ll
+  806  ll benchmark
+  807  rm benchmark -r
+  808  ll
+  809  rm err-sio2-ManipLab2024.o919553 out-sio2-ManipLab2024.o919553
+  810  ll
+  811  cd ../../
+  812  ll
+  813  tar --use-compress-program=pigz -cvf Maniplab-2024.bak.tar.gz Maniplab-2024
+  814  ll
+  815  cd Maniplab-2024
+  816  ll
+  817  cd local
+  818  ll
+  819  python convert_all_files_lammps_to_xyz.py
+  820  clear
+  821  ll
+  822  nvim
+  823  python convert_all_files_lammps_to_xyz.py
+  824  ll
+  825  nvim convert_all_files_lammps_to_xyz.py
+  826  python convert_all_files_lammps_to_xyz.py
+  827  nvim convert_all_files_lammps_to_xyz.py
+  828  python convert_all_files_lammps_to_xyz.py
+  829  ll
+  830  python test10.py
+  831  ll
+  832  ovito pos-glass.data.xyz
+  833  ll
+  834  nvim
+  835  python convert_all_files_lammps_to_xyz.py
+  836  head pos-liquid_phase.data.xyz
+  837  ovito pos-liquid_phase.data.xyz
+  838  z manip
+  839  ll
+  840  cd local
+  841  ll
+  842  clear
+  843  ovito pos-liquid_phase.data.xyz
+  844  head pos-liquid_phase.data.xyz
+  845  head pos-liquid_phase.data
+  846  nvim
+  847  code .
+  848  nvim
+  849  ls -v | grep .xyz
+  850  ls -v *.xyz
+  851  ls -v *.xyz | xargs rm
+  852  ll
+  853  python convert_all_files_lammps_to_xyz.py
+  854  ll
+  855  nvim
+  856  nvim convert_all_files_lammps_to_xyz.py
+  857  ll
+  858  ls -trl
+  859  ls -v *.data.
+  860  ls -v *.data.*
+  861  python convert_all_files_lammps_to_xyz.py
+  862  ll
+  863  nvim convert_.py
+  864  nvim convert_a
+  865  nvim convert_all_files_lammps_to_xyz.py 
+  866  python convert_all_files_lammps_to_xyz.py
+  867  clear
+  868  nvim
+  869  nvim 
+  870  nvim
+  871  nvim ~/.config/nvim
+  872  nvim
+  873  nvim convert_all_files_lammps_to_xyz.py
+  874  python convert_all_files_lammps_to_xyz.py
+  875  nvim convert_all_files_lammps_to_xyz.py
+  876  python convert_all_files_lammps_to_xyz.py
+  877  nvim convert_all_files_lammps_to_xyz.py
+  878  python convert_all_files_lammps_to_xyz.py
+  879  ll
+  880  nvim
+  881  ls *lattices
+  882  ls *lattices | xargs rm
+  883  ll
+  884  nvim convert_all_files_lammps_to_xyz.py
+  885  ovito pos-liquid_phase.data.xyz
+  886  ll
+  887  mv ovito analysis
+  888  ll
+  889  head pos-liquid_phase.data.xyz
+  890  nvim log.lammps
+  891  ssh jperradin@vega.coulomb.univ-montp2.fr
+  892  ll
+  893  rm 1008at-SiO2_300K_final_nvt_relax-sample_ManipLab2024.data input-1008at-sample-generation.in log.lammps pos-* start_lammps.sh
+  894  ll
+  895  cd analysis
+  896  ll
+  897  nvim corr
+  898  nvim correction_input_lammps.lammps
+  899  nvim
+  900  ll
+  901  cd ../
+  902  ll
+  903  nvim correction_input_lammps.lammps
+  904  ll
+  905  clear
+  906  z /home/perraju/Documents/These/Maniplab-2024
+  907  ll
+  908  cd local
+  909  ll
+  910  tar -xzvf benchmark.tgz
+  911  ll
+  912  rm benchmark
+  913  rm benchmark.tgz
+  914  mv benchmark test
+  915  ll
+  916  cd analysis
+  917  ll
+  918  cd ../test
+  919  ll
+  920  cp ../*.py
+  921  cp ../*.py .
+  922  ll
+  923  rm err-sio2-ManipLab2024.o919553 out-sio2-ManipLab2024.o919553
+  924  ll
+  925  python convert_all_files_lammps_to_xyz.py
+  926  ll
+  927  grep Lattice pos-liquid_phase.data
+  928  grep Lattice pos-liquid_phase.data.xyz
+  929  grep Lattice pos-quench.data.xyz
+  930  ll
+  931  nvim ../
+  932  cp ../*.py .
+  933  python convert_all_files_lammps_to_xyz.py
+  934  ll
+  935  nvim pos-quench.data.timestep+temperature+lbox
+  936  xmgrace -nxy pos-quench.data.timestep+temperature+lbox
+  937  ll
+  938  mv *.xyz ../analysis
+  939  mv *lbox ../analysis
+  940  ll
+  941  mv convert_* ../analysis
+  942  ll
+  943  cd ../
+  944  ll
+  945  cd analysis
+  946  ll
+  947  l
+  948  ll
+  949  rm convert_single_file_lammps_to_xyz.py
+  950  rm ../convert_single_file_lammps_to_xyz.py
+  951  ll
+  952  mkdir template
+  953  cd template
+  954  xmgrace
+  955  xmgrace template_111.agr
+  956  nvim template_111.agr
+  957  xmgrace template_111.agr
+  958  cd ../
+  959  ll
+  960  xmgrace template/template_111.agr
+  961  xmgrace template/template_111.agr &
+  962  ll
+  963  mv pos-quench.data.timestep+temperature+lbox timestep+temperature+lbox-density
+  964  ll
+  965  mv timestep+temperature+lbox-density timestep+temperature+lbox-density.dat
+  966  cp fig1-temperature-density.agr fig2-time-temperature.agr
+  967  xmgrace fig2
+  968  xmgrace fig2-time-temperature.agr &
+  969  nvim convert_all_files_lammps_to_xyz.py
+  970  ll
+  971  cp ../convert_all_files_lammps_to_xyz.py ../
+  972  cd ../
+  973  ll
+  974  nvim convert_all_files_lammps_to_xyz.py
+  975  rm convert_all_files_lammps_to_xyz.py
+  976  cp analysis/convert_all_files_lammps_to_xyz.py .
+  977  cp convert_all_files_lammps_to_xyz.py test
+  978  cd test
+  979  ll
+  980  python convert_all_files_lammps_to_xyz.py
+  981  nvim convert_all_files_lammps_to_xyz.py
+  982  python convert_all_files_lammps_to_xyz.py
+  983  ll
+  984  nvim convert_all_files_lammps_to_xyz.py
+  985  python convert_all_files_lammps_to_xyz.py
+  986  ll
+  987  ls -trl
+  988  cp convert_all_files_lammps_to_xyz.py ../convert_all_files_lammps_to_xyz.py
+  989  cp convert_all_files_lammps_to_xyz.py ../analysis/convert_all_files_lammps_to_xyz.py
+  990  ll
+  991  mv *.xyz ../analysis
+  992  mv thermo ../analysis
+  993  ll
+  994  cd ../
+  995  ll
+  996  cd analysis
+  997  ll
+  998  rm timestep+temperature+lbox-density.dat
+  999  ll
+ 1000  xmgrace fig1-temperature-density.agr
+ 1001  xmgrace fig2-time-temperature.agr
+ 1002  head pos-liquid_phase.data.xyz
+ 1003  nvim gspc-liquid-phase.json
+ 1004  z cd
+ 1005  cp gspc-liquid-phase.json gspc-glass-phase.json
+ 1006  head pos-glass.data.xyz
+ 1007  nvim gspc-glass-phase.json
+ 1008  ll
+ 1009  nvim gspc-liquid-phase.json
+ 1010  nvim gspc-glass-phase.json
+ 1011  ll
+ 1012  z cd
+ 1013  z code
+ 1014  ls
+ 1015  python -m GSPC ../../../Maniplab-2024/local/analysis/gspc-liquid-phase.json
+ 1016  ll
+ 1017  z /home/perraju/Documents/These/Maniplab-2024
+ 1018  ll
+ 1019  cd local
+ 1020  ll
+ 1021  cd analysis
+ 1022  ls
+ 1023  cp /media/perraju/pj-key/GSPC . -r
+ 1024  ll
+ 1025  python -m GSPC gspc-liquid-phase.json
+ 1026  readlink -f pos-liquid_phase.data.xyz
+ 1027  nvim gspc-liquid-phase.json
+ 1028  ll
+ 1029  python -m GSPC gspc-liquid-phase.json
+ 1030  nvim gspc-liquid-phase.json
+ 1031  python -m GSPC gspc-liquid-phase.json
+ 1032  nvim gspc-liquid-phase.json
+ 1033  python -m GSPC gspc-liquid-phase.json
+ 1034  ll
+ 1035  cp gspc-liquid-phase.json gspc-glass-phase.json
+ 1036  nvim gspc-glass-phase.json
+ 1037  head pos-glass.data.xyz
+ 1038  nvim gspc-glass-phase.json
+ 1039  python -m GSPC gspc-glass-phase.json
+ 1040  ll
+ 1041  cd glass-phase
+ 1042  ll
+ 1043  cd xmgrace
+ 1044  ll
+ 1045  xmgrace BAD.agr
+ 1046  l
+ 1047  ll
+ 1048  cd ../
+ 1049  ll
+ 1050  cd ../..
+ 1051  ll
+ 1052  cd ../../
+ 1053  ll
+ 1054  cd T
+ 1055  cd Maniplab-2024
+ 1056  cd ../
+ 1057  tar --use-compress-program=pigz -cvf Maniplab-2024.bak.tar.gz Maniplab-2024
+ 1058  cp Maniplab-2024.bak.tar.gz /media/perraju/pj-key/
+ 1059  ssh jperradin@vega.coulomb.univ-montp2.fr
+ 1060  sshtunnel
+ 1061  sshrsync
+ 1062  ll
+ 1063  cd .config
+ 1064  cp nvim nvim.bak -r
+ 1065  cp nvim ../rsync-ssh
+ 1066  cp nvim ../rsync-ssh -r
+ 1067  ll
+ 1068  cd r
+ 1069  cd rsync-ssh
+ 1070  ll
+ 1071  cp test.tgz ~/Documents/These/Maniplab-2024/local/analysis
+ 1072  cd ~/Documents/These/Maniplab-2024/local/analysis
+ 1073  ll
+ 1074  mkdir test_animation
+ 1075  mv test.tgz test_animation
+ 1076  cd test_animation
+ 1077  ll
+ 1078  tar -xzvf test.tgz
+ 1079  ll
+ 1080  rm test.tgz
+ 1081  ll
+ 1082  cd gspc
+ 1083  ll
+ 1084  python animation-DIST.py
+ 1085  code .
+ 1086  cp ../pressure .
+ 1087  znap uninstall marlonrichert/zsh-autocomplete
+ 1088  znap pull
+ 1089  p10k configure
+ 1090  clear
+ 1091  cat .zshrc
+ 1092  ll
+ 1093  cat .zshrc
+ 1094  nvim .zshrc
+ 1095  ll
+ 1096  cd .con
+ 1097  cd .config
+ 1098  ll
+ 1099  cp nvim nvim.bak -r
+ 1100  mkdir ../dotfiles
+ 1101  mv nvim.bak ../dotfiles/nvim
+ 1102  cd ../
+ 1103  ll
+ 1104  cd dotfiles
+ 1105  ll
+ 1106  git init
+ 1107  git add .
+ 1108  git commit -m 'Initial commit'
+ 1109  cd ../
+ 1110  ll
+ 1111  rm dotfiles -rf
+ 1112  git clone git@github.com:JulienPerradin/dotfiles.git
+ 1113  cd dotfiles
+ 1114  cp ../.config/nvim . -r
+ 1115  git add .
+ 1116  git commit -m 'Initial commit'
+ 1117  git push origin main
+ 1118  z /home/perraju/Documents/These/TP_Python
+ 1119  ll
+ 1120  git clone git@github.com:JulienPerradin/HL201H-Python.git
+ 1121  ll
+ 1122  mv * HL201H-Python
+ 1123  ll
+ 1124  cd HL201H-Python
+ 1125  ll
+ 1126  nvim .gitignore
+ 1127  ll
+ 1128  git add .
+ 1129  git commit -m 'Initial commit'
+ 1130  git push origin main
+ 1131  nvim .gitignore
+ 1132  ll
+ 1133  nvim .gitignore
+ 1134  git add .
+ 1135  git commit -m 'update'
+ 1136  git push origin main
+ 1137  cd .config
+ 1138  ll
+ 1139  cd nvim
+ 1140  ll
+ 1141  nvim
+ 1142  nvim 
+ 1143  clear
+ 1144  cp nvim ../../dotfiles -r
+ 1145  cp ../nvim ../../dotfiles -r
+ 1146  cd ../../dotfiles
+ 1147  ll
+ 1148  git add .
+ 1149  git commit -m 'update'
+ 1150  git push origin main
+ 1151  git pull origin main
+ 1152  git config pull.rebase false
+ 1153  git push origin main
+ 1154  git pull origin main
+ 1155  ll
+ 1156  cd ../
+ 1157  rm dotfiles -rf
+ 1158  git clone git@github.com:JulienPerradin/dotfiles.git
+ 1159  cd dotfiles
+ 1160  ll
+ 1161  cp ../.config/nvim . -r
+ 1162  git add .
+ 1163  git commit -m 'update'
+ 1164  git push origin main
+ 1165  cat .zshrc
+ 1166  ll
+ 1167  cd .conf
+ 1168  cd .config
+ 1169  cd n
+ 1170  cd nvim
+ 1171  ll
+ 1172  nvim
+ 1173  code .
+ 1174  nvim
+ 1175  cd lua
+ 1176  ll
+ 1177  cd plugins
+ 1178  ll
+ 1179  rm copilot.lua
+ 1180  nvim
+ 1181  nvim ai.lua
+ 1182  rm ai.lua
+ 1183  nvim
+ 1184  ll
+ 1185  cd ../../
+ 1186  ll
+ 1187  vi init.lua
+ 1188  nvim
+ 1189  clear
+ 1190  ll
+ 1191  cd ../
+ 1192  ll
+ 1193  cd Docker\ Desktop
+ 1194  ll
+ 1195  cd ../
+ 1196  cd ../../
+ 1197  cd 
+ 1198  cd Documents
+ 1199  ll
+ 1200  cd These
+ 1201  ll
+ 1202  cd TP_Python
+ 1203  ll
+ 1204  cd HL201H-Python
+ 1205  ll
+ 1206  git pull origin main
+ 1207  cd 
+ 1208  cd do
+ 1209  cd dotfiles/
+ 1210  git pull origin main
+ 1211  ll
+ 1212  rm ../.config/nvim -r
+ 1213  cp nvim ../.config -r
+ 1214  cd ../../
+ 1215  ll
+ 1216  cd perraju
+ 1217  ll
+ 1218  clear
+ 1219  cd dotfiles
+ 1220  git pull origin main
+ 1221  rm ../.config/nvim -r
+ 1222  cp nvim ../.config -r
+ 1223  nvim
+ 1224  cd ../
+ 1225  ll
+ 1226  z /home/perraju/Documents/These/TP_Python
+ 1227  ll
+ 1228  cd ../
+ 1229  ll
+ 1230  z /home/perraju/Documents/These/TP_Python/HL201H-Python
+ 1231  ll
+ 1232  cd seance-4
+ 1233  ll
+ 1234  cd section23
+ 1235  ll
+ 1236  cd ../..
+ 1237  ll
+ 1238  cat test.py
+ 1239  ll
+ 1240  rm test.py
+ 1241  nvim README.md
+ 1242  git add . 
+ 1243  git commit -m 'update'
+ 1244  git push origin main
+ 1245  nvim README.md
+ 1246  git add . 
+ 1247  git commit -m 'update'
+ 1248  git push origin main
+ 1249  nvim README.md
+ 1250  git add . 
+ 1251  git commit -m 'update'
+ 1252  git push origin main
+ 1253  z the
+ 1254  ll
+ 1255  cd workspaces
+ 1256  ll
+ 1257  cd wip
+ 1258  ll
+ 1259  cd ../../
+ 1260  ll
+ 1261  mkdir post-process
+ 1262  cd post-process
+ 1263  cp /media/perraju/pj-key/results-20240307.tgz .
+ 1264  tar -xzvf results-20240307.tgz
+ 1265  cd ../
+ 1266  ll
+ 1267  cd TP_Python
+ 1268  ll
+ 1269  HL201H-Python
+ 1270  ll
+ 1271  git pull origin main
+ 1272  ll
+ 1273  open has201h.etudiant.pdf &
+ 1274  ll
+ 1275  cd seance-4
+ 1276  ll
+ 1277  nvim
+ 1278  ll
+ 1279  nvim 
+ 1280  z post
+ 1281  ll
+ 1282  cd sio2-96000at-1x
+ 1283  ll
+ 1284  cd 1b
+ 1285  ll
+ 1286  cd dens3.182
+ 1287  ll
+ 1288  nvim
+ 1289  cd clusters_distributions
+ 1290  python average_cluster-dist.py
+ 1291  python 
+ 1292  cd clusters_distributions
+ 1293  python average_cluster-dist.py
+ 1294  cd clusters_distributions
+ 1295  python average_cluster-dist.py
+ 1296  cd ../
+ 1297  ll
+ 1298  mkdir seance-2
+ 1299  tree
+ 1300  ll
+ 1301  cd ../
+ 1302  ll
+ 1303  fdfind readme
+ 1304  tree
+ 1305  tree | grep readme
+ 1306  ll
+ 1307  mkdir seance-5
+ 1308  cd seance-5
+ 1309  ll
+ 1310  pycd ;;:
+ 1311  DCcd ../seance-4
+ 1312  ll
+ 1313  cd ../seance-4/section19
+ 1314  ll
+ 1315  python probleme-19.1-qC.py
+ 1316  cd ../../seance-5
+ 1317  ll
+ 1318  mkdir section24
+ 1319  cd section24
+ 1320  ll
+ 1321  python test01.py
+ 1322  cd ../seance-5
+ 1323  ll
+ 1324  cd section24
+ 1325  ll
+ 1326  nvim
+ 1327  python test02.py
+ 1328  cp test02.py test03.py
+ 1329  nvim
+ 1330  python test03.py
+ 1331  python test04.py
+ 1332  cd ../../seance-4/section20
+ 1333  ll
+ 1334  cp probleme-20.2-qB_C.py probleme-20.2-qB_C-test.py
+ 1335  ll
+ 1336  nivm
+ 1337  nvim
+ 1338  cd ../../seance-4/section20
+ 1339  python probleme-20.2-qB_C-test.py
+ 1340  nvim
+ 1341  python probleme-20.2-qB_C-test.py
+ 1342  wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh | bash
+ 1343  clear
+ 1344  cd $WORK
+ 1345  ll
+ 1346  z the
+ 1347  ll
+ 1348  cd workspaces
+ 1349  ll
+ 1350  cd meeting
+ 1351  ll
+ 1352  mkdir 20240307
+ 1353  ll
+ 1354  cd 20240307
+ 1355  ll
+ 1356  nvim meeting.md
+ 1357  nautilus .
+ 1358  ll
+ 1359  cd Documents
+ 1360  ll
+ 1361  cd These
+ 1362  ll
+ 1363  mkdir notes
+ 1364  cd notes
+ 1365  ll
+ 1366  todolist.md
+ 1367  nvim todolist.md
+ 1368  nvim
+ 1369  code 
+ 1370  code .
+ 1371  cd ../
+ 1372  ll
+ 1373  cd workspaces
+ 1374  ll
+ 1375  cd ../post-process
+ 1376  ll
+ 1377  cd sio2-96000at-1x/1b/dens3.182
+ 1378  ll
+ 1379  nvim
+ 1380  cd clusters_distributions
+ 1381  python average_cluster-dist.py 
+ 1382  cd clusters_distributions
+ 1383  python average_cluster-dist.py
+ 1384  ll
+ 1385  cd ../../
+ 1386  ll
+ 1387  cd ../
+ 1388  ll
+ 1389  cd ..
+ 1390  ll
+ 1391  rm post-process -rf
+ 1392  cd gifs
+ 1393  ll
+ 1394  open d3.70-clusters-SiO6.gif
+ 1395  open movie.gif
+ 1396  ll
+ 1397  ls 
+ 1398  cd ll
+ 1399  z post
+ 1400  ll
+ 1401  cd ../
+ 1402  ll
+ 1403  cd ../../
+ 1404  ll
+ 1405  cd ../
+ 1406  ll
+ 1407  cd T
+ 1408  cd TP_Python
+ 1409  ll
+ 1410  cd HL201H-Python
+ 1411  ll
+ 1412  git whatchanged
+ 1413  ll
+ 1414  cd seance-4
+ 1415  ll
+ 1416  nvim
+ 1417  ll
+ 1418  nvim
+ 1419  cd section19
+ 1420  python test01.py
+ 1421  cd section21
+ 1422  ll
+ 1423  nvim probleme-21.3-qA.py
+ 1424  python probleme-21.3-qA.py
+ 1425  z TP
+ 1426  ll
+ 1427  cd HL201H-Python
+ 1428  ll
+ 1429  git add . 
+ 1430  git commit -m 'update'
+ 1431  git push origin main
+ 1432  clear
+ 1433  ll
+ 1434  sudo snap refresh
+ 1435  z Dev
+ 1436  l
+ 1437  cd Documents
+ 1438  ll
+ 1439  cd These
+ 1440  ll
+ 1441  cd ../
+ 1442  ll
+ 1443  cd Fun/l
+ 1444  ll
+ 1445  cd Fun
+ 1446  ll
+ 1447  rm generateXMG.py
+ 1448  cd gspc
+ 1449  ll
+ 1450  rm __main__.py
+ 1451  ll
+ 1452  nvim
+ 1453  code .
+ 1454  pip install fssa
+ 1455  cd ..
+ 1456  ll
+ 1457  mv gspc dev-gspsc
+ 1458  mv dev-gspsc dev-gspc
+ 1459  cd dev-gspc
+ 1460  ll
+ 1461  mkdir gspc
+ 1462  mv __init__.py gspc
+ 1463  code .
+ 1464  cp ../../These/workspaces/wip/code/clstr/tests/* traj-test
+ 1465  cp ../../These/workspaces/wip/code/clstr/tests/* traj-test -r
+ 1466  ll
+ 1467  sh
+ 1468  bash
+ 1469  cd ../../These/workspaces/wip/code/clstr/
+ 1470  code .
+ 1471  clear
+ 1472  bash
+ 1473  git pull origin main
+ 1474  bash
+ 1475  git pull origin main
+ 1476  bash
+ 1477  find ./ -name "data-SI"
+ 1478  cd ../
+ 1479  find ./ -name "data-SI"
+ 1480  ssh jperradin@vega.coulomb.univ-montp2.fr
+ 1481  xmgrace -nxy '/home/perraju/Documents/Fun/dev-gspc/tests/results/sio2-27216at-1configuration/pair_distribution_function.dat'
+ 1482  cler
+ 1483  clear
+ 1484  git add . 
+ 1485  git commit -m 'update'
+ 1486  git push origin main
+ 1487  cd ../../
+ 1488  ll
+ 1489  cd '/home/perraju/Documents/These/workspaces/histogram-loglog/output/96000at'
+ 1490  ll
+ 1491  xmgrace fit-5-5.agr
+ 1492  cd output/96000at
+ 1493  ll
+ 1494  clear
+ 1495  xmgrace fit-5-5.agr
+ 1496  cd output/96000at
+ 1497  xmgrace 
+ 1498  xmgrace fit-5-5.agr
+ 1499  cd output/96000at/
+ 1500  xmgrace fit-5-5.agr
+ 1501  xmgrace fit-5-5.agr cd /home/perraju/Documents/These/workspaces/histogram-loglog ; /usr/bin/env /home/perraju/anaconda3/bin/python /home/perraju/.vscode/extensions/ms-python.debugpy-2024.2.0-linux-x64/bundled/libs/debugpy/adapter/../../debugpy/launcher 60207 -- /home/perraju/Documents/These/workspaces/histogram-loglog/histogram_sample_size.py 
+ 1502  cd output/96000at/
+ 1503  xmgrace fit-5-5.agr 
+ 1504  python histogram_sample_size.py
+ 1505  pip install iminuit
+ 1506  conda install -c conda-forge iminuit
+ 1507  bg
+ 1508  clear
+ 1509  conda update --all
+ 1510  bash
+ 1511  conda install -c conda-forge iminuit
+ 1512  conda install -c conda-forge pocl\n
+ 1513  ^[[200~conda install -c conda-forge ocl-icd-system
+ 1514  conda install -c conda-forge ocl-icd-system\n
+ 1515  cd /home/perraju/Documents/These/workspaces/histogram-loglog/output/96000at
+ 1516  ll
+ 1517  mv fit-5-5.agr fit-xmgrace-5-5.agr
+ 1518  cp ../../template_111.agr fit_iminuit_all.agr
+ 1519  xmgrace fit_iminuit_all.agr
+ 1520  bash
+ 1521  cd /home/perraju/Documents/These
+ 1522  ll
+ 1523  cd T
+ 1524  cd TP_Python
+ 1525  ll
+ 1526  cd HL201H-Python
+ 1527  ll
+ 1528  code .
+ 1529  cd 
+ 1530  sshtunnel
+ 1531  cat .bashrc
+ 1532  sshfs jperradin@localhost:/home/jperradin/Documents/workspaces/post-processing/results/ -p 2222 /home/perraju/rsync-ssh/
+ 1533  cd rsync-ssh
+ 1534  ll
+ 1535  cd histogram-loglog
+ 1536  ll
+ 1537  cp * ~/Documents/These/workspaces/histogram-loglog/
+ 1538  cp * ~/Documents/These/workspaces/histogram-loglog/ -r
+ 1539  python histogram-loglog.py
+ 1540  cd output/96000at/cldist
+ 1541  mv fit_iminuit_all.agr fit_iminuit_cldist.agr
+ 1542  xmgrace fit_iminuit_cldist.agr
+ 1543  cd ../../
+ 1544  cd ..
+ 1545  python histogram-loglog-rgyr.py
+ 1546  clear
+ 1547  bash
+ 1548  clear
+ 1549  z /home/perraju/Documents/These/TP_Python/HL201H-Python
+ 1550  ll
+ 1551  cd seance-5
+ 1552  cd ../seance-6
+ 1553  cd section-31
+ 1554  python quizz-103.py
+ 1555  cd seance-6/section-33
+ 1556  python quizz-101.py
+ 1557  cd ../../
+ 1558  git add .
+ 1559  git commit -m 'update'
+ 1560  git push origin main
+ 1561  cd seance-6/section-33
+ 1562  python quizz-101.py
+ 1563  cd ../
+ 1564  ll
+ 1565  cd ../..
+ 1566  ll
+ 1567  cd These
+ 1568  ll
+ 1569  mkdir Development
+ 1570  cd Development
+ 1571  ll
+ 1572  git clone git@github.com:JulienPerradin/gspc.git
+ 1573  z Dev
+ 1574  ll
+ 1575  git clone git@github.com:JulienPerradin/clstr.git
+ 1576  cd ../
+ 1577  ll
+ 1578  cd workspaces
+ 1579  ll
+ 1580  sshtunnel
+ 1581  sshfs jperradin@localhost:/home/jperradin/Documents/workspaces/post-processing/clstr -p 2222 /home/perraju/rsync-ssh/
+ 1582  cd 
+ 1583  cd rsync-ssh
+ 1584  ll
+ 1585  code .
+ 1586  code 
+ 1587  sudo code
+ 1588  cd ../
+ 1589  ll
+ 1590  code .
+ 1591  z Dev
+ 1592  clear
+ 1593  cd 
+ 1594  bash
+ 1595  ovito session-ovito.ovito
+ 1596  bash
+ 1597  ssh jperradin@vega.coulomb.univ-montp2.fr
+ 1598  bash
+ 1599  /home/perraju/anaconda3/bin/python
+ 1600  git pull origin main
+ 1601  fdfind *.xyz
+ 1602  fdfind .xyz
+ 1603  cd code/my_tests/xyz/multiple-cfg-1008at-ovito/
+ 1604  ll
+ 1605  cd ../
+ 1606  ll
+ 1607  cd tests/inputs
+ 1608  ll
+ 1609  pwd
+ 1610  mv * /home/perraju/Documents/These/Development/clstr/tests/inputs
+ 1611  cd tests/inputs
+ 1612  ll
+ 1613  cd 1008
+ 1614  ll
+ 1615  cd ../../
+ 1616  ll
+ 1617  cd ../
+ 1618  ll
+ 1619  chmod u+x launch-clstr.py
+ 1620  ll
+ 1621  ./launch-clstr.py
+ 1622  python launch-clstr.py
+ 1623  clear
+ 1624  cat launch-clstr.py
+ 1625  ovito tests/inputs/1008/multiple-cfg-1008at-ovito/pos00.xyz
+ 1626  git add .
+ 1627  git commit -m 'update'
+ 1628  git push origin main
+ 1629  git add .
+ 1630  git commit -m 'add README.md'
+ 1631  git push origin main
+ 1632  git add . 
+ 1633  git commit -m 'add README.md and easier configuration implementation'
+ 1634  git push origin main
+ 1635  python launch-clstr-for-testing.py
+ 1636  git add .
+ 1637  git commit -m 'update'
+ 1638  git push origin main
+ 1639  pwd
+ 1640  cd ../
+ 1641  ll
+ 1642  cd T
+ 1643  cd TP_Python
+ 1644  ll
+ 1645  cd HL201H-Python
+ 1646  cd seance-7/section-35
+ 1647  python test01.py
+ 1648  python quizz-101.py
+ 1649  python quizz-102.py
+ 1650  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-127.py
+ 1651  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-128.py
+ 1652  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-129.py
+ 1653  cd ../section-36
+ 1654  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-130.py
+ 1655  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-131.py
+ 1656  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-132.py
+ 1657  cd ../section-37
+ 1658  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-133.py
+ 1659  cd ../section-38
+ 1660  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-134.py
+ 1661  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-135.py
+ 1662  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-136.py
+ 1663  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-137.py
+ 1664  cd ../section-39
+ 1665  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-138.py
+ 1666  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-139.py
+ 1667  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-140.py
+ 1668  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-141.py
+ 1669  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-142.py
+ 1670  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-143.py
+ 1671  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-144.py
+ 1672  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-145.py
+ 1673  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-146.py
+ 1674  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-147.py
+ 1675  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-148.py
+ 1676  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-149.py
+ 1677  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-150.py
+ 1678  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-151.py
+ 1679  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-152.py
+ 1680  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-153.py
+ 1681  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-154.py
+ 1682  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-155.py
+ 1683  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-156.py
+ 1684  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-157.py
+ 1685  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/sol-158.py
+ 1686  cd ../../
+ 1687  git add .
+ 1688  git commit -m 'update'
+ 1689  git push origin main
+ 1690  git pull origin main
+ 1691  git add .
+ 1692  git commit -m 'update'
+ 1693  git push origin main
+ 1694  git pull origin main
+ 1695  cd ..
+ 1696  ll
+ 1697  rm HL201H-Python -r
+ 1698  rm HL201H-Python -rf
+ 1699  git clone git@github.com:JulienPerradin/HL201H-Python.git
+ 1700  ll
+ 1701  cd Documents
+ 1702  ll
+ 1703  cd These
+ 1704  ll
+ 1705  cd TP_Python
+ 1706  ll
+ 1707  cd HL201H-Python
+ 1708  ll
+ 1709  code .
+ 1710  git pull origin main
+ 1711  ll
+ 1712  code .
+ 1713  cd qcm-maison
+ 1714  ll
+ 1715  python q10.py
+ 1716  python q11.py
+ 1717  python q12.py
+ 1718  \tpython q13.py
+ 1719  cd ../seance-7
+ 1720  ll
+ 1721  cd section-38
+ 1722  python test.py
+ 1723  cd section-38
+ 1724  python test.py
+ 1725  cd ../../
+ 1726  git add .
+ 1727  git commit -m 'update'
+ 1728  git push origin main
+ 1729  python has201h.etudiant.pdf
+ 1730  cd seance-7/section-39
+ 1731  cd ../section-38
+ 1732  python test.py
+ 1733  python has201h.etudiant.pdf
+ 1734  python test.py
+ 1735  ll
+ 1736  cd ../
+ 1737  ll
+ 1738  cd perraju
+ 1739  ll
+ 1740  clear
+ 1741  ll
+ 1742  cd Documents
+ 1743  ll
+ 1744  cd These
+ 1745  ll
+ 1746  cd notes
+ 1747  ll
+ 1748  cat todolist.md
+ 1749  cd ../
+ 1750  ll
+ 1751  rm notes -r
+ 1752  ll
+ 1753  git clone git@github.com:JulienPerradin/notes_and_ideas.git
+ 1754  ll
+ 1755  cd notes_and_ideas
+ 1756  ll
+ 1757  git pull origin main
+ 1758  ll
+ 1759  cd ../../
+ 1760  ll
+ 1761  cd These
+ 1762  ll
+ 1763  cd Development
+ 1764  ll
+ 1765  cd clstr
+ 1766  ll
+ 1767  git pull origin main
+ 1768  ll
+ 1769  cd ../
+ 1770  ll
+ 1771  cd notes_and_ideas
+ 1772  ll
+ 1773  nvim
+ 1774  sudo dpkg -i drawio-amd64-24.1.0.deb
+ 1775  ll
+ 1776  nvim
+ 1777  z dev
+ 1778  cd ../
+ 1779  ll
+ 1780  cd ../
+ 1781  ll
+ 1782  cd These
+ 1783  cd Development
+ 1784  ll
+ 1785  cd clstr
+ 1786  ll
+ 1787  git add .
+ 1788  git commit -m 'added class diagram'
+ 1789  git push origin main
+ 1790  cd clstr
+ 1791  ll
+ 1792  cd src
+ 1793  ll
+ 1794  mkdir data
+ 1795  mkdir io
+ 1796  ll
+ 1797  cd ../../
+ 1798  ll
+ 1799  python launch-clstr.py
+ 1800  cd /home/perraju/Documents/These/Development/clstr/clstr/src/core
+ 1801  tree
+ 1802  cd ..
+ 1803  tree
+ 1804  tree core
+ 1805  cd ..
+ 1806  ll
+ 1807  cd ..
+ 1808  ll
+ 1809  git add .
+ 1810  git commit -m 'update'
+ 1811  git push perraju.example.com:
+ 1812  git push origin main
+ 1813  z note
+ 1814  ll
+ 1815  nvim
+ 1816  git pull origin main
+ 1817  ll
+ 1818  nvim 
+ 1819  alias
+ 1820  nvim ~/.zshrc
+ 1821  sourece ~/.zshrc
+ 1822  source ~/.zshrc
+ 1823  git add .
+ 1824  git commit -m 'update'
+ 1825  git push origin main
+ 1826  git pull origin main
+ 1827  git config pull.rebase true
+ 1828  git pull origin main
+ 1829  git add . && git commit -m 'update' && git push origin main
+ 1830  z dev
+ 1831  ll
+ 1832  cd ..
+ 1833  ll
+ 1834  pwd
+ 1835  cd /home/perraju/Documents/These/Development/clstr
+ 1836  ll
+ 1837  clear
+ 1838  python launch-clstr.py
+ 1839  clear
+ 1840  python launch-clstr.py
+ 1841  clear
+ 1842  python launch-clstr.py
+ 1843  cd clstr
+ 1844  rgrep name_of_the_project
+ 1845  clear
+ 1846  python launch-clstr.py
+ 1847  python launch-clstr-quick-test.py
+ 1848  clear
+ 1849  python launch-clstr.py
+ 1850  git add . && git commit -m 'update' && git push origin main
+ 1851  clear
+ 1852  ll
+ 1853  python launch-clstr.py
+ 1854  cd ..
+ 1855  ll
+ 1856  python launch-clstr.py
+ 1857  clear
+ 1858  python launch-clstr-multiple-files.py
+ 1859  clear
+ 1860  python launch-clstr-multiple-files.py
+ 1861  cd '/home/perraju/Documents/These/Development/clstr/tests/inputs/SiO2/1008/sio2-1008at-1frame'
+ 1862  ls -v pos* | xargs readlink -f > inputs
+ 1863  cd '/home/perraju/Documents/These/Development/clstr/tests/inputs/SiO2/1008/sio2-1008at-1frame'
+ 1864  cd -
+ 1865  z dev
+ 1866  z clstr
+ 1867  ll
+ 1868  clear
+ 1869  python launch-clstr-multiple-files.py
+ 1870  cd tests/results
+ 1871  ll
+ 1872  fdfind .png
+ 1873  fdfind .png | xargs rm
+ 1874  fdfind .txt | xargs rm
+ 1875  python launch-clstr-multiple-files.py
+ 1876  cd tests/results
+ 1877  ll
+ 1878  python plot.py sio2-1008at-11frames-bond
+ 1879  code .
+ 1880  python plot.py sio2-1008at-11frames-bond
+ 1881  z note
+ 1882  ll
+ 1883  nvim
+ 1884  git pull origin main
+ 1885  nvim
+ 1886  cat README.md
+ 1887  git add . && git commit -m "update" && git push origin main
+ 1888  cd -
+ 1889  ll
+ 1890  cd ../..
+ 1891  ll
+ 1892  code .
+ 1893  python launch-clstr-quick-test.py
+ 1894  git add . && git commit -m "update" && git push origin main
+ 1895  clear
+ 1896  ll
+ 1897  git add . && git commit -m "update" && git push origin main
+ 1898  mkdir seance-8
+ 1899  cd seance-
+ 1900  cd seance-8
+ 1901  ll
+ 1902  clear
+ 1903  open ../has201h.prof.pdf
+ 1904  mkdir section40 
+ 1905  mkdir section41
+ 1906  mkdir section42 section43 section44
+ 1907  ll
+ 1908  cd section40
+ 1909  ll
+ 1910  cd Documents
+ 1911  ll
+ 1912  cd These
+ 1913  ll
+ 1914  cd TP_Python
+ 1915  ll
+ 1916  cd HL201H-Python
+ 1917  ll
+ 1918  mkdir codes
+ 1919  cd codes
+ 1920  ll
+ 1921  wget https://dl.eea-fds.umontpellier.fr/PythonL1//code/ -R
+ 1922  wget --help
+ 1923  wget https://dl.eea-fds.umontpellier.fr/PythonL1//code/ -r
+ 1924  wget https://dl.eea-fds.umontpellier.fr/PythonL1//prof/ -r
+ 1925  ip
+ 1926  cd ..
+ 1927  cat has201h.prof.pdf
+ 1928  ll
+ 1929  pdftotext has201h.prof.pdf | grep code/code
+ 1930  pdftotext has201h.prof.pdf
+ 1931  ll
+ 1932  more has201h.prof.txt
+ 1933  cat has201h.prof.txt | grep code/code
+ 1934  cat has201h.prof.txt | grep code/code | awk '{print $4}'
+ 1935  cat has201h.prof.txt | grep code/code | awk '{print $4}' | grep -v [
+ 1936  cat has201h.prof.txt | grep code/code | awk '{print $4}' | grep -v \[
+ 1937  cat has201h.prof.txt | grep code/code | awk '{print $4}'
+ 1938  cat has201h.prof.txt | grep code/code | awk '{print $4}' > list
+ 1939  ll
+ 1940  code list
+ 1941  cd ../../codes
+ 1942  chmod +x execute_lines.sh
+ 1943  ./execute_lines.sh
+ 1944  ll
+ 1945  cat has201h.prof.txt | grep prof/sol | awk '{print $4}' > list
+ 1946  cat has201h.prof.txt | grep prof/sol 
+ 1947  cat has201h.prof.txt | grep prof/sol | awk '{print $1}' > list
+ 1948  cd ../prof
+ 1949  ll
+ 1950  ./execute_lines.sh
+ 1951  git add . && git commit -m "update" && git push origin main
+ 1952  cd ..
+ 1953  ll
+ 1954  git add . && git commit -m "update" && git push origin main
+ 1955  open has201h.prof.pdf
+ 1956  cd '/home/perraju/Documents/These/TP_Python/HL201H-Python/me/seance-8/section40'
+ 1957  cp ../../../code/code-VIII-40-39.py .
+ 1958  ll
+ 1959  code code-VIII-40-39.py
+ 1960  python code-VIII-40-39.py
+ 1961  ll
+ 1962  python code-VIII-40-39-a.py
+ 1963  cp ../../../code/code-VIII-40-40.py .
+ 1964  python code-VIII-40-40.py
+ 1965  code code-VIII-40-40.py
+ 1966  python code-VIII-40-40.py
+ 1967  cp ../../../code/code-VIII-40-41.py .
+ 1968  ll
+ 1969  python code-VIII-40-41.py
+ 1970  cat code-VIII-40-40.py >> test01.py
+ 1971  cat code-VIII-40-41.py >> test01.py
+ 1972  python test01.py
+ 1973  cp ../../../code/code-VIII-40-42.py .
+ 1974  python test01.py
+ 1975  cd ../section41
+ 1976  ll
+ 1977  cp ../../../code/code-VIII-40-43.py .
+ 1978  ll
+ 1979  cp ../../../code/code-VIII-41-43.py .
+ 1980  ll
+ 1981  code code-VIII-41-43.py
+ 1982  python code-VIII-41-43.py
+ 1983  python test01.py
+ 1984  cp ../../../code/code-VIII-41-44.py .
+ 1985  code code-VIII-41-44.py
+ 1986  cp ../../../code/code-VIII-41-44.py .
+ 1987  python test01.py
+ 1988  python test02.py
+ 1989  cp ../../../code/code-VIII-41-45.py .
+ 1990  ll
+ 1991  cp code-VIII-41-45.py test03.py
+ 1992  ll
+ 1993  code test03.py
+ 1994  python test03.py
+ 1995  cd ../section42
+ 1996  ll
+ 1997  cp ../../../prof/sol-161.py .
+ 1998  ll
+ 1999  python sol-161.py
+ 2000  cp sol-161.py test01.py
+ 2001  code test01.py
+ 2002  python test01.py
+ 2003  code probleme-41.1.py
+ 2004  python probleme-41.1.py
+ 2005  cp ../../../prof/sol-162.py probleme-41.1.py
+ 2006  python probleme-41.1.py
+ 2007  cd ../section43
+ 2008  ll
+ 2009  cp ../../../code/code-VIII-43-46.py
+ 2010  cp ../../../code/code-VIII-43-46.py .
+ 2011  ll
+ 2012  code code-VIII-43-46.py
+ 2013  python code-VIII-43-46.py
+ 2014  code quiz01.py
+ 2015  clear
+ 2016  python quiz01.py
+ 2017  code quiz02.py
+ 2018  cp ../../../code/code-VIII-43-47.py
+ 2019  cp ../../../code/code-VIII-43-47.py . 
+ 2020  cp code-VIII-43-47.py quiz02.py
+ 2021  code quiz02.py
+ 2022  python quiz02.py
+ 2023  clear
+ 2024  python quiz02.py
+ 2025  ll
+ 2026  clear
+ 2027  ll
+ 2028  code quiz03.py
+ 2029  python quiz03.py
+ 2030  ll
+ 2031  clear
+ 2032  python quiz03.py
+ 2033  code test01.py
+ 2034  python test01.py
+ 2035  cp ../../../code/code-VIII-43-49.py .
+ 2036  code code-VIII-43-49.py
+ 2037  ll
+ 2038  code quiz04.py
+ 2039  python quiz04.py
+ 2040  code quiz05.py
+ 2041  python quiz05.py
+ 2042  code quiz05.py
+ 2043  python quiz05.py
+ 2044  git add . && git commit -m "update" && git push origin main
+ 2045  cd ../../
+ 2046  cd ..
+ 2047  ll
+ 2048  git add . && git commit -m "update" && git push origin main
+ 2049  open has201h.etudiant.pdf 
+ 2050  ssh -A -Y julien.perradin@etu.umontpellier.fr@x2go.umontpellier.fr
+ 2051  ssh -A -Y -X julien.perradin@etu.umontpellier.fr@x2go.umontpellier.fr 
+ 2052  sudo add-apt-repository -y ppa:x2go/stable
+ 2053  sudo apt-get update
+ 2054  sudo apt-get install x2goclient
+ 2055  cd quick-test
+ 2056  python indices.py
+ 2057  python autre_fichier.py
+ 2058  python expo.py
+ 2059  python erreur_multiplication.py
+ 2060  ll
+ 2061  ssh jperradin@vega.coulomb.univ-montp2.fr
+ 2062  cd ..
+ 2063  git add . && git commit -m "update" && git push origin main
+ 2064  clear
+ 2065  git add . && git commit -m "update" && git push origin main
+ 2066  ll
+ 2067  cd me/seance-8/section44
+ 2068  cd ../../qcm-maison
+ 2069  cd ..
+ 2070  ll
+ 2071  cd ..
+ 2072  cd quick-test
+ 2073  ll
+ 2074  cd seance-8
+ 2075  ll
+ 2076  python e
+ 2077  python expo.py
+ 2078  cd -
+ 2079  cd ../me/seance-8/section42
+ 2080  python test01.py
+ 2081  python probleme-42.1.py
+ 2082  z m
+ 2083  ll
+ 2084  z hl
+ 2085  ll
+ 2086  cd quick-test
+ 2087  ll
+ 2088  cd seance-8
+ 2089  ll
+ 2090  python list.py
+ 2091  z hl
+ 2092  cd quick-test/seance-8
+ 2093  ll
+ 2094  python list.py
+ 2095  cd z
+ 2096  z section42
+ 2097  mm
+ 2098  ll
+ 2099  python test02.py
+ 2100  z hl
+ 2101  ll
+ 2102  cd quick-test
+ 2103  ll
+ 2104  cd seance-8
+ 2105  python list.py
+ 2106  clear
+ 2107  z h
+ 2108  z hl
+ 2109  ll
+ 2110  cd me/seance-8/section44
+ 2111  ll
+ 2112  python probleme-44.2.py
+ 2113  z hl
+ 2114  ll
+ 2115  cd Documents
+ 2116  ll
+ 2117  cd These
+ 2118  ll
+ 2119  z form
+ 2120  ll
+ 2121  cd ../
+ 2122  ll
+ 2123  mkdir seminars
+ 2124  cd seminars
+ 2125  ll
+ 2126  mkdir 20230405
+ 2127  cd 20230405
+ 2128  ll
+ 2129  nvim notes.md
+ 2130  code notes.md
+ 2131  z /home/perraju/Documents/These/
+ 2132  ll
+ 2133  cd Development
+ 2134  ll
+ 2135  cd clstr
+ 2136  ll
+ 2137  cd tests/inputs
+ 2138  ll
+ 2139  cd SiO2
+ 2140  ll
+ 2141  cd 27216
+ 2142  ll
+ 2143  cd sample-27216at-1frame-10GPa
+ 2144  ll
+ 2145  ovito sample-27216at-1frame-66.8132-10GPa.xyz
+ 2146  ll
+ 2147  z dev
+ 2148  ll
+ 2149  cd ../
+ 2150  ll
+ 2151  cd ../
+ 2152  ll
+ 2153  cd These
+ 2154  ll
+ 2155  cd Development
+ 2156  ll
+ 2157  cd clstr
+ 2158  ll
+ 2159  cd /media/perraju/pj-drive/trajectories-lammps-xyz-sio2-1008-to-96000
+ 2160  ll
+ 2161  tar -xzvf positions_xyz-sio2-*
+ 2162  tar -xzvf positions_xyz-sio2-3024-2x.tgz
+ 2163  ll
+ 2164  cd 2a
+ 2165  ll
+ 2166  cd B-part
+ 2167  ll
+ 2168  cd positions_xyz
+ 2169  ll
+ 2170  cd ../../../
+ 2171  ll
+ 2172  mkdir analysis
+ 2173  mkdir archive
+ 2174  mv *.tgz archive
+ 2175  mv archive archives
+ 2176  ll
+ 2177  mkdir trajectories
+ 2178  mv 2* trajectories/
+ 2179  ll
+ 2180  cd trajectories
+ 2181  ll
+ 2182  cd 2a
+ 2183  ll
+ 2184  cd B-part/positions_xyz
+ 2185  mv * ../../
+ 2186  ll
+ 2187  cd ../../
+ 2188  rm B-part -r
+ 2189  ll
+ 2190  ls -v pos* | xargs readlink -f > inputs
+ 2191  ll
+ 2192  cd 
+ 2193  ssh jperradin@vega.coulomb.univ-montp2.fr
+ 2194  vim outputs
+ 2195  xclip outputs
+ 2196  vim pressure
+ 2197  ll
+ 2198  cd ~/Documents/These/Development
+ 2199  ll
+ 2200  cd clstr
+ 2201  git pull origin main
+ 2202  ll
+ 2203  cp examples/launch-clstr-multiple-files.py /media/perraju/pj-drive/trajectories-lammps-xyz-sio2-1008-to-96000/analysis
+ 2204  ll
+ 2205  cd ../
+ 2206  cd ..
+ 2207  ll
+ 2208  code .
+ 2209  ll
+ 2210  cd trajectories/2a
+ 2211  ll
+ 2212  mv inputs ../../analysis
+ 2213  mv outputs ../../analysis
+ 2214  mv pressure ../../analysis
+ 2215  ll
+ 2216  cd ../../a
+ 2217  cd ../../analysis
+ 2218  ll
+ 2219  mkdir sio2-3024at-2x
+ 2220  cd sio2-3024at-2x
+ 2221  mkdir 2a 2b
+ 2222  mkdir 2c 2d 2e
+ 2223  ll
+ 2224  mv ../inputs 2a
+ 2225  mv ../outputs 2a
+ 2226  mv ../pressure 2a
+ 2227  ll
+ 2228  z Dev
+ 2229  ll
+ 2230  cd clstr
+ 2231  ll
+ 2232  cd clstr
+ 2233  ll
+ 2234  pip install .
+ 2235  bash
+ 2236  cd clstr
+ 2237  pip install .
+ 2238  pip install -r requirements.txt
+ 2239  cd ../../
+ 2240  ll
+ 2241  cd ..
+ 2242  ll
+ 2243  pip install --upgrade clstr==0.2.0
+ 2244  pip install twine
+ 2245  pip install --upgrade wheel
+ 2246  cd Down
+ 2247  z Down
+ 2248  ll
+ 2249  bash Anaconda3-2024.02-1-Linux-x86_64.sh uninstall
+ 2250  bash -u Anaconda3-2024.02-1-Linux-x86_64.sh 
+ 2251  bash Anaconda3-2024.02-1-Linux-x86_64.sh -u
+ 2252  conda activate
+ 2253  conda init --reverse --all
+ 2254  cd 
+ 2255  ll
+ 2256  rm -rf anaconda3
+ 2257  ll
+ 2258  cd opt
+ 2259  ll
+ 2260  cd ../
+ 2261  ll
+ 2262  cd Downloads
+ 2263  ll
+ 2264  pip freeze
+ 2265  which pip
+ 2266  sudo apt-get remove pip
+ 2267  sudo apt-get remove python3-pip
+ 2268  sudo apt-get install pip
+ 2269  which pip
+ 2270  pip freeze
+ 2271  ll
+ 2272  bash Anaconda3-2024.02-1-Linux-x86_64.sh
+ 2273  conda config --set auto_activate_base true
+ 2274  ll
+ 2275  conda config --set auto_activate_base true
+ 2276  ll
+ 2277  bash
+ 2278  ll
+ 2279  z Dev
+ 2280  ll
+ 2281  cd clstr
+ 2282  ll
+ 2283  cd clstr
+ 2284  ll
+ 2285  clear
+ 2286  conda install numpy tqdm scipy natsort
+ 2287  ll
+ 2288  pip install .
+ 2289  python setup.py sdist
+ 2290  pip install twine
+ 2291  pip uninstall clstr
+ 2292  python setup.py sdist
+ 2293  twine upload dist/*
+ 2294  cd ..
+ 2295  ls -al
+ 2296  cd .git
+ 2297  ll
+ 2298  code workflow.yaml
+ 2299  git add . && git commit -m "update" && git push origin main
+ 2300  cd ../
+ 2301  git add . && git commit -m "update" && git push origin main
+ 2302  cd ..
+ 2303  ll
+ 2304  pip install .
+ 2305  ll
+ 2306  bash
+ 2307  mv setup.py clstr
+ 2308  rm clstr.egg-info dist
+ 2309  rm clstr.egg-info dist -r
+ 2310  ll
+ 2311  cd clstr
+ 2312  pip install .
+ 2313  python setup.py sdist
+ 2314  ll
+ 2315  pip install dist/clstr-0.2.0.tar.gz
+ 2316  conda install dist/clstr-0.2.0.tar.gz
+ 2317  pip uninstall clstr
+ 2318  conda install dist/clstr-0.2.0.tar.gz
+ 2319  kill 145188
+ 2320  ll
+ 2321  bg
+ 2322  ll
+ 2323  mkdir ../test
+ 2324  conda convert --platform all dist/clstr-0.2.0.tar.gz -o ../test
+ 2325  ll
+ 2326  cd ../test
+ 2327  ll
+ 2328  conda install clstr
+ 2329  pip install .
+ 2330  cd analysis/
+ 2331  ll
+ 2332  python launch-clstr-multiple-files.py
+ 2333  echo PYTHONPATH
+ 2334  echo $PYTHONPATH
+ 2335  Ll
+ 2336  ll
+ 2337  eval $PYTHONPATH
+ 2338  bash
+ 2339  z Dev
+ 2340  ll
+ 2341  cd clstr
+ 2342  ll
+ 2343  cd clstr
+ 2344  ll
+ 2345  cd ..
+ 2346  pwd
+ 2347  source ~/.zshrc
+ 2348  z ana
+ 2349  ll
+ 2350  python launch-clstr-multiple-files.py
+ 2351  source ~/.zshrc
+ 2352  clear
+ 2353  git add . && git commit -m "update" && git push origin main
+ 2354  python analysis/launch-clstr-multiple-files.py
+ 2355  python analysis/launch-clstr-multiple-files.py cd /media/perraju/pj-drive/trajectories-lammps-xyz-sio2-1008-to-96000 ; /home/perraju/anaconda3/bin/python /home/perraju/.vscode/extensions/ms-python.debugpy-2024.4.0-linux-x64/bundled/libs/debugpy/adapter/../../debugpy/launcher 34635 -- /media/perraju/pj-drive/trajectories-lammps-xyz-sio2-1008-to-96000/analysis/launch-clstr-multiple-files.py 
+ 2356  pip uninstall clstr
+ 2357  cd clstr
+ 2358  source ~/.zshrc
+ 2359  pip install .
+ 2360  source ~/.zshrc
+ 2361  python analysis/launch-clstr-multiple-files.py
+ 2362  pip uninstall clstr
+ 2363  python analysis/launch-clstr-multiple-files.py
+ 2364  pip freeze | grep clstr
+ 2365  cd ..
+ 2366  python examples/launch-clstr-quick-test.py
+ 2367  python analysis/launch-clstr-multiple-files.py
+ 2368  git pull origin main
+ 2369  git config pull.rebase false
+ 2370  git pull origin main
+ 2371  git add . && git commit -m "update" && git push origin main
+ 2372  python analysis/launch-clstr-multiple-files.py
+ 2373  ll
+ 2374  cd /media/perraju
+ 2375  ll
+ 2376  pwd
+ 2377  whoami
+ 2378  clear
+ 2379  cd 
+ 2380  ssh jperradin@vega.coulomb.univ-montp2.fr
+ 2381  sshtunnel
+ 2382  ll
+ 2383  sshfs jperradin@localhost:/home/jperradin/Documents/workspaces/post-processing/trajectories/sio2-3024at-2x -p 2222 /home/perraju/rsync-ssh
+ 2384  ll
+ 2385  cd r
+ 2386  cd rsync-ssh
+ 2387  ll
+ 2388  tar -xzvf B-part.tgz
+ 2389  ll
+ 2390  z ana
+ 2391  ll
+ 2392  cd sio2-3024at-2x
+ 2393  ll
+ 2394  pwd
+ 2395  cp B-part.tgz /media/perraju/pj-drive/trajectories-lammps-xyz-sio2-1008-to-96000/analysis/sio2-3024at-2x
+ 2396  python analysis/launch-clstr-multiple-files.py
+ 2397  ll
+ 2398  pwd
+ 2399  mv B-part.tgz ../../trajectories/
+ 2400  cd ../..
+ 2401  ll
+ 2402  cd trajectories
+ 2403  ll
+ 2404  tar -xzvf B-part.tgz
+ 2405  ll
+ 2406  fdfind nvt
+ 2407  fdfind nvt_300K
+ 2408  fdfind nvt_300K_chgbox | wc
+ 2409  fdfind nvt_300K_chgbox | xargs rm -r
+ 2410  ll
+ 2411  fdfind .data
+ 2412  ll
+ 2413  fdfind positions_xyz
+ 2414  fdfind positions_xyz | xargs rm -r
+ 2415  cd 2a
+ 2416  ll
+ 2417  cd B-part
+ 2418  ll
+ 2419  cd positions
+ 2420  ll
+ 2421  ls convert_nvt.py
+ 2422  ll
+ 2423  python convert_nvt.py 3024
+ 2424  l
+ 2425  fdfind boxes
+ 2426  pwd
+ 2427  cp 2a/analysis/boxes /media/perraju/pj-drive/trajectories-lammps-xyz-sio2-1008-to-96000/trajectories/2a/B-part/positions
+ 2428  cp 2c/analysis/boxes /media/perraju/pj-drive/trajectories-lammps-xyz-sio2-1008-to-96000/trajectories/2b/B-part/positions
+ 2429  cp 2b/analysis/boxes /media/perraju/pj-drive/trajectories-lammps-xyz-sio2-1008-to-96000/trajectories/2b/B-part/positions
+ 2430  cp 2c/analysis/boxes /media/perraju/pj-drive/trajectories-lammps-xyz-sio2-1008-to-96000/trajectories/2c/B-part/positions
+ 2431  cp 2d/analysis/boxes /media/perraju/pj-drive/trajectories-lammps-xyz-sio2-1008-to-96000/trajectories/2d/B-part/positions
+ 2432  cp 2e/analysis/boxes /media/perraju/pj-drive/trajectories-lammps-xyz-sio2-1008-to-96000/trajectories/2e/B-part/positions
+ 2433  python convert_nvt.py 3024
+ 2434  ls -v *.xyz
+ 2435  ls -v *.xyz | xargs readlink -f > ../../../../analysis/sio2-3024at-2x/2a/inputs
+ 2436  z ana
+ 2437  ll
+ 2438  python launch-clstr-multiple-files.py
+ 2439  python launch-clstr-multiple-files.py sio2-3024at-2x/2a
+ 2440  cd 
+ 2441  ll
+ 2442  pip install nexus-cat
+ 2443  ll
+ 2444  nexus
+ 2445  vim test.py
+ 2446  python test.py
+ 2447  ll
+ 2448  cd sio2-3024at-2x
+ 2449  ll
+ 2450  cd 2a
+ 2451  ll
+ 2452  cd dens4.098
+ 2453  ll
+ 2454  cat cluster_size_distribution-SiO6-SiO6-stishovite.dat
+ 2455  cat correlation_length.dat
+ 2456  pip install nexus-cat==0.1.4
+ 2457  git pull origin main
+ 2458  cd ..
+ 2459  ll
+ 2460  git clone git@github.com:JulienPerradin/nexus.git
+ 2461  cd nexus
+ 2462  code .
+ 2463  cd ana
+ 2464  z ana
+ 2465  ll
+ 2466  python launch-nexus-parallel-files.py sio2-3024at-2x/2a/
+ 2467  clear
+ 2468  python launch-nexus-parallel-files.py sio2-3024at-2x/2a/
+ 2469  clear
+ 2470  python launch-nexus-parallel-files.py sio2-3024at-2x/2a/
+ 2471  clear
+ 2472  code .
+ 2473  python launch-nexus-parallel-files.py sio2-3024at-2x/2a/
+ 2474  clear
+ 2475  python test.py sio2-3024at-2x/2a
+ 2476  python test.py
+ 2477  python launch-nexus-parallel-files.py sio2-3024at-2x/2a/
+ 2478  clear
+ 2479  python test.py sio2-3024at-2x/2a
+ 2480  clear
+ 2481  python test.py sio2-3024at-2x/2a
+ 2482  clear
+ 2483  python test.py sio2-3024at-2x/2a
+ 2484  clear
+ 2485  python test.py sio2-3024at-2x/2a
+ 2486  cd sio2-3024at-2x/2a/
+ 2487  ll
+ 2488  rm dens* -rf
+ 2489  clear
+ 2490  python test.py sio2-3024at-2x/2a
+ 2491  clear
+ 2492  git add . && git commit -m "updated quiet mode" && git push origin main
+ 2493  python my_tests/launch-nexus-quick-test.py 
+ 2494  git add . && git commit -m "updated quiet mode" && git push origin main
+ 2495  ll
+ 2496  git add . && git commit -m "updated quiet mode" && git push origin main
+ 2497  pip install nexus-cat==0.1.5
+ 2498  git pull origin main
+ 2499  z ana
+ 2500  ll
+ 2501  python test.py sio2-3024at-2x/2a
+ 2502  clear
+ 2503  python launch-nexus-parallel-files.py sio2-3024at-2x/2a/
+ 2504  clear
+ 2505  python launch-nexus-parallel-files.py sio2-3024at-2x/2a/
+ 2506  pwd
+ 2507  z Dev
+ 2508  cd nexus
+ 2509  ll
+ 2510  cp tests/results/plot.py /media/perraju/pj-drive/trajectories-lammps-xyz-sio2-1008-to-96000/analysis
+ 2511  ll
+ 2512  cd /media/perraju/pj-drive/trajectories-lammps-xyz-sio2-1008-to-96000/analysis
+ 2513  ll
+ 2514  pwd
+ 2515  clear
+ 2516  python plot.py sio2-3024at-2x/2a
+ 2517  python launch-nexus-parallel-files.py sio2-3024at-2x/2a/
+ 2518  python plot.py sio2-3024at-2x/2a
+ 2519  clear
+ 2520  python launch-nexus-parallel-files.py sio2-3024at-2x/2a/
+ 2521  clear
+ 2522  python launch-nexus-parallel-files.py sio2-3024at-2x/2a/
+ 2523  python plot.py sio2-3024at-2x/2a
+ 2524  cd sio2-3024at-2x/2a
+ 2525  ll
+ 2526  open average_cluster_size.png
+ 2527  cd sio2-3024at-2x/2a
+ 2528  ll
+ 2529  mkdir figures-1frame
+ 2530  mv *.txt figures-1frame
+ 2531  mv *.png figures-1frame
+ 2532  clear
+ 2533  cd ../../
+ 2534  python launch-nexus-parallel-files.py sio2-3024at-2x/2a/
+ 2535  python plot.py sio2-3024at-2x/2a
+ 2536  cd sio2-3024at-2x/2a
+ 2537  ll
+ 2538  open average_cluster_size.png
+ 2539  cd ../..
+ 2540  python plot.py sio2-3024at-2x/2a
+ 2541  cd sio2-3024at-2x/2a
+ 2542  open average_cluster_size.png
+ 2543  cd ../..
+ 2544  python plot.py sio2-3024at-2x/2a
+ 2545  cd sio2-3024at-2x/2a
+ 2546  open average_cluster_size.png
+ 2547  mkdir figures-51frames
+ 2548  mv *.png figures-51frames
+ 2549  mv *.txt figures-51frames
+ 2550  ll
+ 2551  ssh jperradin@vega.coulomb.univ-montp2.fr
+ 2552  sshtunnel
+ 2553  sshfs jperradin@localhost:/home/jperradin/Documents/workspaces/post-processing/trajectories/sio2-3024at-2x -p 2222 /home/perraju/rsync-ssh
+ 2554  cd rsync-ssh
+ 2555  ll
+ 2556  cd 2a
+ 2557  ll
+ 2558  cd ../
+ 2559  cd ..
+ 2560  umount rsync-ssh
+ 2561  sshfs jperradin@localhost:/home/jperradin/Documents/workspaces/post-processing/results/sio2-3024at-2x -p 2222 /home/perraju/rsync-ssh
+ 2562  cd rsync-ssh
+ 2563  ll
+ 2564  cd 2a
+ 2565  ll
+ 2566  pwd
+ 2567  cp results.tar.gz /media/perraju/pj-drive/trajectories-lammps-xyz-sio2-1008-to-96000/analysis/sio2-3024at-2x/2a
+ 2568  ll
+ 2569  cd ../..
+ 2570  umount rsync-ssh
+ 2571  ll
+ 2572  code .
+ 2573  tar -xzvf results.tar.gz
+ 2574  ll
+ 2575  mkdir ref
+ 2576  mv *.dat ref
+ 2577  ll
+ 2578  cd figures-
+ 2579  cd figures-51frames
+ 2580  ll
+ 2581  xmgrace average_cluster_size.agr
+ 2582  git add . && git commit -m "updated" && git push origin main
+ 2583  cp nexus nexus_test -r
+ 2584  python my_tests/launch-nexus-quick-test.py
+ 2585  ssh jperradin@vega.coulomb.univ-montp2.fr
+ 2586  z ana
+ 2587  ll
+ 2588  cd /media
+ 2589  ll
+ 2590  cd perraju
+ 2591  ll
+ 2592  cd pj-drive
+ 2593  ll
+ 2594  cd trajectories-lammps-xyz-sio2-1008-to-96000
+ 2595  ll
+ 2596  cd analysis
+ 2597  ll
+ 2598  python launch-nexus-parallel-files.py sio2-3024at-2x/2a
+ 2599  git add . && git commit -m "updated" && git push origin main
+ 2600  python setup.py sdist bdist_wheel
+ 2601  git add . && git commit -m "updated" && git push origin main
+ 2602  twine upload dist/*
+ 2603  ll
+ 2604  pip install .
+ 2605  nvim launch-nexus-parallel-files.py
+ 2606  python launch-nexus-parallel-files.py sio2-3024at-2x/2a
+ 2607  python plot.py sio2-3024at-2x/2a
+ 2608  open sio2-3024at-2x/2a/average_cluster_size.png
+ 2609  nvim launch-nexus-parallel-files.py
+ 2610  python launch-nexus-parallel-files.py sio2-3024at-2x/2a
+ 2611  python plot.py sio2-3024at-2x/2a
+ 2612  cd sio2-3024at-2x/2a
+ 2613  ll
+ 2614  open average_cluster_size.png
+ 2615  cd figures-51frames
+ 2616  ll
+ 2617  xmgrace average_cluster_size_comparaison.agr
+ 2618  pip install fssa
+ 2619  python base.py
+ 2620  pip install iminuit
+ 2621  /home/perraju/anaconda3/bin/python
+ 2622  clear
+ 2623  /home/perraju/anaconda3/bin/python
+ 2624  python contour_plot.py
+ 2625  mv contour_plot.py ../test
+ 2626  cd ../test
+ 2627  code .
+ 2628  python contour_plot.py
+ 2629  zip data-performance-20241004-Juju.zip ./
+ 2630  zip data-performance-20241004-Juju.zip *
+ 2631  clear
+ 2632  python contour_plot.py
+ 2633  clear
+ 2634  python contour_plot.py
+ 2635  zip data-performance-20241004-Julien.zip *
+ 2636  python contour_plot.py
+ 2637  zip data-performance-20241004-Julien.zip *
+ 2638  clear
+ 2639  ll
+ 2640  z hl
+ 2641  code .
+ 2642  git add . && git commit -m "updated" && git push origin main
+ 2643  ll
+ 2644  cd me
+ 2645  ll
+ 2646  mkdir seance-9
+ 2647  cd seance-9
+ 2648  ll
+ 2649  mkdir section45 section46 section47
+ 2650  ll
+ 2651  cd section45
+ 2652  ll
+ 2653  code test01.py
+ 2654  python test01.py
+ 2655  cp ../../../prof/sol-172 quiz01.py
+ 2656  cp ../../../prof/sol-172.py quiz01.py
+ 2657  code quiz01.py
+ 2658  python quiz01.py
+ 2659  cp ../../../code/code-IX-45-50.py .
+ 2660  python code-IX-45-50.py
+ 2661  cp ../../../prof/sol-173.py quiz02a.py
+ 2662  python quiz02a.py
+ 2663  cp ../../../prof/sol-174.py quiz02b.py
+ 2664  python quiz02b.py
+ 2665  cp ../../../code/code-IX-45-51.py .
+ 2666  python code-IX-45-51.py
+ 2667  cp ../../../code/code-IX-45-52.py .
+ 2668  python code-IX-45-52.py
+ 2669  cp code-IX-45-51.py test02.py
+ 2670  code test02.py
+ 2671  python test02.py
+ 2672  cp ../../../prof/sol-175.py .
+ 2673  cp ../../../prof/sol-176.py .
+ 2674  python sol-175.py
+ 2675  python sol-176.py
+ 2676  cp ../../../code/code-IX-45-53.py .
+ 2677  ll
+ 2678  python code-IX-45-53.py
+ 2679  cp ../../../code/code-IX-45-54.py .
+ 2680  python code-IX-45-54.py
+ 2681  pwd
+ 2682  ll
+ 2683  cd me/seance-9/section45
+ 2684  ll
+ 2685  python code-IX-45-53.py
+ 2686  cp ../../../code/code-IX-45-55.py .
+ 2687  python code-IX-45-55.py
+ 2688  cp ../../../code/code-IX-45-56.py .
+ 2689  code code-IX-45-56.py
+ 2690  python code-IX-45-56.py
+ 2691  cp ../../../code/code-IX-45-57.py .
+ 2692  python code-IX-45-57.py
+ 2693  cp ../../../code/code-IX-45-58.py .
+ 2694  python code-IX-45-58.py
+ 2695  cp ../../../prof/sol-177.py .
+ 2696  cp ../../../prof/sol-178.py .
+ 2697  cp ../../../prof/sol-179.py .
+ 2698  python sol-177.py
+ 2699  python sol-178.py
+ 2700  python sol-179.py
+ 2701  cp ../section46
+ 2702  cp ../../../prof/sol-180.py .
+ 2703  cp ../../../prof/sol-181.py .
+ 2704  cp ../../../prof/sol-182.py .
+ 2705  cd ../section46
+ 2706  ll
+ 2707  cd ../section46
+ 2708  python sol-180.py
+ 2709  wget http://dl.eea-fds.umontpellier.fr/PythonL1/GlobalTemperatureNasa.csv
+ 2710  ll
+ 2711  python sol-180.py
+ 2712  cp ../../../prof/sol-183.py .
+ 2713  cp ../../../prof/sol-184.py .
+ 2714  python sol-181.py
+ 2715  python sol-180.py
+ 2716  python sol-181.py
+ 2717  python sol-182.py
+ 2718  python sol-183.py
+ 2719  python sol-184.py
+ 2720  ssh jperradin@vega.coulomb.univ-montp2.fr
+ 2721  ll
+ 2722  cd /media
+ 2723  ll
+ 2724  cd perraju
+ 2725  ll
+ 2726  cd pj-drive
+ 2727  ll
+ 2728  cd results_nexus_20240411
+ 2729  ll
+ 2730  code .
+ 2731  ssh jperradin@vega.coulomb.univ-montp2.fr
+ 2732  python find_pc.py sio2-27216at-3x/average_cluster_size--average.csv
+ 2733  python find_pc.py sio2-27216at-3x/3a/analysis/average_cluster_size.txt
+ 2734  sshtunnel
+ 2735  sshfs jperradin@localhost:/home/jperradin/Documents/workspaces/post-processing -p 2222 /home/perraju/rsync-ssh
+ 2736  cd 
+ 2737  cd rsync-ssh
+ 2738  ll
+ 2739  cd results
+ 2740  ll
+ 2741  pwd
+ 2742  cp boxes_all_size.tar.gz /media/perraju/pj-drive/results_nexus_20240411/
+ 2743  cd ../../
+ 2744  umount rsync-ssh
+ 2745  tar -tvf boxes_all_size.tar.gz
+ 2746  ll
+ 2747  cd boxes
+ 2748  tar -xzvf boxes_all_size.tar.gz
+ 2749  ll
+ 2750  cd sio2-1008at-8x
+ 2751  ll
+ 2752  cd average-data
+ 2753  ll
+ 2754  awk '{print $1, $2, $3}' avg-AverageClusterSize.dat > ../boxes_dens_pressure.dat
+ 2755  ll
+ 2756  cd ../
+ 2757  ll
+ 2758  rm average-data -r
+ 2759  cd ../
+ 2760  ll
+ 2761  cd sio2-3024at-2x/average-data
+ 2762  awk '{print $1, $2, $3}' avg-AverageClusterSize.dat > ../boxes_dens_pressure.dat
+ 2763  cd ../
+ 2764  rm 
+ 2765  rm average-data -r
+ 2766  ll
+ 2767  cd ../
+ 2768  ll
+ 2769  cd sio2-8064at-4x/average-data
+ 2770  awk '{print $1, $2, $3}' avg-AverageClusterSize.dat > ../boxes_dens_pressure.dat
+ 2771  cd ../ && rm average-data -r
+ 2772  ll
+ 2773  cd ../sio2-15120at-2x/average-data
+ 2774  awk '{print $1, $2, $3}' avg-AverageClusterSize.dat > ../boxes_dens_pressure.dat
+ 2775  cd ../ && rm average-data -r
+ 2776  cd ../sio2-27216at-3x
+ 2777  cd average-data
+ 2778  awk '{print $1, $2, $3}' avg-AverageClusterSize.dat > ../boxes_dens_pressure.dat
+ 2779  cd ../ && rm average-data -r
+ 2780  cd ..
+ 2781  cd sio2-96000at-1x
+ 2782  cd average-data
+ 2783  awk '{print $1, $2, $3}' avg-AverageClusterSize.dat > ../boxes_dens_pressure.dat
+ 2784  cd ../ && rm average-data -r
+ 2785  ll
+ 2786  cd ..
+ 2787  ll
+ 2788  cd ..
+ 2789  ll
+ 2790  python plot-scaling-max.py
+ 2791  cd '/home/perraju/Documents/These/TP_Python/HL201H-Python/quick-test/seance-9'
+ 2792  python test.py
+ 2793  cd '/home/perraju/Documents/These/TP_Python/HL201H-Python/me/seance-9/section45'
+ 2794  python sol-178.py
+ 2795  cd '/home/perraju/Documents/These/TP_Python/HL201H-Python/quick-test/seance-9'
+ 2796  python test.py
+ 2797  python plot-scaling-max.py
+ 2798  git add . && git commit -m "updated" && git push origin main
+ 2799  cd 
+ 2800  z hl
+ 2801  git add . && git commit -m "updated" && git push origin main
+ 2802  python plot-scaling-max.py
+ 2803  code .
+ 2804  git add . && git commit -m "update" && git push origin main
+ 2805  python setup.py sdist bdist_wheel
+ 2806  twine upload dist/*
+ 2807  ll
+ 2808  ls -al
+ 2809  nvim .pypirc
+ 2810  source .pypirc
+ 2811  ll
+ 2812  cd ../
+ 2813  ll
+ 2814  z doc
+ 2815  ll
+ 2816  z Doc
+ 2817  ll
+ 2818  cd ;./.
+ 2819  cd 
+ 2820  ll
+ 2821  cd Documents
+ 2822  ll
+ 2823  cd ProtonDrive
+ 2824  ll
+ 2825  cd F2A
+ 2826  ll
+ 2827  vi pypi_token_laptop.txt
+ 2828  cd ../
+ 2829  ll
+ 2830  z gspc
+ 2831  ll
+ 2832  twine upload dist/*
+ 2833  cp ../clstr/clstr/settings/* gspc/settings/
+ 2834  cd gspc
+ 2835  ll
+ 2836  mkdir utils
+ 2837  cd utils
+ 2838  mkdir __init__.py
+ 2839  ll
+ 2840  rm __init__.py -r
+ 2841  code __init__.py
+ 2842  cd ..
+ 2843  cp ../../clstr/clstr/__init__.py .
+ 2844  ll
+ 2845  cd ../
+ 2846  ll
+ 2847  python launch-GSPC.py
+ 2848  pip install gspc
+ 2849  pip list
+ 2850  pip list | grep gspc
+ 2851  python launch-GSPC.py
+ 2852  ovito archive/inputs/sio2-27216at-1configuration/sample-27216at-1cfg-62.7029-20GPa.xyz
+ 2853  clear
+ 2854  ll
+ 2855  clear
+ 2856  cp ../clstr/clstr/core/* gspc/core
+ 2857  ll
+ 2858  cp ../clstr/clstr/data gpsc/ -r
+ 2859  python launch-GSPC.py
+ 2860  git add . && git commit -m "update" && git push origin main
+ 2861  clear
+ 2862  git pull origin main
+ 2863  clear
+ 2864  ssh jperradin@vega.coulomb.univ-montp2.fr
+ 2865  ll
+ 2866  ssh jperradin@vega.coulomb.univ-montp2.fr
+ 2867  git pull origin main
+ 2868  clear
+ 2869  python setup.py sdist bdist_wheel
+ 2870  twine upload dist/*
+ 2871  pip install nexus-cat==0.1.7
+ 2872  git add . && git commit -m "update" && git push origin main
+ 2873  ll
+ 2874  gpg --output decrypted_files.tar --decrypt encrypted--stageM2-2022.tar.gpg
+ 2875  ll
+ 2876  rm decrypted_files.tar
+ 2877  rm encrypted--stageM2-2022.tar.gpg
+ 2878  ll
+ 2879  cd Documents
+ 2880  ll
+ 2881  cd ProtonDrive
+ 2882  ll
+ 2883  cd ..
+ 2884  ll
+ 2885  tar -czvf ProtonDrive.tar.gz ProtonDrive
+ 2886  ll
+ 2887  sudo apt-get install openssh-server
+ 2888  sudo apt-get install openssh-sftp-server
+ 2889  sudo apt-get install openssh-client
+ 2890  sudo apt autoremove
+ 2891  ll
+ 2892  sudo systemcl start ssh
+ 2893  sudo systemctl start ssh
+ 2894  ll
+ 2895  ip addr show
+ 2896  ssh perraju@192.168.1.14
+ 2897  ssh perraju@viper
+ 2898  hostname
+ 2899  sudo vi /etc/hostname
+ 2900  sudo vi /etc/hosts
+ 2901  sudo hostname -F /etc/hostname
+ 2902  sudo reboot
+ 2903  hostname
+ 2904  ll
+ 2905  sftp perraju@viper
+ 2906  ll
+ 2907  ssh-keygen
+ 2908  cat /home/perraju/.ssh/id_rsa.pub
+ 2909  ssh perraju@viper
+ 2910  ssh-copy-id perraju@viper
+ 2911  ssh perraju@viper
+ 2912  clear
+ 2913  sudo apt-get update
+ 2914  sudo apt-get upgrade
+ 2915  sudo apt autoremove
+ 2916  sudo reboot
+ 2917  sudo brave-browser
+ 2918  brave-browser
+ 2919  brave-browser --help
+ 2920  brave-browser
+ 2921  sudo apt install brave-browser
+ 2922  sudo apt remove brave-browser
+ 2923  sudo rm /etc/apt/sources.list.d/brave-browser-release.list
+ 2924  sudo apt update
+ 2925  sudo apt upgrade
+ 2926  sudo apt auto
+ 2927  sudo apt autoremove
+ 2928  sudo apt install curl
+ 2929  sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg\n\necho "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main"|sudo tee /etc/apt/sources.list.d/brave-browser-release.list\n\nsudo apt update\n\nsudo apt install brave-browser
+ 2930  brave-browser
+ 2931  ps aux | grep brave
+ 2932  sudo kill 18204
+ 2933  rm ~/.config/BraveSoftware/Brave-Browser/SingletonLock
+ 2934  cd Documents
+ 2935  ll
+ 2936  cd These
+ 2937  ll
+ 2938  cd workspaces
+ 2939  ll
+ 2940  cd wip
+ 2941  ll
+ 2942  mv * old
+ 2943  ll
+ 2944  cp /media/perraju/pj-key/nexus_results_20240420.tar.gz .
+ 2945  ll
+ 2946  mkdir nexus_results_20240420
+ 2947  ll
+ 2948  mv nexus_results_20240420.tar.gz nexus_results_20240420
+ 2949  cd nexus_results_20240420
+ 2950  ll
+ 2951  tar -xzvf nexus_results_20240420.tar.gz
+ 2952  umount /media/perraju/pj-key
+ 2953  eject /media/perraju/pj-key
+ 2954  code .
+ 2955  python calculate_rho_vs_pressure.py sio2-96000at-1x
+ 2956  clear
+ 2957  python plot-xrho-scaling.py
+ 2958  ssh jperradin@vega.coulomb.univ-montp2.fr
+ 2959  python plot-xrho-scaling.py
+ 2960  ssh jperradin@vega.coulomb.univ-montp2.fr
+ 2961  ll
+ 2962  vi data_collapse.ipynb
+ 2963  cd ..
+ 2964  ll
+ 2965  cd ..
+ 2966  ll
+ 2967  cd histogram-loglog
+ 2968  ll
+ 2969  cat histogram-loglog-cldist.py
+ 2970  z python
+ 2971  ll
+ 2972  cd HL201H-Python
+ 2973  ll
+ 2974  code .
+ 2975  ll
+ 2976  fdfind np_event
+ 2977  fdfind NP_event
+ 2978  fdfind NP
+ 2979  cd ..
+ 2980  fdfind NP
+ 2981  ll
+ 2982  rm GanttProject -r
+ 2983  ll
+ 2984  cd These
+ 2985  ll
+ 2986  mkdir NP_events
+ 2987  cd N
+ 2988  cd NP_events
+ 2989  ll
+ 2990  cd ../../..
+ 2991  ll
+ 2992  cd These
+ 2993  ll
+ 2994  cd TP_Python
+ 2995  ll
+ 2996  cd HL201H-Python
+ 2997  git pull origin main
+ 2998  code .
+ 2999  cd '/home/perraju/Documents/These/TP_Python/HL201H-Python/me/seance-10/section48'
+ 3000  python quizz01.py
+ 3001  cd ../../../
+ 3002  git add . && git commit -m "update" && git push origin main
+ 3003  python launch-GSPC-quick-test.py
+ 3004  clear
+ 3005  git add . && git commit -m "update" && git push origin main
+ 3006  python setup.py sdist bdist_wheel
+ 3007  twine upload dist/*
+ 3008  git add . && git commit -m "update" && git push origin main
+ 3009  cd me/seance-10/section54
+ 3010  ll
+ 3011  python probleme54.2.py
+ 3012  python probleme54.3.py
+ 3013  ssh jperradin@vega.coulomb.univ-montp2.fr
+ 3014  git add . && git commit -m "update" && git push origin main
+ 3015  python setup.py sdist bdist_wheel
+ 3016  twine upload dist/*
+ 3017  ll
+ 3018  cd Documents
+ 3019  ll
+ 3020  cd These/workspaces
+ 3021  cd wip
+ 3022  ll
+ 3023  tar -xzvf sio2-reaxff-compression-31GPa-66pts.tar.gz
+ 3024  ll
+ 3025  cd sio2-reaxff-compression-31GPa-66pts
+ 3026  ll
+ 3027  cd analysis
+ 3028  ll
+ 3029  open bond_angular_distribution.png
+ 3030  code .
+ 3031  ssh jperradin@vega.coulomb.univ-montp2.fr
+ 3032  xmgrace -nxy dens-pressure
+ 3033  ll
+ 3034  cd ../..
+ 3035  ll
+ 3036  cd nexus_results_20240420
+ 3037  ll
+ 3038  cd sio2-96000at-1x
+ 3039  ll
+ 3040  cd 1e
+ 3041  ll
+ 3042  cd analysis
+ 3043  ll
+ 3044  cd ../
+ 3045  ll
+ 3046  cd ../../
+ 3047  ll
+ 3048  cd ../
+ 3049  ll
+ 3050  cd sio2-reaxff-compression-31GPa-66pts
+ 3051  ll
+ 3052  cd analysis
+ 3053  ll
+ 3054  ssh jperradin@vega.coulomb.univ-montp2.fr
+ 3055  ll
+ 3056  mv ../pressure-dens-Tsiok1998Sato2008.agr .
+ 3057  ll
+ 3058  xmgrace pressure-dens-Tsiok1998Sato2008.agr
+ 3059  ll
+ 3060  mv pressure-dens-Tsiok1998Sato2008.agr pressure-dens-Tsiok1998Sato2008+SHIK+ReaxFF.agr
+ 3061  ssh jperradin@vega.coulomb.univ-montp2.fr
+ 3062  ll
+ 3063  cd ..
+ 3064  ll
+ 3065  rm sio2-reaxff-compression-31GPa-66pts.tar.gz
+ 3066  tar --use-compress-program=pigz -cvf nexus_results_20240420.tar.gz nexus_results_20240420
+ 3067  ll
+ 3068  tar -xzvf nexus_results.tar.gz
+ 3069  /home/perraju/anaconda3/bin/python
+ 3070  cd data-collapse
+ 3071  ll
+ 3072  python plot.py
+ 3073  cd data-collapse
+ 3074  python plot.py
+ 3075  /home/perraju/anaconda3/bin/python
+ 3076  python plot.py
+ 3077  cd data-collapse
+ 3078  python plot.py
+ 3079  ax[0].set_ylabel(r"\nu")
+ 3080  python plot.py
+ 3081  print(len(label))
+ 3082  python plot.py
+ 3083  cd '/home/perraju/Documents/These/TP_Python/HL201H-Python/me/seance-8/section43'
+ 3084  python code-VIII-43-47.py
+ 3085  cp ../../../code/code-VIII-43-48.py .
+ 3086  python code-VIII-43-47.py
+ 3087  python plot.py
+ 3088  cd '/home/perraju/Documents/These/TP_Python/HL201H-Python/me/seance-10/section51'
+ 3089  python sol-199.py
+ 3090  python plot.py
+ 3091  clear
+ 3092  python plot.py
+ 3093  cd '/home/perraju/Documents/These/TP_Python/HL201H-Python/me/seance-10/section53'
+ 3094  python quizz01.py
+ 3095  python probleme53.1.py
+ 3096  z hl
+ 3097  git add . && git commit -m "update" && git push origin main
+ 3098  cd quick-test/seance-10
+ 3099  python test.py
+ 3100  \tpython q13.py
+ 3101  python te
+ 3102  python test.py
+ 3103  python plot.py
+ 3104  git add . && git commit -m "update" && git push origin main
+ 3105  clear
+ 3106  cd '/home/perraju/Documents/These/workspaces/wip/nexus_results_20240420/sio2-1008at-8x'
+ 3107  ll
+ 3108  fdfind analysis
+ 3109  fdfind analysis | xargs tar --use-compress-program=pigz sio2-1008at-8x.tar.gz
+ 3110  fdfind analysis | xargs tar --use-compress-program=pigz -cvf sio2-1008at-8x.tar.gz
+ 3111  rm 8* -r
+ 3112  ll
+ 3113  cd ../
+ 3114  ll
+ 3115  cd sio2-3024at-2x
+ 3116  fdfind analysis | xargs tar --use-compress-program=pigz -cvf sio2-3024at-2x.tar.gz
+ 3117  rm 2* -r
+ 3118  cd ../sio2-8064at-4x
+ 3119  ll
+ 3120  fdfind analysis | xargs tar --use-compress-program=pigz -cvf sio2-8064at-4x.tar.gz
+ 3121  rm 4* -r
+ 3122  cd ../sio2-15120at-2x
+ 3123  ll
+ 3124  fdfind analysis | xargs tar --use-compress-program=pigz -cvf sio2-15120at-2x.tar.gz
+ 3125  rm 2* -r
+ 3126  cd ../
+ 3127  ll
+ 3128  cd sio2-27216at-3x
+ 3129  ll
+ 3130  fdfind analysis | xargs tar --use-compress-program=pigz -cvf sio2-27216at-3x.tar.gz 
+ 3131  rm 3* -r
+ 3132  cd ../sio2-96000at-1x
+ 3133  ll
+ 3134  fdfind analysis | xargs tar --use-compress-program=pigz -cvf sio2-96000at-1x.tar.gz
+ 3135  rm 1* -r
+ 3136  ll
+ 3137  clear
+ 3138  nvim
+ 3139  ll
+ 3140  z nexus
+ 3141  ll
+ 3142  nvim 
+ 3143  cd data-collapse
+ 3144  ll
+ 3145  nvim plot.py
+ 3146  cd 
+ 3147  sudo apt remove code
+ 3148  2024-04-26 14:15:56.196 [error] request to https://github.com/login/device/code\?client_id\=01ab8ac9400c4e429b23\&scope\=user:email failed, reason: connect EHOSTUNREACH 140.82.121.3:443\n2024-04-26 14:15:56.197 [error] Error: No auth flow succeeded.\n\tat a.GitHubServer.login (/snap/code/157/usr/share/code/resources/app/extensions/github-authentication/dist/extension.js:1:230297)\n\tat process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n\tat async a.GitHubAuthenticationProvider.createSession (/snap/code/157/usr/share/code/resources/app/extensions/github-authentication/dist/extension.js:1:225531)
+ 3149  ext install chrmarti.network-proxy-test
+ 3150  cd .con
+ 3151  cd .config
+ 3152  ll
+ 3153  cd Code
+ 3154  ll
+ 3155  cd ..
+ 3156  ll
+ 3157  rm Code -r
+ 3158  env 
+ 3159  env | grep http_proxy
+ 3160  git config --get http.proxy
+ 3161  git config --get https.proxy
+ 3162  snap get system proxy
+ 3163  sudo 
+ 3164  sudo snap get system proxy
+ 3165  env | grep -i proxy
+ 3166  cat /etc/environment
+ 3167  cat /etc/apt/apt.conf\n
+ 3168  cp Code.tar.gz ~/.config/
+ 3169  cd ~/.config
+ 3170  ll
+ 3171  tar -tf Code
+ 3172  tar -tf Code.tar.gz
+ 3173  tar -xzvf Code.tar.gz
+ 3174  (type -p wget >/dev/null || (sudo apt update && sudo apt-get install wget -y)) \\n&& sudo mkdir -p -m 755 /etc/apt/keyrings \\n&& wget -qO- https://cli.github.com/packages/githubcli-archive-keyring.gpg | sudo tee /etc/apt/keyrings/githubcli-archive-keyring.gpg > /dev/null \\n&& sudo chmod go+r /etc/apt/keyrings/githubcli-archive-keyring.gpg \\n&& echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null \\n&& sudo apt update \\n&& sudo apt install gh -y
+ 3175  gh auth login
+ 3176  cd 
+ 3177  ll
+ 3178  ll -al
+ 3179  cat .gitconfig
+ 3180  code .gitconfig
+ 3181  code ~/.git-credentials
+ 3182  gh auth login
+ 3183  code
+ 3184  ip addr show
+ 3185  ip addr show | grep 140.82.121.4:443
+ 3186  ip addr show | grep 140.82.121.4
+ 3187  ip addr show 
+ 3188  git config --get user
+ 3189  git config --get username
+ 3190  git config --get 
+ 3191  git config --get-all
+ 3192  git config --get mail
+ 3193  git --help
+ 3194  node
+ 3195  sudo apt-get update
+ 3196  cd /etc/apt/sources.list.d
+ 3197  ll
+ 3198  cat brave-browser-release.list
+ 3199  cat brave-browser-release.list.save
+ 3200  cat brave-browser-release.list.distUpgrade
+ 3201  sudo apt-get update
+ 3202  sudo apt-get upgrade
+ 3203  sudo apt-get autoremove
+ 3204  node --version
+ 3205  node update
+ 3206  node -help
+ 3207  node -help | grep update
+ 3208  npm install -g node@latest\n
+ 3209  cd 
+ 3210  npm install -g node@latest\n
+ 3211  sudo npm install -g npm@lastest
+ 3212  npm -v
+ 3213  nvm install --lts
+ 3214  npm install -g npm-check-updates\nncu -u\nnpm install -g npm@latest\n
+ 3215  sudo npm install -g npm-check-updates\nncu -u\nnpm install -g npm@latest\n
+ 3216  sudo npm install -g npm-check-updates\n
+ 3217  ncu -u
+ 3218  npm install -g npm@lastest
+ 3219  npm install -g npm@latest
+ 3220  sudo npm install -g npm@latest
+ 3221  z dev
+ 3222  ll
+ 3223  code .
+ 3224  git remote set-url origin https://JulienPerradin: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@github.com/JulienPerradin/gspc.git
+ 3225  ping 8.8.8.8
+ 3226  ifconfig
+ 3227  ip addr show 
+ 3228  sudo ifdown wlp0s20f3 && sudo ifup wlp0s20f3
+ 3229  sudo systemctl restart networking\n
+ 3230  sudo systemctl restart NetworkManager\n
+ 3231  ping 8.8.8.8
+ 3232  sudo systemctl status NetworkManager\n
+ 3233  sudo snap refresh
+ 3234  ping 8.8.8.8
+ 3235  sudo ufw disable
+ 3236  ping 8.8.8.8
+ 3237  sudo ufw enable
+ 3238  cat /etc/resolv.conf
+ 3239  ping 8.8.8.8
+ 3240  clear
+ 3241  cd data-collapse
+ 3242  ll
+ 3243  python plot.py
+ 3244  sudo apt-get update
+ 3245  sudo apt-get upgrade
+ 3246  sudo snap refresh
+ 3247  sudo snap remove mc-installer
+ 3248  snap list
+ 3249  sudo snap remove superproductivity jmol molden octave chromium
+ 3250  dpkg -list
+ 3251  dpkg --list
+ 3252  clear
+ 3253  ll
+ 3254  cd .config
+ 3255  ll
+ 3256  cd 
+ 3257  ll
+ 3258  cd Templates
+ 3259  ll
+ 3260  cd ..
+ 3261  ll
+ 3262  rm Templates -r
+ 3263  ll
+ 3264  cd Documents
+ 3265  ll
+ 3266  mv Fun fun
+ 3267  mv ProtonDrive proton_drive
+ 3268  mv These these
+ 3269  ll
+ 3270  cd these
+ 3271  ll
+ 3272  cd Development
+ 3273  ll
+ 3274  cd gspc
+ 3275  ll
+ 3276  nvim
+ 3277  sudo snap remove nvim
+ 3278  cd 
+ 3279  ll
+ 3280  cd .confg
+ 3281  cd .config
+ 3282  ll
+ 3283  sudo apt-get install neovim
+ 3284  nvim
+ 3285  nvim --version
+ 3286  sudo apt-get remove neovim
+ 3287  cd 
+ 3288  ll
+ 3289  git clone git@github.com:neovim/neovim.git
+ 3290  cd neovim
+ 3291  ll
+ 3292  cd cmake
+ 3293  ll
+ 3294  make CMAKE_BUILD_TYPE=Release
+ 3295  cd ..
+ 3296  make CMAKE_BUILD_TYPE=Release
+ 3297  sudo make install
+ 3298  nvim
+ 3299  nvim --version
+ 3300  nvim -V1 -v
+ 3301  nvim
+ 3302  z dev
+ 3303  ll
+ 3304  cd gspc
+ 3305  ll
+ 3306  nvim
+ 3307  git add . && git commit -m "update" && git push origin main
+ 3308  code .
+ 3309  nvim
+ 3310  cd ~/.con
+ 3311  cd ~/.config
+ 3312  ll
+ 3313  cd nvim
+ 3314  ll
+ 3315  nvim
+ 3316  git clone --depth 1 https://github.com/nyoom-engineering/nyoom.nvim.git ~/.config/nvim \ncd ~/.config/nvim/\nbin/nyoom install \nbin/nyoom sync
+ 3317  git clone --depth 1 https://github.com/nyoom-engineering/nyoom.nvim.git ~/.config/nvim/nyoom\ncd ~/.config/nvim/\nbin/nyoom install \nbin/nyoom sync
+ 3318  ll
+ 3319  cd nyoom
+ 3320  ll
+ 3321  bin/nyoom install
+ 3322  cd ..
+ 3323  ll
+ 3324  rm nyoom -r
+ 3325  rm nyoom -rf
+ 3326  ll
+ 3327  nvim
+ 3328  z dev
+ 3329  ll
+ 3330  cd test
+ 3331  ll
+ 3332  cd ../
+ 3333  cd gspc
+ 3334  ll
+ 3335  nvim
+ 3336  ip addr show 
+ 3337  :q
+ 3338  nvim
+ 3339  python launch-GSPC-quick-test.py
+ 3340  code .
+ 3341  cd anaconda3
+ 3342  ll
+ 3343  cd bin
+ 3344  ll
+ 3345  clear
+ 3346  git add . && git commit -m "update" && git push origin main
+ 3347  cd 
+ 3348  ll
+ 3349  z nex
+ 3350  ll
+ 3351  cd Documents
+ 3352  ll
+ 3353  cd these
+ 3354  ll
+ 3355  cd ..
+ 3356  ll
+ 3357  cd These
+ 3358  ll
+ 3359  tree
+ 3360  cd ../
+ 3361  ll
+ 3362  cd these
+ 3363  ll
+ 3364  cd workspaces
+ 3365  ll
+ 3366  cd wip
+ 3367  ll
+ 3368  cd nexus_results_20240420
+ 3369  ll
+ 3370  code .
+ 3371  cd data-collapse
+ 3372  ll
+ 3373  python plot.py
+ 3374  python test.py
+ 3375  python plot.py
+ 3376  python test.py
+ 3377  python plot_cmap.py
+ 3378  python plot.py
+ 3379  python plot_cmap.py
+ 3380  python plot.py
+ 3381  python test.py
+ 3382  python plot-xrho-scaling.py
+ 3383  open scaling-average_cluster_size.png
+ 3384  nautilus 
+ 3385  open scaling-average_cluster_size.png
+ 3386  sudo snap refresh
+ 3387  snap
+ 3388  strings /usr/lib/x86_64-linux-gnu/libstdc++.so.6 | grep GLIBCXX\n
+ 3389  open scaling-average_cluster_size.png
+ 3390  nautilus . 
+ 3391  open scaling-average_cluster_size.png
+ 3392  clear
+ 3393  python plot-xrho-scaling.py
+ 3394  python test.py
+ 3395  python plot-xrho-scaling.py
+ 3396  cd 
+ 3397  cd Pictures
+ 3398  ll
+ 3399  cd Screenshots
+ 3400  ll
+ 3401  ls -trl
+ 3402  open Screenshot\ from\ 2024-04-24\ 16-30-48.png
+ 3403  python plot-exponents.py
+ 3404  cd Downloads
+ 3405  ll
+ 3406  python eduroam-linux-UdM.py
+ 3407  cd ..
+ 3408  ll -trl 
+ 3409  ll -tral
+ 3410  fdfind ca
+ 3411  fdfind certificate
+ 3412  fdfind eduroam
+ 3413  cd Downloads
+ 3414  ll
+ 3415  python eduroam-linux-UdM.py
+ 3416  cd ../.config
+ 3417  ll
+ 3418  cd cat_installer
+ 3419  ll
+ 3420  code .
+ 3421  z nexus
+ 3422  ll
+ 3423  tar -cvf --use-compress-program=pigz ../nexus_results_20240420.tar.gz *
+ 3424  cd ..
+ 3425  ll
+ 3426  cp nexus_results_20240420.tar.gz /media/perraju/pj-drive/
+ 3427  cd /media/perraju/pj-drive
+ 3428  ll
+ 3429  umount /media/perraju/pj-key
+ 3430  umount /media/perraju/pj-drive
+ 3431  cd ..
+ 3432  z nexus
+ 3433  ll
+ 3434  nautilus .
+ 3435  ll
+ 3436  tar --use-compress-program=pigz -cvf ../nexus_results.tar.gz *
+ 3437  cd ..
+ 3438  ll
+ 3439  mount /media/perraju/pj-drive
+ 3440  cp nexus_results.tar.gz /media/perraju/pj-drive/
+ 3441  umount /media/perraju/pj-drive
+ 3442  mount /media/perraju/pj-drive
+ 3443  cd /media/perraju/pj-drive
+ 3444  ll
+ 3445  cd nexus_results_20240420
+ 3446  ll
+ 3447  rm * -rf
+ 3448  cp /media/perraju/pj-drive/nexus_results.tar.gz .
+ 3449  tar -xvzf nexus_results.tar.gz
+ 3450  ll
+ 3451  code .
+ 3452  clezar
+ 3453  claer
+ 3454  clear
+ 3455  python data-collapse-OP-xrho.py
+ 3456  python data-collapse-S-xrho.py 
+ 3457  python data-collapse-OP-xpressure.py
+ 3458  cd data-collapse-order-parameter
+ 3459  python plot_s+op.py
+ 3460  cd ..
+ 3461  python animation_size_distribution.py
+ 3462  clear
+ 3463  ll
+ 3464  tar --use-compress-program=pigz -cvf /media/perraju/pj-drive/nexus_results.tar.gz *
+ 3465  cd Downloads
+ 3466  ll
+ 3467  sudo dpkg -i zoom_amd64.deb
+ 3468  zoom
+ 3469  python animation_size_distribution.py
+ 3470  cd sio2-96000at-1x
+ 3471  tar -xzvf sio2-96000at-1x.tar.gz
+ 3472  cd ..
+ 3473  python animation_size_distribution.py
+ 3474  sshtunnel
+ 3475  sshfs jperradin@localhost:/home/jperradin/Documents/workspaces/post-processing/nexus_results -p 2222 /home/perraju/rsync-ssh
+ 3476  ssh jperradin@vega.coulomb.univ-montp2.fr
+ 3477  
+ 3478  ssh jperradin@vega.coulomb.univ-montp2.fr
+ 3479  sshtunnel
+ 3480  sshfs jperradin@localhost:/home/jperradin/Documents/workspaces/post-processing/nexus_results -p 2222 /home/perraju/rsync-ssh
+ 3481  ll
+ 3482  cd rsync-ssh
+ 3483  ll
+ 3484  cd ..
+ 3485  ll
+ 3486  cd Documents
+ 3487  ll
+ 3488  cd these
+ 3489  ll
+ 3490  cd workspaces
+ 3491  ll
+ 3492  cd wip
+ 3493  ll
+ 3494  rm nexus_results* -rf
+ 3495  cp ~/rsync-ssh/archive.tar.gz .
+ 3496  ll
+ 3497  mkdir nexus_results
+ 3498  mv archive.tar.gz nexus_results
+ 3499  cd nexus_results
+ 3500  tar -xzvf archive.tar.gz
+ 3501  code .
+ 3502  python plot-xrho-scaling.py
+ 3503  python plot-xpressure-scaling.py
+ 3504  tar --use-compress-program=pigz -cvf /media/perraju/pj-drive/nexus_results.tar.gz *
+ 3505  cd /media/perraju/pj-drive
+ 3506  ll
+ 3507  umount /media/perraju/pj-drive
+ 3508  cd ..
+ 3509  umount /media/perraju/pj-drive
+ 3510  tracker3 status 
+ 3511  rm -rf .cache/tracker3
+ 3512  rm -rf .local/share/tracker
+ 3513  tracker3 daemon -k
+ 3514  rm -rf .cache/tracker3
+ 3515  rm -rf .local/share/tracker
+ 3516  tracker3 daemon -s
+ 3517  tracker3 Steam
+ 3518  tracker3 status
+ 3519  tracker3 status 
+ 3520  tracker3 status --help
+ 3521  tracker3 status -a
+ 3522  tracker3 status 
+ 3523  top
+ 3524  clear
+ 3525  tracker3 status 
+ 3526  tracker3 -h
+ 3527  tracker3 extract -h
+ 3528  tracker3 help extract 
+ 3529  top
+ 3530  tracker3 extract
+ 3531  tracker3 status extract
+ 3532  tracker3 status 
+ 3533  cd .cache/tracker3
+ 3534  ll
+ 3535  cd files
+ 3536  ll
+ 3537  ls -trl
+ 3538  clear
+ 3539  cd 
+ 3540  cd /media/perraju/pj-drive
+ 3541  cd /media/perraju/
+ 3542  ll
+ 3543  cd pj-key
+ 3544  ll
+ 3545  cd 3024at-2a
+ 3546  ll
+ 3547  cd positions_xyz
+ 3548  ll
+ 3549  ovito session.ovito
+ 3550  ll
+ 3551  code .
+ 3552  python analysis.py
+ 3553  pip install nexus-cat==0.1.7
+ 3554  python analysis.py
+ 3555  python analysis
+ 3556  python analysis.
+ 3557  python analysis.py
+ 3558  z dev
+ 3559  ll
+ 3560  cd nexus
+ 3561  ll
+ 3562  code .
+ 3563  pip show nexus-cat
+ 3564  python setup.py sdist bdist_wheel
+ 3565  twine upload dist/*
+ 3566  pip install nexus-cat==0.1.8
+ 3567  conda help
+ 3568  conda remove nexus
+ 3569  conda remove nexus-cat
+ 3570  conda list
+ 3571  conda update --all
+ 3572  conda install nexus-cat
+ 3573  conda install nexus
+ 3574  code
+ 3575  code .
+ 3576  conda install conda-build anaconda-client
+ 3577  conda install conda-build
+ 3578  conda build .
+ 3579  conda config --set solver classic
+ 3580  sudo apt-get install libarchive-dev
+ 3581  conda install conda-build anaconda-client
+ 3582  conda build .
+ 3583  clear
+ 3584  git add . && git commit -m "update" && git push origin main
+ 3585  conda install conda-build anaconda-client
+ 3586  conda update conda
+ 3587  sudo apt-get update -y
+ 3588  sudo apt-get upgrade -y
+ 3589  conda update -n base -c defaults conda
+ 3590  conda install conda-build anaconda-client
+ 3591  ssh jperradin@vega.coulomb.univ-montp2.fr
+ 3592  z nexu
+ 3593  ll
+ 3594  z post
+ 3595  sshfs jperradin@localhost:/home/jperradin/Documents/biblio -p 2222 /home/perraju/rsync-ssh
+ 3596  sshtun
+ 3597  sshtunnel
+ 3598  sshfs jperradin@localhost:/home/jperradin/Documents/biblio -p 2222 /home/perraju/rsync-ssh
+ 3599  cd rsync-ssh
+ 3600  ll
+ 3601  ssh jperradin@vega.coulomb.univ-montp2.fr
+ 3602  cp biblio.tar.gz ../Documents
+ 3603  clear
+ 3604  cd trajectories-lammps-xyz-sio2-1008-to-96000
+ 3605  ll
+ 3606  cd trajectories
+ 3607  ll
+ 3608  cd 3024at/3024at-2a
+ 3609  ll
+ 3610  cd positions_xyz
+ 3611  ll
+ 3612  cd sessions
+ 3613  ll
+ 3614  ovito animation.ovito
+ 3615  cd ../../../
+ 3616  ll
+ 3617  cd ../1008at
+ 3618  ll
+ 3619  cd 8
+ 3620  cd 8a
+ 3621  ll
+ 3622  cd B-part/positions_xyz
+ 3623  ll
+ 3624  mkdir sessions
+ 3625  ovito pos1B.xyz
+ 3626  cd 
+ 3627  ll
+ 3628  cd Documents
+ 3629  ll
+ 3630  cd These
+ 3631  ll
+ 3632  cd workspaces
+ 3633  ll
+ 3634  cd wip
+ 3635  ll
+ 3636  gh repo clone dh4gan/percolation-model
+ 3637  cd percolation-model
+ 3638  ll
+ 3639  cat R
+ 3640  cat README.md
+ 3641  code .
+ 3642  python PercolationModel.py
+ 3643  python run_model.py
+ 3644  cd ..
+ 3645  ll
+ 3646  rm percolation-model -rf
+ 3647  gh repo clone ussserrr/percolation-python
+ 3648  cd percolation-python
+ 3649  ll
+ 3650  cat RE
+ 3651  cat README.md
+ 3652  ll
+ 3653  python percolation.py
+ 3654  cd example_samples
+ 3655  ll
+ 3656  cd single_experiment_graph
+ 3657  ll
+ 3658  cat 100x40,0.4_2clusters.png
+ 3659  open 100x40,0.4_2clusters.png
+ 3660  cd ../..
+ 3661  ll
+ 3662  ls -al
+ 3663  rm * -rf
+ 3664  cd ../
+ 3665  ll
+ 3666  cd percolation-python
+ 3667  ll
+ 3668  touch percolation2D.py
+ 3669  cd ..
+ 3670  rm percolation-python -rf
+ 3671  mkdir percolation-python
+ 3672  cd percolation-python
+ 3673  ll
+ 3674  touch percolation2D.py
+ 3675  cd ..
+ 3676  ll
+ 3677  cd percolation-python
+ 3678  ll
+ 3679  code .
+ 3680  cd ..
+ 3681  umount rsync-ssh
+ 3682  python percolation2D.py
+ 3683  clear
+ 3684  python percolation2D.py
+ 3685  cd /media/perraju
+ 3686  ll
+ 3687  cd pj-drive
+ 3688  ll
+ 3689  cd trajectories-lammps-xyz-sio2-1008-to-96000/trajectories/3024at
+ 3690  ll
+ 3691  cd 3024at-2a
+ 3692  ll
+ 3693  cd positions_xyz
+ 3694  ll
+ 3695  cd sessions
+ 3696  ll
+ 3697  ovito animation.ovito
+ 3698  alias
+ 3699  ll
+ 3700  cd Documents/These
+ 3701  cd workspaces/wip
+ 3702  ll
+ 3703  xmgrace FigExt3c.agr
+ 3704  z notes
+ 3705  cd Documents
+ 3706  ll
+ 3707  cd these
+ 3708  ll
+ 3709  cd notes_and_ideas
+ 3710  ll
+ 3711  cd Talks
+ 3712  ll
+ 3713  nvim talk-cambrige.md
+ 3714  cd 
+ 3715  ssh jperradin@vega.coulomb.univ-montp2.fr
+ 3716  cd Documents
+ 3717  ll
+ 3718  cd these
+ 3719  ll
+ 3720  cd workspaces
+ 3721  ll
+ 3722  cd wip
+ 3723  ll
+ 3724  cd nexus_results
+ 3725  ll
+ 3726  cd sio2-1008at-8x
+ 3727  ll
+ 3728  cd 
+ 3729  cd -
+ 3730  cd 8a
+ 3731  ll
+ 3732  cd analysis
+ 3733  ll
+ 3734  cd 
+ 3735  ll
+ 3736  cd /media/perraju/pj-drive/
+ 3737  ll
+ 3738  cd tra
+ 3739  cd trajectories-lammps-xyz-sio2-1008-to-96000
+ 3740  ll
+ 3741  cd trajectories
+ 3742  ll
+ 3743  cd 1008at
+ 3744  ll
+ 3745  cd 8a
+ 3746  ll
+ 3747  cd B-part
+ 3748  ll
+ 3749  cd positions_xyz
+ 3750  ll
+ 3751  cd sessions
+ 3752  ll
+ 3753  cd ..
+ 3754  ovito pos1B.xyz
+ 3755  cd ..
+ 3756  ll
+ 3757  cd ClassicalMD
+ 3758  ll
+ 3759  cd ..
+ 3760  ll
+ 3761  cd ..
+ 3762  ll
+ 3763  cd t
+ 3764  ll
+ 3765  cd talks
+ 3766  ll
+ 3767  cd ..
+ 3768  ll
+ 3769  cd ..
+ 3770  ll
+ 3771  cd These
+ 3772  ll
+ 3773  cd workspaces
+ 3774  ll
+ 3775  cd wip
+ 3776  ll
+ 3777  cd ../
+ 3778  cd ...
+ 3779  cd ..
+ 3780  ll
+ 3781  cd Documents
+ 3782  ll
+ 3783  cd these
+ 3784  ll
+ 3785  cd workspaces
+ 3786  ll
+ 3787  cd wip
+ 3788  ll
+ 3789  cd ../../..
+ 3790  ll
+ 3791  cd these
+ 3792  ll
+ 3793  cd /media
+ 3794  ll
+ 3795  cd perraju
+ 3796  ll
+ 3797  cd pj-drive/
+ 3798  ll
+ 3799  mkdir structure_factor_15120at
+ 3800  cd structure_factor_15120at
+ 3801  ll
+ 3802  mv ../trajectories-lammps-xyz-sio2-1008-to-96000/trajectories/positions_xyz-sio2-15120-2x.tgz .
+ 3803  cd 
+ 3804  ll
+ 3805  cd /media
+ 3806  l
+ 3807  cd perraju
+ 3808  ll
+ 3809  cd pj-drive
+ 3810  ll
+ 3811  cd trajectories-lammps-xyz-sio2-1008-to-96000
+ 3812  ll
+ 3813  cd trajectories
+ 3814  ll
+ 3815  mv positions_xyz-sio2-15120-2x.tgz ../../structure_factor_15120at
+ 3816  cd ../../st
+ 3817  cd ../../structure_factor_15120at
+ 3818  ll
+ 3819  mv ../GSPC_last_before_rework .
+ 3820  ll
+ 3821  tar -xzvf positions_xyz-sio2-15120-2x.tgz
+ 3822  cd 
+ 3823  ssh jperradin@vega.coulomb.univ-montp2.fr
+ 3824  tar -xzvf pressure.tar.gz
+ 3825  cd 2a
+ 3826  ll
+ 3827  cd B-part/positions_xyz
+ 3828  ll
+ 3829  ls -v *.xyz | xargs readlink -f > ../../analysis/inputs
+ 3830  cd ../../../2b/B-part/positions_xyz
+ 3831  ls -v *.xyz | xargs readlink -f > ../../analysis/inputs
+ 3832  cd ../../../2c/B-part/positions_xyz
+ 3833  ls -v *.xyz | xargs readlink -f > ../../analysis/inputs
+ 3834  cd ../../../2d/B-part/positions_xyz
+ 3835  ls -v *.xyz | xargs readlink -f > ../../analysis/inputs
+ 3836  cd ../../../2e/B-part/positions_xyz
+ 3837  ls -v *.xyz | xargs readlink -f > ../../analysis/inputs
+ 3838  ll
+ 3839  cd ../../../2a
+ 3840  ll
+ 3841  cd analysis
+ 3842  ll
+ 3843  paste inputs pressure
+ 3844  cd ../..
+ 3845  ll
+ 3846  python -m GSPC 2a.json
+ 3847  conda install termcolor
+ 3848  pip install termcolor
+ 3849  conda install termcolor
+ 3850  python -m GSPC 2a.json
+ 3851  pip install ase
+ 3852  python -m GSPC 2a.json
+ 3853  cp ../trajectories-lammps-xyz-sio2-1008-to-96000/trajectories/1008at/8a/B-part/positions_xyz/pos1B.xyz ./pos1B-1008at.xyz
+ 3854  python -m GSPC test1008.json
+ 3855  cd 2a/analysis
+ 3856  cd test/StructureFactor
+ 3857  ll
+ 3858  xmgrace -nxy Sq.dat
+ 3859  cd ../../../../
+ 3860  ll
+ 3861  rm test1008.json pos1B-1008at.xyz 
+ 3862  ll
+ 3863  python -m GSPC 2b.json
+ 3864  xmgrace -nxy Sq.dat
+ 3865  cd 2b/analysis
+ 3866  paste inputs pressure
+ 3867  python -m GSPC 2b.json
+ 3868  xmgrace
+ 3869  python -m GSPC 2b.json
+ 3870  xmgrace sq.agr
+ 3871  ll
+ 3872  cd 
+ 3873  ll
+ 3874  cd Documents
+ 3875  ll
+ 3876  cd ..
+ 3877  ll
+ 3878  tar --use-compress-program=pigz -cvf /media/perraju/pj-drive/BACKUP-laptop/archive-home-20240626.tar.gz /home/perraju/
+ 3879  sudo apt update
+ 3880  ll
+ 3881  sudo apt install virtualbox
+ 3882  ll
+ 3883  code .
+ 3884  xmgrace FigExt3c.agr
+ 3885  cd 2b/analysis
+ 3886  paste inputs pressure
+ 3887  cd ../..
+ 3888  ll
+ 3889  python -m GSPC 2b.json
+ 3890  bash
+ 3891  python -m GSPC 2b.json
+ 3892  xmgrace sq.agr
+ 3893  xmgrace FigExt3c.agr &
+ 3894  ll
+ 3895  tar -xzvf 96000at-1b.tar.gz
+ 3896  ll
+ 3897  rm 96000at-1b.tar.gz
+ 3898  cd 96000at-1b
+ 3899  ll
+ 3900  mv * ../
+ 3901  l
+ 3902  cd ..
+ 3903  rm 96000at-1b
+ 3904  rm 96000at-1b -r
+ 3905  ll
+ 3906  cd visuel
+ 3907  ll
+ 3908  ovito session_fractal.ovito
+ 3909  cd ..
+ 3910  ll
+ 3911  code .
+ 3912  cd visuel
+ 3913  python example.py
+ 3914  python example.py fractal4-4_moved.xyz
+ 3915  python example.py fractal4-4_moved-1cfg.xyz
+ 3916  cd visuel
+ 3917  ll
+ 3918  ovito session_fractal.ovito
+ 3919  cd Documents
+ 3920  ll
+ 3921  cd proton_drive
+ 3922  ll
+ 3923  cd documents_these
+ 3924  ll
+ 3925  open contrat_doctoral.pdf
+ 3926  nautilus . &
+ 3927  touch code_ref.txt
+ 3928  vi code_ref.txt
+ 3929  open MCE2024.pdf
+ 3930  top
+ 3931  clear
+ 3932  ll
+ 3933  cd /media/perraju/pj-drive
+ 3934  ll
+ 3935  cd structure_factor_15120at
+ 3936  ll
+ 3937  code .
+ 3938  ssh jperradin@vega.coulomb.univ-montp2.fr
+ 3939  cd visuel
+ 3940  python calculate_diluted_sq.py fractal4-4_moved-1cfg.xyz
+ 3941  xmgrace -nxy sq-fractal4-4_moved-1cfg.txt
+ 3942  cd visuel
+ 3943  python calculate_diluted_sq.py fractal4-4_moved-1cfg.xyz
+ 3944  ll
+ 3945  pwd
+ 3946  cd 
+ 3947  cd /media
+ 3948  ll
+ 3949  cd perraju/pj-drive
+ 3950  ll
+ 3951  cd vi
+ 3952  cd visual-ovito
+ 3953  ll
+ 3954  ovito session.ovito
+ 3955  cd visuel
+ 3956  ll
+ 3957  ovito session_fractal.ovito 
+ 3958  cd /media/perraju/pj-drive/visual-ovito
+ 3959  ll
+ 3960  cd visuel
+ 3961  ll
+ 3962  cd ..
+ 3963  ovito session_fractal.ovito 
+ 3964  ovito session.ovito
+ 3965  code .
+ 3966  cd visuel
+ 3967  python move_origin.py fractal6-6.xyz
+ 3968  ovito fractal6-6_moved.xyz
+ 3969  python move_origin.py fractal6-6.xyz
+ 3970  ovito fractal6-6_moved.xyz
+ 3971  python move_origin.py fractal6-6.xyz
+ 3972  ovito fractal6-6_moved.xyz
+ 3973  python move_origin.py fractal6-6.xyz
+ 3974  ovito fractal6-6_moved.xyz
+ 3975  ovito session_fractal.ovito
+ 3976  python calculate_diluted_sq.py fractal6-6_moved.xyz
+ 3977  xmgrace sq-fractal6-6_moved.txt
+ 3978  python calculate_diluted_sq.py fractal6-6_moved.xyz
+ 3979  ovito session_fractal6-6.ovito
+ 3980  ovito session.ovito
+ 3981  python move_origin.py fractal6-6-f2605.xyz
+ 3982  ovito fractal6-6-f2605_moved.xyz
+ 3983  python calculate_diluted_sq.py fractal6-6-f2605_moved.xyz
+ 3984  code fractal6-6-f2605_moved.xyz
+ 3985  python calculate_diluted_sq.py fractal6-6-f2605_moved.xyz
+ 3986  ovito session.ovito
+ 3987  python move_origin.py fractal6-6-f2634.xyz
+ 3988  python calculate_diluted_sq.py fractal6-6-f2634_moved.xyz
+ 3989  cd visuel
+ 3990  ovito fractal6-6-f2634_moved.xyz
+ 3991  cd /media/perraju/pj-drive/visual-ovito
+ 3992  ll
+ 3993  ovito session.ovito
+ 3994  cd visuel
+ 3995  python move_origin.py fractal6-6-f2678.xyz
+ 3996  python calculate_diluted_sq.py fractal6-6-f2678_moved.xyz
+ 3997  cd visuel
+ 3998  ll
+ 3999  ovito session_fractal6-6.ovito
+ 4000  python move_origin.py fractal6-6-f2678.xyz
+ 4001  ovito session_fractal6-6.ovito
+ 4002  python move_origin.py fractal6-6-f2678.xyz
+ 4003  cd visuel
+ 4004  python move_origin.py fractal6-6-f2678.xyz
+ 4005  ll
+ 4006  cd 
+ 4007  cd /media/perraju/pj-drive/visual-ovito
+ 4008  ll
+ 4009  cd visuel
+ 4010  mm
+ 4011  cd 
+ 4012  cd /media/perraju/pj-drive/visual-ovito
+ 4013  ovito session.ovito
+ 4014  ovito session_fractal6-6.ovito
+ 4015  ovito session_fractal6-6-f2.ovito
+ 4016  cd 
+ 4017  cd /
+ 4018  cd /media/perraju/pj-drive/visual-ovito
+ 4019  code .
+ 4020  cd visuel
+ 4021  ovito session_fractal6-6-f2.ovito
+ 4022  ovito session_fractal6-6.ovito
+ 4023  ovito fractal6-6-f2678_moved.xyz
+ 4024  python move_origin.py fractal6-6-f2678.xyz
+ 4025  ovito fractal6-6-f2678_moved.xyz
+ 4026  python calculate_diluted_sq.py fractal6-6-f2678_moved.xyz
+ 4027  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4028  cd /media/perraju/pj-drive/visual-ovito
+ 4029  ll
+ 4030  cd visuel
+ 4031  ll
+ 4032  open 4-4
+ 4033  open 4-4.png
+ 4034  ll
+ 4035  cd ../
+ 4036  ll
+ 4037  cd ../
+ 4038  ll
+ 4039  cd 
+ 4040  ll
+ 4041  cd Documents
+ 4042  ll
+ 4043  tar --use-compress-program=pigz -cvf /media/perraju/pj-drive/BACKUP-laptop/archive-Documents-20240703.tar.gz ./
+ 4044  cd /media/perraju/pj-drive/visual-ovito
+ 4045  ll
+ 4046  cd visuel
+ 4047  ll
+ 4048  ovito fractal6-6-f2678_moved.xyz
+ 4049  code .
+ 4050  ovito fractal6-6-f2678_moved-180cfg.xyz
+ 4051  ssh-keygen -t rsa -b 4096
+ 4052  cd .ssh
+ 4053  ll
+ 4054  cat id_rsa
+ 4055  cat id_rsa.pub
+ 4056  ll
+ 4057  cd ..
+ 4058  ll
+ 4059  fdfind ssh_coulomb.pub
+ 4060  scp ssh_coulomb.pub jperradin@ssh.coulomb.univ-montp2.fr
+ 4061  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4062  ll
+ 4063  scp ssh_coulomb.pub jperradin@ssh.coulomb.univ-montp2.fr:
+ 4064  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4065  ip addr show 
+ 4066  route
+ 4067  sudo -s 
+ 4068  bash
+ 4069  cd Downloads
+ 4070  ll
+ 4071  mkdir -p ~/.virtualenvs
+ 4072  python3 -m venv ~/.virtualenvs/eduroam-install
+ 4073  source ~/.virtualenvs/eduroam-install
+ 4074  source ~/.virtualenvs/eduroam-install/bin/activate
+ 4075  sudo apt-get install build-essential libpython3-dev libdbus-1-dev
+ 4076  sudo apt autoremove
+ 4077  python3 -m pip install dbus-python
+ 4078  python3 eduroam-linux-UoC-eduroam_public_CA.py
+ 4079  sudo apt-get install build-essential libpython3-dev libdbus-1-dev libdbus-glib-1-dev libgirepository1.0-dev
+ 4080  python3 eduroam-linux-UoC-eduroam_public_CA.py
+ 4081  ll
+ 4082  code eduroam-linux-UoC-eduroam_public_CA.py
+ 4083  python3 -m pip install pyOpenSSL
+ 4084  pip install --upgrade pip
+ 4085  python3 eduroam-linux-UoC-eduroam_public_CA.py
+ 4086  cd ../.config
+ 4087  ll
+ 4088  cd cat_installer/ll
+ 4089  cd cat_installer/
+ 4090  ll
+ 4091  python3 eduroam-linux-UdM.py
+ 4092  ip addr show 
+ 4093  clear
+ 4094  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4095  sudo apt-get update -y
+ 4096  sudo apt-get upgrade -y
+ 4097  z /home/perraju/Documents/these/notes_and_ideas
+ 4098  ll
+ 4099  cd Talks
+ 4100  ll
+ 4101  nvim talk-cambrige-others.md
+ 4102  cd 
+ 4103  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4104  al
+ 4105  alias
+ 4106  cd 
+ 4107  ll
+ 4108  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4109  fdfind shik
+ 4110  cd Documents/these/shik_files
+ 4111  touch README
+ 4112  nvim README
+ 4113  ll
+ 4114  nautilus . &
+ 4115  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4116  ovito 
+ 4117  ll
+ 4118  cd Documents
+ 4119  ll
+ 4120  fdfind *.xyz
+ 4121  fdfind .xyz
+ 4122  cd these
+ 4123  ll
+ 4124  cd workspaces
+ 4125  ll
+ 4126  cd DFTB
+ 4127  ll
+ 4128  cd data_idris
+ 4129  ll
+ 4130  cd ..
+ 4131  ll
+ 4132  cd ..
+ 4133  ll
+ 4134  cd LAMMPS
+ 4135  ll
+ 4136  cd test
+ 4137  ll
+ 4138  cd ..
+ 4139  ll
+ 4140  ovito output.xyz
+ 4141  cd ..
+ 4142  ll
+ 4143  cd wip
+ 4144  ll
+ 4145  cd nexus_results
+ 4146  ll
+ 4147  cd sio2-
+ 4148  cd sio2-96000at-1x
+ 4149  ll
+ 4150  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4151  cd Documents
+ 4152  ll
+ 4153  cd these
+ 4154  ll
+ 4155  cd workspaces
+ 4156  ll
+ 4157  cd LAMMPS
+ 4158  ll
+ 4159  cd ..
+ 4160  ll
+ 4161  cd test-NS3-compression
+ 4162  ll
+ 4163  cd 3000at
+ 4164  ll
+ 4165  cd ..
+ 4166  ll
+ 4167  cd 3000at
+ 4168  ll
+ 4169  nvim input-loop-compression-35GPa-120pts.in
+ 4170  ll
+ 4171  cd ../
+ 4172  ll
+ 4173  cd 1080at
+ 4174  ll
+ 4175  cd sample_generation
+ 4176  ll
+ 4177  tar -xzvf 1080at.tar.gz
+ 4178  ll
+ 4179  cat input_SHIK_ns3-1080at.in
+ 4180  nvim input_SHIK_ns3-1080at.in
+ 4181  ll
+ 4182  z work
+ 4183  ll
+ 4184  cd ..
+ 4185  ll
+ 4186  cd sio2-reaxff-compression-31GPa-66pts
+ 4187  ll
+ 4188  cd positions_xyz
+ 4189  ll
+ 4190  cd /media/perraju/pj-key
+ 4191  ll
+ 4192  cd 3024at-2a
+ 4193  ll
+ 4194  cd positions_xyz
+ 4195  ll
+ 4196  ovito session.ovito
+ 4197  ovito pos1B.xyz
+ 4198  ll
+ 4199  cd ../..
+ 4200  ll
+ 4201  cd GSPC
+ 4202  ll
+ 4203  cd ..
+ 4204  ll
+ 4205  ovito pos1B.xyz
+ 4206  ll
+ 4207  ovito 
+ 4208  z work
+ 4209  ll
+ 4210  cd ..
+ 4211  ll
+ 4212  cd wip
+ 4213  ll
+ 4214  cd ../..
+ 4215  ll
+ 4216  cd ../
+ 4217  fdfind visual
+ 4218  cd hese
+ 4219  cd These
+ 4220  ll
+ 4221  cd workspaces
+ 4222  ll
+ 4223  cd visual-ovito
+ 4224  ll
+ 4225  ovito pos1B.xyz
+ 4226  cd 
+ 4227  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4228  ll
+ 4229  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4230  cd ../..
+ 4231  ll
+ 4232  cd ../
+ 4233  ll
+ 4234  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4235  cd these
+ 4236  ll
+ 4237  cd w
+ 4238  cd workspaces
+ 4239  ll
+ 4240  cd ../
+ 4241  ll
+ 4242  cd ../These
+ 4243  ll
+ 4244  cd workspaces
+ 4245  ll
+ 4246  cd visual-ovito
+ 4247  ll
+ 4248  ovito atomic_strain.ovito
+ 4249  ll
+ 4250  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4251  ll
+ 4252  clear
+ 4253  sftp jperradin@ssh.coulomb.univ-montp2.fr
+ 4254  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4255  alias
+ 4256  ssh -L 2222:aule.coulomb.univ-montp2.fr:22 jperradin@ssh.coulomb.univ-montp2.fr
+ 4257  alias 
+ 4258  sshfs jperradin@localhost:/media/jperradin/Expansion/STORE_julien/LAMMPS/sample-generation/NS2/ -p 2222 /home/perraju/rsync-ssh/
+ 4259  cd rsync-ssh
+ 4260  ll
+ 4261  cp sample_NS2-1a.tar.gz ../Documents/These/workspaces/
+ 4262  ll
+ 4263  umount rsync-ssh
+ 4264  cd Documents/These/
+ 4265  ll
+ 4266  cd workspaces
+ 4267  ll
+ 4268  mkdir NS2
+ 4269  mv sample_NS2-1a.tar.gz NS2
+ 4270  ll
+ 4271  cd NS2
+ 4272  ll
+ 4273  tar -xzvf sample_NS2-1a.tar.gz
+ 4274  ll
+ 4275  ovito NS2_300K_final_nvt_rlx_sample1-13500at.data
+ 4276  ll
+ 4277  cd Documents/These
+ 4278  cd workspaces
+ 4279  ll
+ 4280  unzip simulation-shik-ns.zip
+ 4281  ll
+ 4282  mkdir simulation-shik-ns
+ 4283  mv density-alkali2compo-SHIK.agr simulation-shik-ns/
+ 4284  mv input_SHIK_ns3-300at simulation-shik-ns/
+ 4285  ll
+ 4286  rm simulation-shik-ns.zip
+ 4287  ll
+ 4288  cd simulation-shik-ns
+ 4289  ll
+ 4290  xmgrace density-alkali2compo-SHIK.agr
+ 4291  code input_SHIK_ns3-300at
+ 4292  ll
+ 4293  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4294  code .
+ 4295  python charge_calculator.py
+ 4296  ll
+ 4297  xmgrace density-alkali2compo-SHIK.agr
+ 4298  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4299  sudo apt-get update -y
+ 4300  sudo apt-get upgrade
+ 4301  sudo apt update
+ 4302  sudo apt upgrade
+ 4303  sudo apt autoremove
+ 4304  reboo
+ 4305  reboot
+ 4306  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4307  wget https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.3-3_all.deb\n
+ 4308  sudo dpkg -i ./protonvpn-stable-release_1.0.3-3_all.deb && sudo apt update\n
+ 4309  echo "de7ef83a663049b5244736d3eabaacec003eb294a4d6024a8fbe0394f22cc4e5  protonvpn-stable-release_1.0.3-3_all.deb" | sha256sum --check -\n
+ 4310  sudo apt update && sudo apt upgrade\n
+ 4311  sudo apt install proton-vpn-gnome-desktop\n
+ 4312  sudo apt update && sudo apt upgrade\n
+ 4313  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4314  ll
+ 4315  cd Documents
+ 4316  ll
+ 4317  cd these
+ 4318  ll
+ 4319  cd workspaces
+ 4320  ll
+ 4321  cd ../T
+ 4322  cd ../../These/workspaces
+ 4323  ll
+ 4324  cd NS2
+ 4325  ll
+ 4326  cd 
+ 4327  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4328  cat /media/perraju/pj-key/ssh_jperradin.pub 
+ 4329  cd .ssh
+ 4330  ll
+ 4331  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4332  cat /media/perraju/pj-key/ssh_jperradin.pub 
+ 4333  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4334  ll
+ 4335  cd Documents
+ 4336  ll
+ 4337  cd These
+ 4338  ll
+ 4339  cd workspaces
+ 4340  ll
+ 4341  cd visual-ovito
+ 4342  cd ../wip
+ 4343  ll
+ 4344  cd ../
+ 4345  ll
+ 4346  cd simulation-shik-ns
+ 4347  ll
+ 4348  cd ../
+ 4349  ll
+ 4350  cd NS2
+ 4351  cd ../../t
+ 4352  ll
+ 4353  cd ../..
+ 4354  ll
+ 4355  cd ../
+ 4356  ll
+ 4357  cd these
+ 4358  ll
+ 4359  cd workspaces
+ 4360  ll
+ 4361  cd ..
+ 4362  ll
+ 4363  cd 
+ 4364  ll
+ 4365  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4366  vi ssh_jperradin.pub
+ 4367  nvim keys
+ 4368  vi keys
+ 4369  ll
+ 4370  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4371  ll
+ 4372  cd .ssh
+ 4373  ll
+ 4374  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4375  cd 
+ 4376  cd /media/perraju/pj-drive
+ 4377  ll
+ 4378  cd tra
+ 4379  cd trajectories-lammps-xyz-sio2-1008-to-96000
+ 4380  ll
+ 4381  cd trajectories
+ 4382  ll
+ 4383  cd ../
+ 4384  ll
+ 4385  cd ../
+ 4386  ll
+ 4387  cd vi
+ 4388  cd visual-ovito
+ 4389  ll
+ 4390  cd analysis
+ 4391  ll
+ 4392  cd ../..
+ 4393  ll
+ 4394  fdfind atomic
+ 4395  cd visual-ovito/visuel/
+ 4396  ll
+ 4397  ovito atomic_strain.ovito
+ 4398  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4399  ping jperradin@ssh.coulomb.univ-montp2.fr
+ 4400  e
+ 4401  ping ssh.coulomb.univ-montp2.fr
+ 4402  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4403  sudo apt update && sudo apt upgrade\n
+ 4404  sudo apt-get update -y && sudo apt-get upgrade -y
+ 4405  sudo apt auto
+ 4406  sudo apt autoremove
+ 4407  sudo snap refresh
+ 4408  natpmpc
+ 4409  ping google.com
+ 4410  lshw -C network
+ 4411  cd Documents/these/workspaces/wip
+ 4412  ll
+ 4413  cd polyhedricitiy
+ 4414  ll
+ 4415  open paschek1999-Tetrahedricity.pdf
+ 4416  ll
+ 4417  z dev
+ 4418  ll
+ 4419  cd nexus
+ 4420  ll
+ 4421  code .
+ 4422  python examples/launch-nexus.py
+ 4423  cd ..
+ 4424  ll
+ 4425  cd gspc
+ 4426  ll
+ 4427  code .
+ 4428  znap pull
+ 4429  sudo snap refresh
+ 4430  sudo apt update && sudo apt upgrade\n
+ 4431  sudo apt-get update -y && sudo apt-get upgrade -y
+ 4432  fdfind proton
+ 4433  fdfind vpn
+ 4434  cd /
+ 4435  ll
+ 4436  fdfind vpn
+ 4437  cd ..
+ 4438  ll
+ 4439  rm polyhedricitiy -r
+ 4440  git clone git@github.com:JulienPerradin/polyhedricity.git
+ 4441  code .
+ 4442  z wip
+ 4443  ll
+ 4444  cd polyhedricity
+ 4445  ll
+ 4446  code .
+ 4447  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4448  z dev
+ 4449  ll
+ 4450  z wip
+ 4451  ll
+ 4452  cd polyhedricity
+ 4453  ll
+ 4454  git add . && git commit -m "update" && git push origin main
+ 4455  ll
+ 4456  cd VirtualBox\ VMs
+ 4457  ll
+ 4458  cd Windows11
+ 4459  ll
+ 4460  cd Logs
+ 4461  ll
+ 4462  code .
+ 4463  ps -ef | grep docker
+ 4464  sudo systemctl status docker
+ 4465  lsof /dev/kvm
+ 4466  sudo systemctl stop docker.socket\n
+ 4467  sudo systemctl status docker
+ 4468  sudo systemctl start docker
+ 4469  sudo systemctl status docker
+ 4470  ll
+ 4471  sudo systemctl enable docker
+ 4472  sudo systemctl disable docker
+ 4473  sudo systemctl enable docker
+ 4474  lsmod | grep kvm
+ 4475  irqbypass
+ 4476  lsmod | grep kvm
+ 4477  z poly
+ 4478  git pull origin main
+ 4479  ll
+ 4480  code .
+ 4481  pwd
+ 4482  git pull origin main
+ 4483  code .
+ 4484  ll
+ 4485  cat jperradin@ssh.coulomb.univ-montp2.fr
+ 4486  ssh jperradin@ssh.coulomb.univ-montp2.fr
+ 4487  sudo dpkg --remove virtualbox virtualbox-dkms virtualbox-qt
+ 4488  cd Downloads
+ 4489  sudo dpkg -i virtualbox-7.1_7.1.0-164728\~Ubuntu\~jammy_amd64.deb
+ 4490  virtualbox
+ 4491  cd 
+ 4492  sudo snap refresh
+ 4493  clear
+ 4494  sudo distro-info
+ 4495  sudo distro-info --lts
+ 4496  sudo distro-info --all
+ 4497  sudo distro-info --update
+ 4498  sudo distro-info --help
+ 4499  do-release-upgrade
+ 4500  RabbitMQ
+ 4501  rabbitmq
+ 4502  rabbitmq-upgrade
+ 4503  rabbitmqctl
+ 4504  sudo apt-get remove rabbitmq-server
+ 4505  do-release-upgrade
+ 4506  omz update
+ 4507  clear
+ 4508  sudo apt-get update -y && sudo apt-get upgrade -y
+ 4509  sudo apt autoremove
+ 4510  sudo do-release-upgrade
+ 4511  clear
+ 4512  ping6 -c1 changelogs.ubuntu.com
+ 4513  openssl s_client -CAfile /etc/ssl/certs/ca-certificates.crt -showcerts -connect changelogs.ubuntu.com:443 < /dev/null\n
+ 4514  sudo apt-get update -y && sudo apt-get upgrade -y
+ 4515  sudo apt-get auto
+ 4516  sudo apt-get autoremove
+ 4517  sudo do-release-upgrade
+ 4518  sudo apt-key del 23F3D4EA75716059 && sudo rm /etc/apt/sources.list.d/github-cli.list
+ 4519  sudo apt install git
+ 4520  git
+ 4521  sudo do-release-upgrade
+ 4522  sudo apt-get update -y && sudo apt-get upgrade -y
+ 4523  sudo apt autoremove
+ 4524  sudo snap refresh
+ 4525  snap
+ 4526  omz update
+ 4527  ll
+ 4528  conda update --all
+ 4529  rm -rf ~/anaconda3
+ 4530  nvim .zshrc
+ 4531  source ~/.zshrc
+ 4532  rm -rf ~/.conda ~/.condarc ~/.continuum
+ 4533  wget https://repo.anaconda.com/archive/Anaconda3-latest-Linux-x86_64.sh\n
+ 4534  sudo apt-get install libgl1-mesa-glx libegl1-mesa libxrandr2 libxrandr2 libxss1 libxcursor1 libxcomposite1 libasound2 libxi6 libxtst6
+ 4535  cd Downloads
+ 4536  wget https://repo.anaconda.com/archive/Anaconda3-2024.06-1-Linux-x86_64.sh
+ 4537  git add . && git commit -m "update" && git push origin main
+ 4538  cd 
+ 4539  ll
+ 4540  rm ovito-basic-3.10.1-x86_64 -rf
+ 4541  mv Downloads/ovito-pro-3.10.6-x86_64.tar.xz .
+ 4542  tar xJfv ovito-pro-3.10.6-x86_64.tar.xz
+ 4543  nvim .zshrc
+ 4544  cd ovito-pro-3.10.6-x86_64
+ 4545  ll
+ 4546  cd bin
+ 4547  ll
+ 4548  readlink -f ovito
+ 4549  source ~/.zshrc
+ 4550  :q
+ 4551  readlink -f ovito
+ 4552  source ~/.zshrc
+ 4553  nvim .zshrc
+ 4554  source ~/.zshrc
+ 4555  ovito
+ 4556  bash Anaconda3-2024.06-1-Linux-x86_64.sh
+ 4557  conda update --all
+ 4558  conda list
+ 4559  clear
+ 4560  conda install termcolor natsort
+ 4561  clear
+ 4562  python launch-GSPC-quick-test.py
+ 4563  git add . && git commit -m "update" && git push origin main
+ 4564  sudo snap refresh
+ 4565  protonvpn-app
+ 4566  sudo snap refresh
+ 4567  sudo apt-get update -y && sudo apt-get upgrade -y
+ 4568  z article
+ 4569  ll
+ 4570  cd Documents
+ 4571  ll
+ 4572  cd these
+ 4573  ll
+ 4574  cd wi
+ 4575  cd writings
+ 4576  ll
+ 4577  cd ../
+ 4578  ll
+ 4579  cd ../These
+ 4580  ll
+ 4581  cd workspaces
+ 4582  ll
+ 4583  cd wip
+ 4584  ll
+ 4585  cd ../../
+ 4586  ll
+ 4587  z poly
+ 4588  ll
+ 4589  git pull
+ 4590  cd ..
+ 4591  rm -rf polyhedricity
+ 4592  git clone git@github.com:JulienPerradin/polyhedricity.git
+ 4593  sudo apt-get update -y && sudo apt-get upgrade -y
+ 4594  sudo apt autoremove
+ 4595  python launch-GSPC-quick-test.py
+ 4596  clear
+ 4597  python launch-GSPC-quick-test.py
+ 4598  ll
+ 4599  z dev
+ 4600  ll
+ 4601  git add . && git commit -m "update" && git push origin main
+ 4602  cd ../
+ 4603  rm -rf polyhedricity
+ 4604  z dev
+ 4605  git clone git@github.com:JulienPerradin/polyhedricity.git
+ 4606  code .
+ 4607  ll
+ 4608  python launch-GSPC-quick-test.py
+ 4609  xmgrace
+ 4610  cd polyhedricity
+ 4611  ll
+ 4612  cd output
+ 4613  ll
+ 4614  python launch-GSPC-quick-test.py
+ 4615  git add . && git commit -m "update" && git push origin main
+ 4616  clear
+ 4617  l
+ 4618  ll
+ 4619  cd Documents
+ 4620  ll
+ 4621  cd these
+ 4622  ll
+ 4623  cd Development
+ 4624  ll
+ 4625  cd ../
+ 4626  ll
+ 4627  cd ..
+ 4628  ll
+ 4629  cd These
+ 4630  ll
+ 4631  cd workspaces
+ 4632  ll
+ 4633  cd wip
+ 4634  ll
+ 4635  cd ../..
+ 4636  ll
+ 4637  cd ../
+ 4638  ll
+ 4639  python launch-GSPC-quick-test.py
+ 4640  python launch-GSPC-really-quick-test.py
+ 4641* z gspc
+ 4642* cd 
+ 4643* cd -
+ 4644* ll
+ 4645* cd tests/results
+ 4646* ll
+ 4647* cd quick-test
+ 4648* ll
+ 4649* xmgrace 
+ 4650  python launch-GSPC-quick-test.py
+ 4651  python launch-GSPC-really-quick-test.py
+ 4652  python launch-GSPC-quick-test.py
+ 4653* pip install numba-progress
+ 4654  kill 158493
+ 4655  clear
+ 4656  python launch-GSPC-quick-test.py
+ 4657* z fun
+ 4658* ll
+ 4659* cd 
+ 4660* cd Documents
+ 4661* ll
+ 4662* cd fun
+ 4663* ll
+ 4664* python test_tqdm_numba.py
+ 4665  python launch-GSPC-really-quick-test.py
+ 4666  python launch-GSPC-quick-test.py
+ 4667  kill 167438
+ 4668  python launch-GSPC-really-quick-test.py
+ 4669  python launch-GSPC-quick-test.py
+ 4670* xmgrace
+ 4671  code launch-GSPC-really-quick-test.py
+ 4672  python launch-GSPC-really-quick-test.py
+ 4673* ll
+ 4674* xmgrace -nxy neutron_structure_factor-*
+ 4675  git add . && git commit -m "update: implemented polyhedricity and neutron strucutre factor" && git push origin main
+ 4676  python setup.py sdist bdist_wheel
+ 4677  history
