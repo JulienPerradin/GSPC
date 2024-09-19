@@ -281,7 +281,7 @@ def return_keys(property: str) -> list:
             {"connectivity_SiO5": ["CS_SiO5", "ES_SiO5", "FS_SiO5"]},
             {"connectivity_SiO6": ["CS_SiO6", "ES_SiO6", "FS_SiO6"]},
             {"connectivity": ["proportion_corners","proportion_edges","proportion_faces",]},
-            {"polyhedricity": ["tetrahedra", "pentahedra", "square based pyramid", "triangular bipyramid", "octahedra"]},
+            {"polyhedricity": ["tetrahedra", "pentahedra", "square_based_pyramid", "triangular_bipyramid", "octahedra"]},
             {"hist_polyhedricity": ["bins", "hist_SiO4", "hist_SiO5", "hist_SiO5_allSQP", "hist_SiO5_sqp", "hist_SiO5_allTBP", "hist_SiO5_tBP", "hist_SiO6"]},
         ]
     elif property == "neutron_structure_factor":
