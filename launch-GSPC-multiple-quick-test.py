@@ -2,7 +2,7 @@ import gspc
 import os
 from tqdm import tqdm
 
-directory = "./tests/inputs/SiO2/1008/sio2-1008at-1frame"
+directory = "./tests/inputs/SiO2/1008/sio2-1008at-11frames"
 trajectories = []
 pressures = []
 outputs = []
@@ -45,7 +45,7 @@ settings = gspc.settings.Settings(extension="SiO2")
 for i, trajectory in progress_bar:
     print(trajectory)
     settings.project_name.set_value(f"{outputs[i]}")
-    settings.export_directory.set_value("tests/results/SiO2/1008/sio2-1008at-1frame")
+    settings.export_directory.set_value("tests/results/SiO2/1008/sio2-1008at-11frames")
     settings.path_to_xyz_file.set_value(f"{trajectory}")
     settings.header.set_value(2)
     settings.number_of_atoms.set_value(1008)
@@ -67,7 +67,7 @@ for i, trajectory in progress_bar:
 
     settings.pdf_settings.set_rmax(8.0)
 
-    gspc.main(settings)
+    # gspc.main(settings)
 
 gspc.utils.generate_recaps.make(settings.export_directory.get_value())
 
