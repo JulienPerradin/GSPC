@@ -73,16 +73,12 @@ def make(export_directory):
                 except:
                     continue
 
-    print(output)
     with open(os.path.join(export_directory, "recap.dat"), 'w') as f:
         nlines = len(output['Pressure'])
         # write header of the recap file
         f.write('# ')
         for k in output.keys():
             f.write(f"{k}\t")
-            print(len(output[k]))
-            if len(output[k]) == 0:
-                print(k)
         f.write('\n')
 
         # write the results
