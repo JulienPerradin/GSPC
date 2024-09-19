@@ -77,20 +77,16 @@ def main(settings):
         results_pdf = {}
         keys_pdf = module.return_keys("pair_distribution_function")
         for key in keys_pdf:
-            results_pdf[key] = io.DistResult(
-                "pair_distribution_function", key, start)
-            results_pdf[key].write_file_header(
-                settings._output_directory, end - start)
-    
+            results_pdf[key] = io.DistResult("pair_distribution_function", key, start)
+            results_pdf[key].write_file_header(settings._output_directory, end - start)
+
     if "bond_angular_distribution" in settings.properties.get_value():
         results_bad = {}
         keys_bad = module.return_keys("bond_angular_distribution")
         for key in keys_bad:
-            results_bad[key] = io.DistResult(
-                "bond_angular_distribution", key, start)
-            results_bad[key].write_file_header(
-                settings._output_directory, end - start)
-            
+            results_bad[key] = io.DistResult("bond_angular_distribution", key, start)
+            results_bad[key].write_file_header(settings._output_directory, end - start)
+
     if "structural_units" in settings.properties.get_value():
         results_sru = {}
         keys_sru = module.return_keys("structural_units")
@@ -98,22 +94,20 @@ def main(settings):
             for key in dict_key:
                 results_sru[key] = io.PropResult(key, dict_key[key], start)
                 results_sru[key].write_file_header(
-                    settings._output_directory, end - start)
+                    settings._output_directory, end - start
+                )
 
     if "mean_square_displacement" in settings.properties.get_value():
         results_msd = io.MSDResult("mean_square_displacement", key, start)
-        results_msd.write_file_header(settings._output_directory, end-start)
-        
+        results_msd.write_file_header(settings._output_directory, end - start)
+
     if "neutron_structure_factor" in settings.properties.get_value():
         results_nsf = {}
         keys_nsf = module.return_keys("neutron_structure_factor")
         for key in keys_nsf:
-            results_nsf[key] = io.DistResult(
-                "neutron_structure_factor", key, start)
-            results_nsf[key].write_file_header(
-                settings._output_directory, end - start)
-    
-            
+            results_nsf[key] = io.DistResult("neutron_structure_factor", key, start)
+            results_nsf[key].write_file_header(settings._output_directory, end - start)
+
     # Loop over the frames in the trajectory
     for i in progress_bar:
         # Update the progress bar
@@ -133,10 +127,10 @@ def main(settings):
                         atom.set_current_position(ref)
                         # next atom
                         break
-                    
+
             system.init_mean_square_displacement()
         else:
-            store_msd = system.msd  
+            store_msd = system.msd
             system, current_positions = io.read_and_create_system(
                 input_file, i, n_atoms + n_header, settings, cutoffs, start, end
             )
@@ -164,7 +158,7 @@ def main(settings):
 
         # Calculate the mean square displacement
         if "mean_square_displacement" in settings.properties.get_value():
-            if i != start: 
+            if i != start:
                 system.calculate_mean_square_displacement()
                 results_msd.add_to_timeline(i, system.msd)
 
@@ -175,7 +169,9 @@ def main(settings):
             for d in keys_sru:
                 key = list(d.keys())[0]
                 sub_keys = d[key]
-                results_sru[key].add_to_timeline(i, sub_keys, system.structural_units[key])
+                results_sru[key].add_to_timeline(
+                    i, sub_keys, system.structural_units[key]
+                )
 
         # Calculate the bond angular distribution
         if "bond_angular_distribution" in settings.properties.get_value():
@@ -194,38 +190,37 @@ def main(settings):
                 results_pdf[key].add_to_timeline(
                     i, system.distances["r"], system.distances[key]
                 )
-        
+
         if "neutron_structure_factor" in settings.properties.get_value():
             system.calculate_neutron_structure_factor(keys_nsf)
             # Add the results to the timeline
             for key in keys_nsf:
-                results_nsf[key].add_to_timeline(
-                    i, system.q, system.nsf[key]
-                )
-            
+                results_nsf[key].add_to_timeline(i, system.q, system.nsf[key])
 
-
-    if 'pair_distribution_function' in settings.properties.get_value():
+    if "pair_distribution_function" in settings.properties.get_value():
         for key in keys_pdf:
             results_pdf[key].calculate_average_distribution()
             results_pdf[key].append_results_to_file()
-    
-    if 'bond_angular_distribution' in settings.properties.get_value():  
+
+    if "bond_angular_distribution" in settings.properties.get_value():
         for key in keys_bad:
             results_bad[key].calculate_average_distribution()
             results_bad[key].append_results_to_file()
-    if 'mean_square_displacement' in settings.properties.get_value():
+    if "mean_square_displacement" in settings.properties.get_value():
         results_msd.calculate_average_msd(system.calculate_mass_per_species())
-        results_msd.append_results_to_file(settings.msd_settings.get_dt(), settings.msd_settings.get_printlevel())
-    if 'structural_units' in settings.properties.get_value():
+        results_msd.append_results_to_file(
+            settings.msd_settings.get_dt(), settings.msd_settings.get_printlevel()
+        )
+    if "structural_units" in settings.properties.get_value():
         for d in keys_sru:
             key = list(d.keys())[0]
             results_sru[key].calculate_average_proportion()
             results_sru[key].append_results_to_file()
-    if 'neutron_structure_factor' in settings.properties.get_value():
+    if "neutron_structure_factor" in settings.properties.get_value():
         for key in keys_nsf:
             results_nsf[key].calculate_average_distribution()
             results_nsf[key].append_results_to_file()
-            
+
+    settings.write_readme_file()
     # END OF MAIN FUNCTION
     DEBUG = True

@@ -124,4 +124,35 @@ class Settings:
         print(separator)
         for p, v in self.__dict__.items():
             print(f"\t\t{v.get_name().ljust(max_attr_length)} ➜ {v.get_value()}")
+
+    def write_readme_file(self) -> None:
+        """
+        Writes the settings to a README file.
+        """
+        from datetime import datetime
+        with open(f"{self._output_directory}/README.md", "w") as f:
+            f.write(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+            f.write(f"Version: {self.version.get_value()}\n")
+            f.write(f"# {self.project_name.get_value()}\n")
+            f.write("## Settings\n")
+            f.write(f"### Input file\n")
+            f.write(f"- Path to input file: {self.path_to_xyz_file.get_value()}\n")
+            f.write(f"- Number of frames: {self.number_of_frames.get_value()}\n")
+            if self.range_of_frames.get_value() is not None:
+                f.write(f"- Range of frames: {self.range_of_frames.get_value()}\n")
+            f.write(f"### Structure\n")
+            f.write(f"- Number of atoms: {self.number_of_atoms.get_value()}\n")
+            for atom in self.structure.get_value():
+                f.write(f"- Species: {atom['element']} | Number of atoms: {atom['number']}\n")
+            f.write(f"### Export\n")
+            f.write(f"- Export directory: {self.export_directory.get_value()}\n")
+            f.write(f"### Structural properties\n")
+            for prop in self.properties.get_value():
+                f.write(f"- {prop}\n")
+                
+            f.write("## Informations\n")
+            f.write(f"Pressure (GPa) : {self.pressure.get_value()}\n")
+            f.write(f"Temperature (K) : {self.temperature.get_value()}\n")
+            f.write(f"Timestep (ps) : {self.timestep.get_value()}\n")
+            f.write(f"Time of simulation (ps) : {self.msd_settings.return_duration(self.number_of_frames.get_value())}\n")
         
