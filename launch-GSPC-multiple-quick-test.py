@@ -2,7 +2,7 @@ import gspc
 import os
 from tqdm import tqdm
 
-directory = "/home/jperradin/Documents/workspaces/Developments/gspc/tests/inputs/SiO2/1008/sio2-1008at-1frame"
+directory = "./tests/inputs/SiO2/1008/sio2-1008at-1frame"
 trajectories = []
 pressures = []
 outputs = []
@@ -30,7 +30,7 @@ progress_bar = tqdm(
     enumerate(trajectories),
     total=len(trajectories),
     desc="",
-    colour="#510e4c",
+    colour="#144e4c",
     unit="file",
     leave=False,
 )
