@@ -7,12 +7,17 @@ def make(export_directory):
     r"""
     This function is expected to be called in the export directory
     """
-    
+
     # fetch directories
-    dirs = os.listdir(export_directory)
-    dirs = natsorted(dirs)
-    
-    # Fetch pression or temperature 
+    dirs = natsorted(
+        [
+            d
+            for d in os.listdir(export_directory)
+            if os.path.isdir(os.path.join(export_directory, d))
+        ]
+    )
+
+    # Fetch pression or temperature
     pressures = []
     temperatures = []
 
@@ -26,24 +31,24 @@ def make(export_directory):
     ]
 
     output = {}
-    output['Pressure'] = []
-    output['Temperature'] = []
+    output["Pressure"] = []
+    output["Temperature"] = []
 
     for dir in dirs:
-        if dir == 'recap.dat':
+        if dir == "recap.dat":
             continue
         files = os.listdir(os.path.join(export_directory, dir))
         for file in files:
             # Fetch thermodynamic informations.
             if file == "README.md":
-                with open(os.path.join(export_directory, dir, file), 'r') as f:
+                with open(os.path.join(export_directory, dir, file), "r") as f:
                     for li, line in enumerate(f):
                         try:
                             parts = line.split()
-                            if parts[0] == 'Pressure':
-                                output['Pressure'].append(float(parts[-1]))
+                            if parts[0] == "Pressure":
+                                output["Pressure"].append(float(parts[-1]))
                             elif parts[0] == "Temperature":
-                                output['Temperature'].append(float(parts[-1]))
+                                output["Temperature"].append(float(parts[-1]))
                         except:
                             # line is empty, go next
                             continue
@@ -51,12 +56,12 @@ def make(export_directory):
             # Fetch results but avoid distributions or histograms
             if file not in files_to_avoid:
                 try:
-                    parts = file.split('-')
+                    parts = file.split("-")
                     if parts[0] not in files_to_avoid:
-                        with open(os.path.join(export_directory, dir, file), 'r') as f:
+                        with open(os.path.join(export_directory, dir, file), "r") as f:
                             for li, line in enumerate(f):
                                 if li == 0:
-                                # skip first line
+                                    # skip first line
                                     continue
                                 if li == 1:
                                     # line 1 shall contains the keys
@@ -73,19 +78,16 @@ def make(export_directory):
                 except:
                     continue
 
-    with open(os.path.join(export_directory, "recap.dat"), 'w') as f:
-        nlines = len(output['Pressure'])
+    with open(os.path.join(export_directory, "recap.dat"), "w") as f:
+        nlines = len(output["Pressure"])
         # write header of the recap file
-        f.write('# ')
+        f.write("# ")
         for k in output.keys():
             f.write(f"{k}\t")
-        f.write('\n')
+        f.write("\n")
 
         # write the results
         for n in range(nlines):
             for k in output.keys():
                 f.write(f"{output[k][n]}\t")
-            f.write('\n')
-        
-
-
+            f.write("\n")
