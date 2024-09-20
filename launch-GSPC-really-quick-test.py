@@ -18,7 +18,14 @@ settings.structure.set_value(
 #     [{"element": "Si", "number": 9072}, {"element": "O", "number": 18144}]
 # )
 
-settings.properties.set_value(["neutron_structure_factor"])
+settings.properties.set_value(
+    [
+        "neutron_structure_factor",
+        "structural_units",
+        "pair_distribution_function",
+        "bond_angle_distribution",
+    ]
+)
 
 settings.temperature.set_value(300)
 settings.pressure.set_value(9.0)
@@ -28,4 +35,3 @@ settings.pdf_settings.set_rmax(8.0)
 gspc.main(settings)
 
 HOLD = 1
-

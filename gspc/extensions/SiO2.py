@@ -24,7 +24,7 @@ class Silicon(Atom):
         self.number_of_edges: int = 0
         self.number_of_faces: int = 0
         self.qi_species: int = 0
-        self.form: str = ''
+        self.form: str = ""
 
     def get_number_of_corners(self) -> int:
         """
@@ -56,7 +56,7 @@ class Silicon(Atom):
         """
         return self.form
 
-    def calculate_coordination(self) -> int:
+    def calculate_coordination(self) -> None:
         """
         Calculate the coordination number of the atom (ie the number of first neighbours) for the extension SiO2
         """
@@ -135,7 +135,7 @@ class Oxygen(Atom):
     def __init__(self, element, id, position, frame, cutoffs, extension) -> None:
         super().__init__(element, id, position, frame, cutoffs, extension)
 
-    def calculate_coordination(self) -> int:
+    def calculate_coordination(self) -> None:
         """
         Calculate the coordination number of the atom (ie the number of first neighbours) for the extension SiO2
         """
@@ -280,17 +280,44 @@ def return_keys(property: str) -> list:
             {"connectivity_SiO4": ["CS_SiO4", "ES_SiO4", "FS_SiO4"]},
             {"connectivity_SiO5": ["CS_SiO5", "ES_SiO5", "FS_SiO5"]},
             {"connectivity_SiO6": ["CS_SiO6", "ES_SiO6", "FS_SiO6"]},
-            {"connectivity": ["proportion_corners","proportion_edges","proportion_faces",]},
-            {"polyhedricity": ["tetrahedra", "pentahedra", "square_based_pyramid", "triangular_bipyramid", "octahedra"]},
-            {"hist_polyhedricity": ["bins", "hist_SiO4", "hist_SiO5", "hist_SiO5_allSQP", "hist_SiO5_sqp", "hist_SiO5_allTBP", "hist_SiO5_tBP", "hist_SiO6"]},
+            {
+                "connectivity": [
+                    "proportion_corners",
+                    "proportion_edges",
+                    "proportion_faces",
+                ]
+            },
+            {
+                "polyhedricity": [
+                    "tetrahedra",
+                    "pentahedra",
+                    "square_based_pyramid",
+                    "triangular_bipyramid",
+                    "octahedra",
+                ]
+            },
+            {
+                "hist_polyhedricity": [
+                    "bins",
+                    "hist_SiO4",
+                    "hist_SiO5",
+                    "hist_SiO5_allSQP",
+                    "hist_SiO5_sqp",
+                    "hist_SiO5_allTBP",
+                    "hist_SiO5_tBP",
+                    "hist_SiO6",
+                ]
+            },
         ]
     elif property == "neutron_structure_factor":
         return ["Si-Si", "Si-O", "O-O", "total"]
-    
+
     # TODO: add the other properties
+    else:
+        return []
 
 
-def calculate_structural_units(atoms, box) -> None:
+def calculate_structural_units(atoms, box) -> dict:
     """
     Calculate the number of SiO_z and OSi_k units for each atom in the system.
     """
@@ -308,15 +335,15 @@ def calculate_structural_units(atoms, box) -> None:
     CS_SiO5, ES_SiO5, FS_SiO5 = [], [], []
     CS_SiO6, ES_SiO6, FS_SiO6 = [], [], []
     proportion_corners, proportion_edges, proportion_faces = [], [], []
-    
+
     tetrahedricity = []
     pentahedricity = []
     octahedricity = []
-    
-    SQP_pentahedricity = [] # all SiO5 are considered as square base pyramid
-    TBP_pentahedricity = [] # all SiO5 are considered as triangular bipyramid
-    sqp_pentahedricity = [] # only SiO5 that are square base pyramid
-    tbp_pentahedricity = [] # only SiO5 that are triangular bipyramid
+
+    SQP_pentahedricity = []  # all SiO5 are considered as square base pyramid
+    TBP_pentahedricity = []  # all SiO5 are considered as triangular bipyramid
+    sqp_pentahedricity = []  # only SiO5 that are square base pyramid
+    tbp_pentahedricity = []  # only SiO5 that are triangular bipyramid
 
     silicons = [atom for atom in atoms if atom.get_element() == "Si"]
     oxygens = [atom for atom in atoms if atom.get_element() == "O"]
@@ -410,24 +437,26 @@ def calculate_structural_units(atoms, box) -> None:
                 connectivity == 3
             ):  # 3 oxygens are shared by 'silicon' and 'second_silicon'
                 silicon.number_of_faces += 1
-                
+
         distances = calculate_distances_between_vertices(silicon, box)
 
         if silicon.coordination == 4:
             CS_SiO4.append(silicon.number_of_corners)
             ES_SiO4.append(silicon.number_of_edges)
             FS_SiO4.append(silicon.number_of_faces)
-            
+
             tetrahedricity.append(calculate_tetrahedricity(distances))
-            
+
             silicon.form = "tetrahedron"
-            
+
         if silicon.coordination == 5:
             CS_SiO5.append(silicon.number_of_corners)
             ES_SiO5.append(silicon.number_of_edges)
             FS_SiO5.append(silicon.number_of_faces)
-            
-            this_sbp_pentahedricity, this_tbp_pentahedricity = calculate_pentahedricity(distances)
+
+            this_sbp_pentahedricity, this_tbp_pentahedricity = calculate_pentahedricity(
+                distances
+            )
             SQP_pentahedricity.append(this_sbp_pentahedricity)
             TBP_pentahedricity.append(this_tbp_pentahedricity)
             if this_sbp_pentahedricity < this_tbp_pentahedricity:
@@ -438,13 +467,12 @@ def calculate_structural_units(atoms, box) -> None:
                 pentahedricity.append(this_tbp_pentahedricity)
                 tbp_pentahedricity.append(this_tbp_pentahedricity)
                 silicon.form = "triangular bipyramid"
-                
-                
+
         if silicon.coordination == 6:
             CS_SiO6.append(silicon.number_of_corners)
             ES_SiO6.append(silicon.number_of_edges)
             FS_SiO6.append(silicon.number_of_faces)
-            
+
             octahedricity.append(calculate_octahedricity(distances))
 
         proportion_corners.append(silicon.number_of_corners)
@@ -497,19 +525,31 @@ def calculate_structural_units(atoms, box) -> None:
     hist_octahedricity = np.zeros(len(bins))
 
     for i in range(len(tetrahedricity)):
-        hist_tetrahedricity[int(tetrahedricity[i] / dbin)+1] += 1/len(tetrahedricity)
+        hist_tetrahedricity[int(tetrahedricity[i] / dbin) + 1] += 1 / len(
+            tetrahedricity
+        )
     for i in range(len(pentahedricity)):
-        hist_pentahedricity[int(pentahedricity[i] / dbin)+1] += 1/len(pentahedricity)
+        hist_pentahedricity[int(pentahedricity[i] / dbin) + 1] += 1 / len(
+            pentahedricity
+        )
     for i in range(len(SQP_pentahedricity)):
-        hist_SBP_pentahedricity[int(SQP_pentahedricity[i] / dbin)+1] += 1/len(pentahedricity)
+        hist_SBP_pentahedricity[int(SQP_pentahedricity[i] / dbin) + 1] += 1 / len(
+            pentahedricity
+        )
     for i in range(len(sqp_pentahedricity)):
-        hist_sbp_pentahedricity[int(sqp_pentahedricity[i] / dbin)+1] += 1/len(pentahedricity)
+        hist_sbp_pentahedricity[int(sqp_pentahedricity[i] / dbin) + 1] += 1 / len(
+            pentahedricity
+        )
     for i in range(len(TBP_pentahedricity)):
-        hist_TBP_pentahedricity[int(TBP_pentahedricity[i] / dbin)+1] += 1/len(pentahedricity)
+        hist_TBP_pentahedricity[int(TBP_pentahedricity[i] / dbin) + 1] += 1 / len(
+            pentahedricity
+        )
     for i in range(len(tbp_pentahedricity)):
-        hist_tbp_pentahedricity[int(tbp_pentahedricity[i] / dbin)+1] += 1/len(pentahedricity)
+        hist_tbp_pentahedricity[int(tbp_pentahedricity[i] / dbin) + 1] += 1 / len(
+            pentahedricity
+        )
     for i in range(len(octahedricity)):
-        hist_octahedricity[int(octahedricity[i] / dbin)+1] += 1/len(octahedricity)
+        hist_octahedricity[int(octahedricity[i] / dbin) + 1] += 1 / len(octahedricity)
 
     tetrahedra = len(tetrahedricity) / len(silicons)
     pentahedra = len(pentahedricity) / len(silicons)
@@ -524,8 +564,25 @@ def calculate_structural_units(atoms, box) -> None:
         "connectivity_SiO5": [CS_SiO5, ES_SiO5, FS_SiO5],
         "connectivity_SiO6": [CS_SiO6, ES_SiO6, FS_SiO6],
         "connectivity": [proportion_corners, proportion_edges, proportion_faces],
-        "polyhedricity": [tetrahedra, pentahedra, square_base_pyramid, triangular_bipyramid, octahedra],
-        "hist_polyhedricity" : np.array([bins, hist_tetrahedricity, hist_pentahedricity, hist_SBP_pentahedricity, hist_sbp_pentahedricity, hist_TBP_pentahedricity, hist_tbp_pentahedricity, hist_octahedricity]),
+        "polyhedricity": [
+            tetrahedra,
+            pentahedra,
+            square_base_pyramid,
+            triangular_bipyramid,
+            octahedra,
+        ],
+        "hist_polyhedricity": np.array(
+            [
+                bins,
+                hist_tetrahedricity,
+                hist_pentahedricity,
+                hist_SBP_pentahedricity,
+                hist_sbp_pentahedricity,
+                hist_TBP_pentahedricity,
+                hist_tbp_pentahedricity,
+                hist_octahedricity,
+            ]
+        ),
     }
 
     _debug_check_SiOz = np.sum(results["SiOz"])
@@ -533,88 +590,101 @@ def calculate_structural_units(atoms, box) -> None:
 
     return results
 
-def calculate_distances_between_vertices(atom, box):
+
+def calculate_distances_between_vertices(atom, box):  # -> np.array
     """
     Calculate the distances between the vertices of the polyhedron.
     """
     distances = []
-    neighbours = [neighbour for neighbour in atom.neighbours if neighbour.get_element() == "O"]
+    neighbours = [
+        neighbour for neighbour in atom.neighbours if neighbour.get_element() == "O"
+    ]
     for i in range(len(neighbours)):
         neighbour_1 = neighbours[i]
-        for j in range(i+1, len(neighbours)):
+        for j in range(i + 1, len(neighbours)):
             neighbour_2 = neighbours[j]
             distance = neighbour_1.position - neighbour_2.position
             distance = distance - np.round(distance / box) * box
             distances.append(np.linalg.norm(distance))
 
     distances.sort()
-    
+
     if atom.coordination == 4 and len(distances) != 6:
         print("ERROR: SiO4 unit should have 6 distances")
     if atom.coordination == 5 and len(distances) != 10:
         print("ERROR: SiO5 unit should have 10 distances")
     if atom.coordination == 6 and len(distances) != 15:
         print("ERROR: SiO6 unit should have 15 distances")
-    
+
     return np.array(distances)
 
-def calculate_tetrahedricity(distances):
+
+def calculate_tetrahedricity(distances) -> float:
     mean_distance = np.mean(distances**2)
-    
+
     tetrahedricity = 0
-    
+
     for i in range(len(distances)):
-        for j in range(i+1, len(distances)):
-            tetrahedricity += (distances[i] - distances[j])**2
-            
-    tetrahedricity /= (15 * mean_distance)
-    
+        for j in range(i + 1, len(distances)):
+            tetrahedricity += (distances[i] - distances[j]) ** 2
+
+    tetrahedricity /= 15 * mean_distance
+
     return tetrahedricity
-    
-def calculate_pentahedricity(distances):
+
+
+def calculate_pentahedricity(distances) -> tuple:
     # case 1 : square base pyramid
     # copy distances to avoid modifying the original array
     sbp_distances = np.copy(distances)
     sbp_distances[-2] /= np.sqrt(2)
     sbp_distances[-1] /= np.sqrt(2)
-    
+
     sbp_pentahedricity = 0
-    
+
     sbp_mean_distances = np.mean(sbp_distances**2)
-    
+
     for i in range(len(sbp_distances)):
-        for j in range(i+1, len(sbp_distances)):
-            sbp_pentahedricity += (sbp_distances[i] - sbp_distances[j])**2
-    sbp_pentahedricity /= (45 * sbp_mean_distances)
-    
+        for j in range(i + 1, len(sbp_distances)):
+            sbp_pentahedricity += (sbp_distances[i] - sbp_distances[j]) ** 2
+    sbp_pentahedricity /= 45 * sbp_mean_distances
+
     # case 2 : triangular bipyramid
     tbp_distances = np.copy(distances)
-    tbp_distances[-1] /= np.sqrt(8/3)
-    
+    tbp_distances[-1] /= np.sqrt(8 / 3)
+
     tbp_pentahedricity = 0
-    
+
     tbp_mean_distances = np.mean(tbp_distances**2)
-    
+
     for i in range(len(tbp_distances)):
-        for j in range(i+1, len(tbp_distances)):
-            tbp_pentahedricity += (tbp_distances[i] - tbp_distances[j])**2
-    tbp_pentahedricity /= (45 * tbp_mean_distances)
-    
+        for j in range(i + 1, len(tbp_distances)):
+            tbp_pentahedricity += (tbp_distances[i] - tbp_distances[j]) ** 2
+    tbp_pentahedricity /= 45 * tbp_mean_distances
+
     return sbp_pentahedricity, tbp_pentahedricity
 
-def calculate_octahedricity(distances):
+
+def calculate_octahedricity(distances) -> float:
     distances[-3] /= np.sqrt(2)
     distances[-2] /= np.sqrt(2)
     distances[-1] /= np.sqrt(2)
-    
+
     octahedricity = 0
-    
+
     mean_distance = np.mean(distances**2)
-    
+
     for i in range(len(distances)):
-        for j in range(i+1, len(distances)):
-            octahedricity += (distances[i] - distances[j])**2
-    octahedricity /= (105 * mean_distance)
-    
+        for j in range(i + 1, len(distances)):
+            octahedricity += (distances[i] - distances[j]) ** 2
+    octahedricity /= 105 * mean_distance
+
     return octahedricity
-    
+
+
+def calculate_lifetime_SiOz(atoms, storage, dt, printlevel) -> dict:
+    """
+    Calculate the lifetime of each SiOz units inside the whole trajectory.
+    """
+
+    return {}
