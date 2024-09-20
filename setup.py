@@ -1,19 +1,19 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='gspc',
-    version='0.0.7',
+    name="gspc",
+    version="0.0.8",
     packages=find_packages(),
     install_requires=[
-        'numpy',
-        'pandas',
-        'matplotlib',
-        'numba',
-        'numba-progress',
-        'scipy'
+        "numpy",
+        "pandas",
+        "matplotlib",
+        "numba",
+        "numba-progress",
+        "scipy",
     ],
-    author='Julien Perradin',
-    author_email='julien.perradin@umontpellier.fr',
-    description='GSPC package is a package for computing structural properties of glasses',
-    url='https://github.com/JulienPerradin/gspc',
+    author="Julien Perradin",
+    author_email="julien.perradin@umontpellier.fr",
+    description="GSPC package is a package for computing structural properties of glasses",
+    url="https://github.com/JulienPerradin/gspc",
 )
