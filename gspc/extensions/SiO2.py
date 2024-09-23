@@ -284,7 +284,7 @@ def return_keys(property: str) -> list:
                 "connectivity": [
                     "proportion_corners",
                     "proportion_edges",
-                    "proportion_faces",
+                    "proportion_faces"
                 ]
             },
             {
@@ -293,7 +293,7 @@ def return_keys(property: str) -> list:
                     "pentahedra",
                     "square_based_pyramid",
                     "triangular_bipyramid",
-                    "octahedra",
+                    "octahedra"
                 ]
             },
             {
@@ -305,9 +305,26 @@ def return_keys(property: str) -> list:
                     "hist_SiO5_sqp",
                     "hist_SiO5_allTBP",
                     "hist_SiO5_tBP",
-                    "hist_SiO6",
+                    "hist_SiO6"
                 ]
             },
+            {
+                "lifetime": [
+                    "time",
+                    "4_to_5p",
+                    "4_to_5bp",
+                    "4_to_6",
+                    "5p_to_4",
+                    "5p_to_6",
+                    "5p_to_5bp",
+                    "5bp_to_5p",
+                    "5bp_to_4",
+                    "5bp_to_6",
+                    "6_to_4",
+                    "6_to_5p",
+                    "6_to_5bp"
+                ]
+            }
         ]
     elif property == "neutron_structure_factor":
         return ["Si-Si", "Si-O", "O-O", "total"]
@@ -474,6 +491,8 @@ def calculate_structural_units(atoms, box) -> dict:
             FS_SiO6.append(silicon.number_of_faces)
 
             octahedricity.append(calculate_octahedricity(distances))
+            
+            silicon.form = "octahedron"
 
         proportion_corners.append(silicon.number_of_corners)
         proportion_edges.append(silicon.number_of_edges)
@@ -682,7 +701,7 @@ def calculate_octahedricity(distances) -> float:
     return octahedricity
 
 
-def append_SiOz_forms(number_of_frames, atoms, forms):  # -> np.array
+def append_forms(number_of_frames, atoms, forms):  # -> np.array
     """
     Calculate the lifetime of each SiOz units inside the whole trajectory.
     """
@@ -692,27 +711,29 @@ def append_SiOz_forms(number_of_frames, atoms, forms):  # -> np.array
 
     if forms is None:
         # if frame 0 is being analyzed, create variable
-        forms = np.zeros((number_of_frames, len(silicons)), dtype="<U10")
+        forms = {}
 
     # Calculate the lifetime of each SiOz units
     for i, silicon in enumerate(silicons):
-        forms[silicon.frame, i] = silicon.get_form()
+        if silicon.frame not in forms:
+            forms[silicon.frame] = []
+        forms[silicon.frame].append(silicon.get_form())
 
     return forms
 
 
-def calculate_SiOz_lifetime(settings, forms):
+def calculate_lifetime(settings, forms):
     """
     Calculate the lifetime of each SiOz units inside the whole trajectory.
     """
 
-    number_of_frames = forms.shape[0]
-    number_of_atoms = forms.shape[1]
+    number_of_frames = len(forms)
+    number_of_atoms = len(forms[0])
 
     types = ["tetrahedron", "square base pyramid", "triangular bipyramid", "octahedron"]
 
-    dt = settings.msd_settings.dt.get_value()
-    printlevel = settings.msd_settings.printlevel.get_value()
+    dt = settings.msd_settings.get_dt()
+    printlevel = settings.msd_settings.get_printlevel()
 
     # create the histograms
     bins = np.arange(1, number_of_frames + 1, 1) * dt * printlevel  # time in ps
@@ -729,19 +750,21 @@ def calculate_SiOz_lifetime(settings, forms):
     hist_6_to_5p = np.zeros(number_of_frames)
     hist_6_to_5bp = np.zeros(number_of_frames)
 
-    counter = np.zeros(forms.shape[1])  # counter for each atom
+    counter = np.zeros(len(forms[0]), dtype=np.int32)  # counter for each atom
 
     if not settings.quiet.get_value():
         # create progress bar
-        pbar = tqdm(range(1, forms.shape[0]), desc="Calculating SiOz lifetime")
+        pbar = tqdm(range(1, len(forms)), desc="Calculating SiOz lifetime")
     else:
-        pbar = range(1, forms.shape[0])
+        pbar = range(1, len(forms))
 
     for f in pbar:
         # loop over frames
-        for a in range(forms.shape[1]):
+        previous_f = forms[f - 1]
+        this_f = forms[f]
+        for a in range(len(this_f)):
             # loop over atoms
-            if forms[f - 1, a] == forms[f, a]:
+            if previous_f[a] == this_f[a]:
                 # if the form is the same as the previous frame, increment the counter
                 counter[a] += 1
             else:
@@ -749,49 +772,50 @@ def calculate_SiOz_lifetime(settings, forms):
                 # atom a has changed form
                 # count the number of frames the atom has been in the previous form before changing
                 # then reset the counter
-                if forms[f - 1, a] == "tetrahedron":
-                    if forms[f, a] == "square base pyramid":
+                if previous_f[a] == "tetrahedron":
+                    if this_f[a] == "square base pyramid":
                         hist_4_to_5p[counter[a]] += 1
-                    elif forms[f, a] == "triangular bipyramid":
+                    elif this_f[a] == "triangular bipyramid":
                         hist_4_to_5bp[counter[a]] += 1
-                    elif forms[f, a] == "octahedron":
+                    elif this_f[a] == "octahedron":
                         hist_4_to_6[counter[a]] += 1
-                elif forms[f - 1, a] == "square base pyramid":
-                    if forms[f, a] == "tetrahedron":
+                elif previous_f[a] == "square base pyramid":
+                    if this_f[a] == "tetrahedron":
                         hist_5p_to_4[counter[a]] += 1
-                    elif forms[f, a] == "triangular bipyramid":
+                    elif this_f[a] == "triangular bipyramid":
                         hist_5p_to_5bp[counter[a]] += 1
-                    elif forms[f, a] == "octahedron":
+                    elif this_f[a] == "octahedron":
                         hist_5p_to_6[counter[a]] += 1
-                elif forms[f - 1, a] == "triangular bipyramid":
-                    if forms[f, a] == "tetrahedron":
+                elif previous_f[a] == "triangular bipyramid":
+                    if this_f[a] == "tetrahedron":
                         hist_5bp_to_4[counter[a]] += 1
-                    elif forms[f, a] == "square base pyramid":
+                    elif this_f[a] == "square base pyramid":
                         hist_5bp_to_5p[counter[a]] += 1
-                    elif forms[f, a] == "octahedron":
+                    elif this_f[a] == "octahedron":
                         hist_5bp_to_6[counter[a]] += 1
-                elif forms[f - 1, a] == "octahedron":
-                    if forms[f, a] == "tetrahedron":
+                elif previous_f[a] == "octahedron":
+                    if this_f[a] == "tetrahedron":
                         hist_6_to_4[counter[a]] += 1
-                    elif forms[f, a] == "square base pyramid":
+                    elif this_f[a] == "square base pyramid":
                         hist_6_to_5p[counter[a]] += 1
-                    elif forms[f, a] == "triangular bipyramid":
+                    elif this_f[a] == "triangular bipyramid":
                         hist_6_to_5bp[counter[a]] += 1
                 counter[a] = 0
 
     results = {
-        "4_to_5p": [bins, hist_4_to_5p],
-        "4_to_5bp": [bins, hist_4_to_5bp],
-        "4_to_6": [bins, hist_4_to_6],
-        "5p_to_4": [bins, hist_5p_to_4],
-        "5p_to_6": [bins, hist_5p_to_6],
-        "5p_to_5bp": [bins, hist_5p_to_5bp],
-        "5bp_to_5p": [bins, hist_5bp_to_5p],
-        "5bp_to_4": [bins, hist_5bp_to_4],
-        "5bp_to_6": [bins, hist_5bp_to_6],
-        "6_to_4": [bins, hist_6_to_4],
-        "6_to_5p": [bins, hist_6_to_5p],
-        "6_to_5bp": [bins, hist_6_to_5bp],
+        "time": bins,
+        "4_to_5p": hist_4_to_5p,
+        "4_to_5bp": hist_4_to_5bp,
+        "4_to_6": hist_4_to_6,
+        "5p_to_4": hist_5p_to_4,
+        "5p_to_6": hist_5p_to_6,
+        "5p_to_5bp": hist_5p_to_5bp,
+        "5bp_to_5p": hist_5bp_to_5p,
+        "5bp_to_4": hist_5bp_to_4,
+        "5bp_to_6": hist_5bp_to_6,
+        "6_to_4": hist_6_to_4,
+        "6_to_5p": hist_6_to_5p,
+        "6_to_5bp": hist_6_to_5bp,
     }
 
     return results

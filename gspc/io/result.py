@@ -197,7 +197,7 @@ class PropResult(Result):
             # TODO add more information to the header such as the cutoff values, etc. #PRIO2
         output.close()
 
-    def append_results_to_file(self) -> None:
+    def append_results_to_file(self, lifetime=None) -> None:
         """
         Appends the results to the output file.
         """
@@ -214,7 +214,17 @@ class PropResult(Result):
                     for j in range(self.result.shape[0]):
                         output.write(f"{self.result[j,i]:.5f} ")
                     output.write("\n")
-
+        elif self.property == "lifetime" and lifetime is not None:
+            with open(self.filepath, "a") as output:
+                output.write("# ")
+                for key, value in lifetime.items():
+                    output.write(f"{key:^8}\t")
+                output.write("\n")
+                nframes = len(value)
+                for i in range(nframes):
+                    for key, value in lifetime.items():
+                        output.write(f"{value[i]:^8.5f}\t")
+                    output.write("\n")
         else:
             with open(self.filepath, "a") as output:
                 output.write("# ")

@@ -20,10 +20,10 @@ settings.structure.set_value(
 
 settings.properties.set_value(
     [
-        "neutron_structure_factor",
+        # "neutron_structure_factor",
         "structural_units",
-        "pair_distribution_function",
-        "bond_angle_distribution",
+        # "pair_distribution_function",
+        # "bond_angle_distribution",
     ]
 )
 

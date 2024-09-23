@@ -129,7 +129,12 @@ def main(settings):
                         break
 
             system.init_mean_square_displacement()
+
+            if "structural_units" in settings.properties.get_value():
+                stored_forms = None
+
         else:
+            stored_forms = system.forms
             store_msd = system.msd
             system, current_positions = io.read_and_create_system(
                 input_file, i, n_atoms + n_header, settings, cutoffs, start, end
@@ -169,9 +174,13 @@ def main(settings):
             for d in keys_sru:
                 key = list(d.keys())[0]
                 sub_keys = d[key]
+                if key == "lifetime":
+                    continue
                 results_sru[key].add_to_timeline(
                     i, sub_keys, system.structural_units[key]
                 )
+
+            stored_forms = system.append_forms(stored_forms)
 
         # Calculate the bond angular distribution
         if "bond_angular_distribution" in settings.properties.get_value():
@@ -214,6 +223,9 @@ def main(settings):
     if "structural_units" in settings.properties.get_value():
         for d in keys_sru:
             key = list(d.keys())[0]
+            if key == "lifetime":
+                lifetime = system.calculate_lifetime()
+                results_sru[key].append_results_to_file(lifetime)
             results_sru[key].calculate_average_proportion()
             results_sru[key].append_results_to_file()
     if "neutron_structure_factor" in settings.properties.get_value():
