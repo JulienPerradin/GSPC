@@ -18,7 +18,7 @@ class Settings:
 
     """
 
-    def __init__(self, extension="SiO2") -> None:
+    def __init__(self, extension) -> None:
         """
         Initializes a Settings object with default settings.
 
@@ -56,7 +56,7 @@ class Settings:
         self.overwrite_results: Parameter = Parameter("overwrite_results", False)
 
         self.supported_extensions: Parameter = Parameter(
-            "extensions", ["SiO2"]
+            "extensions", ["SiO2", "NSx"]
         )  # Update the list of supported extensions when adding a new one
 
         if extension in self.supported_extensions.get_value():
