@@ -224,7 +224,7 @@ def main(settings):
         for d in keys_sru:
             key = list(d.keys())[0]
             if key == "lifetime":
-                lifetime = system.calculate_lifetime()
+                lifetime, counts = system.calculate_lifetime()
                 results_sru[key].append_results_to_file(lifetime)
             results_sru[key].calculate_average_proportion()
             results_sru[key].append_results_to_file()

@@ -311,18 +311,22 @@ def return_keys(property: str) -> list:
             {
                 "lifetime": [
                     "time",
-                    "4_to_5p",
-                    "4_to_5bp",
-                    "4_to_6",
-                    "5p_to_4",
-                    "5p_to_6",
-                    "5p_to_5bp",
-                    "5bp_to_5p",
-                    "5bp_to_4",
-                    "5bp_to_6",
-                    "6_to_4",
-                    "6_to_5p",
-                    "6_to_5bp"
+                    "4_to_5p": hist_4_to_5p,
+                    "4_to_5bp": hist_4_to_5bp,
+                    "4_to_6": hist_4_to_6,
+                    "5p_to_4": hist_5p_to_4,
+                    "5p_to_6": hist_5p_to_6,
+                    "5p_to_5bp": hist_5p_to_5bp,
+                    "5bp_to_5p": hist_5bp_to_5p,
+                    "5bp_to_4": hist_5bp_to_4,
+                    "5bp_to_6": hist_5bp_to_6,
+                    "6_to_4": hist_6_to_4,
+                    "6_to_5p": hist_6_to_5p,
+                    "6_to_5bp": hist_6_to_5bp,
+                    "4_to_5" : hist_4_to_5p + hist_4_to_5bp,
+                    "5_to_4" : hist_5p_to_4 + hist_5bp_to_4,
+                    "5_to_6" : hist_5p_to_6 + hist_5bp_to_6,
+                    "6_to_5" : hist_6_to_5p + hist_6_to_5bp,
                 ]
             }
         ]
@@ -749,6 +753,10 @@ def calculate_lifetime(settings, forms):
     hist_6_to_4 = np.zeros(number_of_frames)
     hist_6_to_5p = np.zeros(number_of_frames)
     hist_6_to_5bp = np.zeros(number_of_frames)
+    hist_4_to_4 = 0
+    hist_5bp_to_5bp = 0
+    hist_5p_to_5p = 0
+    hist_6_to_6 = 0
 
     counter = np.zeros(len(forms[0]), dtype=np.int32)  # counter for each atom
 
@@ -801,6 +809,22 @@ def calculate_lifetime(settings, forms):
                     elif this_f[a] == "triangular bipyramid":
                         hist_6_to_5bp[counter[a]] += 1
                 counter[a] = 0
+    
+    no_changes = np.where(counter==len(forms)-1)[0]
+    forms = np.array(forms[0])
+    unchanged_forms = forms[no_changes]
+
+    unchanged_forms = np.unique(unchanged_forms, return_counts=True)
+    # print(unchanged_forms)
+    for i in range(len(unchanged_forms[0])):
+        if unchanged_forms[0][i] == 'tetrahedron':
+            hist_4_to_4 = unchanged_forms[1][i]
+        if unchanged_forms[0][i] == 'square base pyramid':
+            hist_5p_to_5p = unchanged_forms[1][i]
+        if unchanged_forms[0][i] == 'triangular bipyramid':
+            hist_5bp_to_5bp = unchanged_forms[1][i]
+        if unchanged_forms[0][i] == 'octahedron':
+            hist_6_to_6 = unchanged_forms[1][i]
 
     results = {
         "time": bins,
@@ -816,6 +840,35 @@ def calculate_lifetime(settings, forms):
         "6_to_4": hist_6_to_4,
         "6_to_5p": hist_6_to_5p,
         "6_to_5bp": hist_6_to_5bp,
+        "4_to_5" : hist_4_to_5p + hist_4_to_5bp,
+        "5_to_4" : hist_5p_to_4 + hist_5bp_to_4,
+        "5_to_6" : hist_5p_to_6 + hist_5bp_to_6,
+        "6_to_5" : hist_6_to_5p + hist_6_to_5bp,
     }
 
-    return results
+    counts = {
+        # TODO : find a normalization factor and apply it to the following results
+        "4_to_4": hist_4_to_4,
+        "4_to_5p": np.sum(hist_4_to_5p, dtype=np.int32),
+        "4_to_5bp": np.sum(hist_4_to_5bp, dtype=np.int32),
+        "4_to_6": np.sum(hist_4_to_6, dtype=np.int32),
+        "4_to_5" : np.sum(hist_4_to_5p + hist_4_to_5bp, dtype=np.int32),
+        "5p_to_4": np.sum(hist_5p_to_4, dtype=np.int32),
+        "5p_to_6": np.sum(hist_5p_to_6, dtype=np.int32),
+        "5p_to_5bp": np.sum(hist_5p_to_5bp, dtype=np.int32),
+        "5bp_to_5p": np.sum(hist_5bp_to_5p, dtype=np.int32),
+        "5bp_to_4": np.sum(hist_5bp_to_4, dtype=np.int32),
+        "5bp_to_6": np.sum(hist_5bp_to_6, dtype=np.int32),
+        "5bp_to_5bp": hist_5bp_to_5bp,
+        "5p_to_5p": hist_5p_to_5p,
+        "5_to_5": hist_5p_to_5p + hist_5bp_to_5bp,
+        "5_to_4" : np.sum(hist_5p_to_4 + hist_5bp_to_4, dtype=np.int32),
+        "5_to_6" : np.sum(hist_5p_to_6 + hist_5bp_to_6, dtype=np.int32),
+        "6_to_5" : np.sum(hist_6_to_5p + hist_6_to_5bp, dtype=np.int32),
+        "6_to_4": np.sum(hist_6_to_4, dtype=np.int32),
+        "6_to_5p": np.sum(hist_6_to_5p, dtype=np.int32),
+        "6_to_5bp": np.sum(hist_6_to_5bp, dtype=np.int32),
+        "6_to_6": hist_6_to_6, 
+    }
+
+    return results, counts

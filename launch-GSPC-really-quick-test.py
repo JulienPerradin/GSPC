@@ -5,7 +5,7 @@ settings = gspc.settings.Settings(extension="SiO2")
 settings.project_name.set_value("quick-test")
 settings.export_directory.set_value("tests/results")
 settings.path_to_xyz_file.set_value(
-    "tests/inputs/SiO2/1008/sio2-1008at-11frames/pos14.xyz"
+    "tests/inputs/SiO2/1008/sio2-1008at-11frames/pos12.xyz"
 )
 # settings.range_of_frames.set_value([0, 2])
 settings.header.set_value(2)
