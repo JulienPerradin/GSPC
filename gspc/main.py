@@ -221,11 +221,13 @@ def main(settings):
             settings.msd_settings.get_dt(), settings.msd_settings.get_printlevel()
         )
     if "structural_units" in settings.properties.get_value():
+        lifetime, switch_probability = system.calculate_lifetime()
         for d in keys_sru:
             key = list(d.keys())[0]
             if key == "lifetime":
-                lifetime, counts = system.calculate_lifetime()
                 results_sru[key].append_results_to_file(lifetime)
+            if key == "switch_probability":
+                results_sru[key].append_results_to_file(switch_probability)
             results_sru[key].calculate_average_proportion()
             results_sru[key].append_results_to_file()
     if "neutron_structure_factor" in settings.properties.get_value():

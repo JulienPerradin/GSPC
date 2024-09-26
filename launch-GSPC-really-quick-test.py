@@ -23,7 +23,7 @@ settings.properties.set_value(
         # "neutron_structure_factor",
         "structural_units",
         # "pair_distribution_function",
-        # "bond_angle_distribution",
+        # "bonu_angle_uistribution",
     ]
 )
 
@@ -33,5 +33,3 @@ settings.pressure.set_value(9.0)
 settings.pdf_settings.set_rmax(8.0)
 
 gspc.main(settings)
-
-HOLD = 1

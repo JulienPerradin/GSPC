@@ -197,7 +197,7 @@ class PropResult(Result):
             # TODO add more information to the header such as the cutoff values, etc. #PRIO2
         output.close()
 
-    def append_results_to_file(self, lifetime=None) -> None:
+    def append_results_to_file(self, lifetime=None ) -> None:
         """
         Appends the results to the output file.
         """
@@ -207,13 +207,24 @@ class PropResult(Result):
                 # write headers
                 output.write("# ")
                 for i in range(len(self.info)):
-                    output.write(f"{self.info[i]:^8}\t")
+                    output.write(f"{self.info[i]}\t")
                 output.write("\n")
                 # write the histograms
                 for i in range(self.result.shape[1]):
                     for j in range(self.result.shape[0]):
                         output.write(f"{self.result[j,i]:.5f} ")
                     output.write("\n")
+        elif self.property == "switch_probability" and lifetime is not None:
+            with open(self.filepath, "a") as output:
+                # write headers
+                output.write("# ")
+                for i in range(len(self.info)):
+                    output.write(f"{self.info[i]}\t")
+                output.write("\n")
+                # write the histograms
+                for key, value in lifetime.items():
+                    output.write(f"{value:.5f} ")
+                output.write("\n")
         elif self.property == "lifetime" and lifetime is not None:
             with open(self.filepath, "a") as output:
                 output.write("# ")
