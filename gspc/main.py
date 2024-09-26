@@ -174,7 +174,7 @@ def main(settings):
             for d in keys_sru:
                 key = list(d.keys())[0]
                 sub_keys = d[key]
-                if key == "lifetime":
+                if key == "lifetime" or key == "switch_probability":
                     continue
                 results_sru[key].add_to_timeline(
                     i, sub_keys, system.structural_units[key]
@@ -237,4 +237,3 @@ def main(settings):
 
     settings.write_readme_file()
     # END OF MAIN FUNCTION
-    DEBUG = True

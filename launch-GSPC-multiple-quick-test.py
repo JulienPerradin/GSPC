@@ -66,8 +66,10 @@ for i, trajectory in progress_bar:
     settings.pressure.set_value(pressures[i])
 
     settings.pdf_settings.set_rmax(8.0)
+    settings.msd_settings.set_dt(0.0016)
+    settings.msd_settings.set_printlevel(625)
 
-    # gspc.main(settings)
+    gspc.main(settings)
 
 gspc.utils.generate_recaps.make(settings.export_directory.get_value())
 
