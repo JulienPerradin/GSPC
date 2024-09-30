@@ -8,4 +8,3 @@ dist/
 dist_archive/
 *.egg-info/
 Session.vim
-my_scripts/

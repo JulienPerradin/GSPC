@@ -194,22 +194,27 @@ class System:
         --------
             - None.
         """
-        color_gradient = generate_color_gradient(len(self.atoms))
-        progress_bar = tqdm(
-            self.atoms,
-            desc="Wrapping positions inside the box ...",
-            colour="#0dff00",
-            leave=False,
-            unit="atom",
-        )
-        color = 0
-        for atom in progress_bar:
-            # Updating progress bar
-            progress_bar.set_description(
-                f"Wrapping positions inside the box {atom.id} ..."
+        if not self.settings.quiet.get_value():
+            color_gradient = generate_color_gradient(len(self.atoms))
+            progress_bar = tqdm(
+                prange(len(self.atoms)),
+                desc="Wrapping positions inside the box ...",
+                colour="#0dff00",
+                leave=False,
+                unit="atom",
             )
-            progress_bar.colour = "#%02x%02x%02x" % color_gradient[color]
-            color += 1
+        else:
+            progress_bar = prange(len(self.atoms))
+        color = 0
+        for i in progress_bar:
+            atom = self.atoms[i]
+            # Updating progress bar
+            if not self.settings.quiet.get_value():
+                progress_bar.set_description(
+                    f"Wrapping positions inside the box {atom.id} ..."
+                )
+                progress_bar.colour = "#%02x%02x%02x" % color_gradient[color]
+                color += 1
 
             # Getting box dimensions at the current frame
             box_size = self.box.get_box_dimensions(self.frame)
@@ -245,20 +250,24 @@ class System:
         tree_with_pbc = cKDTree(positions, boxsize=box_size)
 
         # Set the progress bar
-        color_gradient = generate_color_gradient(len(positions))
-        progress_bar = tqdm(
-            range(len(positions)),
-            desc="Fetching nearest neighbours ...",
-            colour="#00ffff",
-            leave=False,
-            unit="atom",
-        )
+        if not self.settings.quiet.get_value():
+            color_gradient = generate_color_gradient(len(positions))
+            progress_bar = tqdm(
+                prange(len(positions)),
+                desc="Fetching nearest neighbours ...",
+                colour="#00ffff",
+                leave=False,
+                unit="atom",
+            )
+        else:
+            progress_bar = prange(len(positions))
 
         # Loop over the atomic positions
         for i in progress_bar:
             # Update progress bar
-            progress_bar.set_description(f"Fetching nearest neighbours {i} ...")
-            progress_bar.colour = "#%02x%02x%02x" % color_gradient[i]
+            if not self.settings.quiet.get_value():
+                progress_bar.set_description(f"Fetching nearest neighbours {i} ...")
+                progress_bar.colour = "#%02x%02x%02x" % color_gradient[i]
 
             # Process with pbc applied
             # Query the neighbouring atoms within the cutoff distance
@@ -306,6 +315,8 @@ class System:
 
         self.structural_units = module.calculate_structural_units(self.get_atoms(), box)
 
+
+    # @njit(parallel=True) # TODO : implement a fork of gspc without the progress bar and prange instead
     def calculate_bond_angular_distribution(self) -> None:
         r"""
         Determine the bond angular distribution of the system.
@@ -317,7 +328,7 @@ class System:
 
         if self.settings.quiet.get_value() == False:
             progress_bar = tqdm(
-                self.atoms,
+                prange(len(self.atoms)),
                 desc="Calculating bond angular distribution ...",
                 colour="#00ffff",
                 leave=False,
@@ -325,16 +336,17 @@ class System:
             )
             color_gradient = generate_color_gradient(len(self.atoms))
         else:
-            progress_bar = self.atoms
+            progress_bar = prange(len(self.atoms))
 
-        for atom in progress_bar:
+        for i in progress_bar: # NOTE : uncomment this when done testing
+        # for i in prange(len(self.atoms)):
             # Update the progress bar
+            atom = self.atoms[i]
             if self.settings.quiet.get_value() == False:
                 progress_bar.set_description(
                     f"Calculating bond angular distribution {atom.id} ..."
                 )
                 progress_bar.colour = "#%02x%02x%02x" % color_gradient[atom.id]
-
             dict_angles = atom.calculate_angles_with_neighbours(self.box)
             for key, value in dict_angles.items():
                 if key in self.angles:
@@ -453,7 +465,7 @@ class System:
 
         if self.settings.quiet.get_value() == False:
             progress_bar = tqdm(
-                self.atoms,
+                prange(len(self.atoms)),
                 desc="Calculating pair distribution function ...",
                 colour="#00ffff",
                 leave=False,
@@ -461,9 +473,10 @@ class System:
             )
             color_gradient = generate_color_gradient(len(self.atoms))
         else:
-            progress_bar = self.atoms
+            progress_bar = prange(len(self.atoms))
 
-        for atom in progress_bar:
+        for i in progress_bar:
+            atom = self.atoms[i]
             # Update the progress bar
             if self.settings.quiet.get_value() == False:
                 progress_bar.set_description(
@@ -727,7 +740,7 @@ class System:
                     )
             else:
                 cosd, sind = self._calculate_neutron_structure_factor(
-                    qx, qy, qz, positions, progress
+                    qx, qy, qz, positions, None 
                 )
 
             qcos[species] += cosd
@@ -856,6 +869,7 @@ class System:
             cosd = np.cos(dot)
             qcos += cosd
             qsin += sind
-            progress_proxy.update(1)
+            if progress_proxy is not None:
+                progress_proxy.update(1)
 
         return qcos, qsin
