@@ -106,7 +106,7 @@ class Settings:
             settings_output += f"\t\t  {'Species'.ljust(max_attr_length)} \u279c\t {atom['element']:2}\t|\tNumber of atoms \u279c\t {atom['number']}\n"
         settings_output += f"{separator}\n"
         settings_output += (
-            f"\t\tExport directory   \u279c\t {self.export_directory.get_value()}\n"
+            f"\t\tExport directory   \u279c\t {self.export_directory.get_value()}/{self.project_name.get_value()}\n"
         )
         settings_output += f"{separator}\n"
         settings_output += f"\t\tStructural properties:\n"
@@ -157,7 +157,7 @@ class Settings:
                     f"- Species: {atom['element']} | Number of atoms: {atom['number']}\n"
                 )
             f.write(f"### Export\n")
-            f.write(f"- Export directory: {self.export_directory.get_value()}\n")
+            f.write(f"- Export directory: {self.export_directory.get_value()}/{self.project_name.get_value()}\n")
             f.write(f"### Structural properties\n")
             for prop in self.properties.get_value():
                 f.write(f"- {prop}\n")

@@ -68,6 +68,8 @@ class DistResult(Result):
         super().__init__(name, info, init_frame)
         self.bins: np.ndarray = np.array([])
         self.histogram: np.ndarray = np.array([])
+        self.error: np.ndarray = np.array([])
+        self.result: np.ndarray = np.array([])
         self.filepath: str = ""
 
     def add_to_timeline(self, frame: int, bins: np.array, hist: np.array) -> None:
@@ -81,13 +83,21 @@ class DistResult(Result):
         """
         Calculates the average distribution based on the timeline data.
         """
-        for frame, value in self.timeline.items():
+        for frame, array in self.timeline.items():
+            self.error = np.zeros((len(self.timeline), len(array)))
+            break
+        
+        for frame, array in self.timeline.items():
+            self.error[frame] = array
             if len(self.histogram) == 0:
-                self.histogram = value
+                # Initialize histogram ndarray
+                self.histogram = array
             else:
-                self.histogram += value
+                self.histogram += array
+         
+        self.error = np.std(self.error, axis=0) / np.sqrt(len(self.timeline))
 
-        self.histogram /= len(self.timeline)
+        self.result = self.histogram / len(self.timeline)
 
     def write_file_header(self, path_to_directory: str, number_of_frames: int) -> None:
         """
@@ -117,7 +127,7 @@ class DistResult(Result):
         """
         with open(self.filepath, "a") as output:
             for i in range(len(self.bins)):
-                output.write(f"{self.bins[i]:.5f} {self.histogram[i]:.5f}\n")
+                output.write(f"{self.bins[i]:10.6f} {self.result[i]:10.6f} +/- {self.error[i]:<10.5f}\n")
         output.close()
 
 
@@ -140,40 +150,28 @@ class PropResult(Result):
         super().__init__(property, info, init_frame)
         self.filepath: str = ""
         self.result: dict = {}
+        self.error: dict = {}
 
     def add_to_timeline(self, frame: int, keys: list, values: list) -> None:
         """
         Appends a data point to the timeline.
         """
-        if self.property == "hist_polyhedricity":
-            values = np.array(values)
-            if frame not in self.timeline:
-                self.timeline[frame] = values
-
-        else:
-            for key, val in zip(keys, values):
-                if key not in self.timeline:
-                    self.timeline[key] = []
-                self.timeline[key].append(val)
+        for key, val in zip(keys, values):
+            if key not in self.timeline:
+                self.timeline[key] = []
+            self.timeline[key].append(val)
 
     def calculate_average_proportion(self) -> None:
         """
         Calculates the average proportion based on the timeline data.
         """
-        if self.property == "hist_polyhedricity":
-            # average the histograms
-            for key, value in self.timeline.items():
-                if len(self.result) == 0:
-                    self.result = value
-                else:
-                    self.result += value
-            self.result /= len(self.timeline)
-        else:
-            for key, value in self.timeline.items():
-                self.result[key] = sum(value)
+        for key, list_value in self.timeline.items():
+            self.result[key] = sum(list_value)
+            self.error[key] = np.std(list_value) 
 
-            for key in self.result.keys():
-                self.result[key] /= len(self.timeline[key])
+        for key in self.result.keys():
+            self.result[key] /= len(self.timeline[key])
+            self.error[key] /= np.sqrt(len(self.timeline[key]))
 
     def write_file_header(self, path_to_directory: str, number_of_frames: int) -> None:
         """
@@ -192,61 +190,22 @@ class PropResult(Result):
 
         with open(self.filepath, "w") as output:
             output.write(
-                f"# {self.property} {self.info} \u279c {number_of_frames} frames averaged.\n"
+                f"# {self.property} \u279c {number_of_frames} frames averaged.\n"
             )
             # TODO add more information to the header such as the cutoff values, etc. #PRIO2
         output.close()
 
-    def append_results_to_file(self, lifetime=None ) -> None:
+    def append_results_to_file(self) -> None:
         """
         Appends the results to the output file.
         """
-        DEBUG = False
-        if self.property == "hist_polyhedricity":
-            with open(self.filepath, "a") as output:
-                # write headers
-                output.write("# ")
-                for i in range(len(self.info)):
-                    output.write(f"{self.info[i]}\t")
-                output.write("\n")
-                # write the histograms
-                for i in range(self.result.shape[1]):
-                    for j in range(self.result.shape[0]):
-                        output.write(f"{self.result[j,i]:.5f} ")
-                    output.write("\n")
-        elif self.property == "switch_probability" and lifetime is not None:
-            with open(self.filepath, "a") as output:
-                # write headers
-                output.write("# ")
-                for i in range(len(self.info)):
-                    output.write(f"{self.info[i]}\t")
-                output.write("\n")
-                # write the histograms
-                for key, value in lifetime.items():
-                    output.write(f"{value:.5f} ")
-                output.write("\n")
-        elif self.property == "lifetime" and lifetime is not None:
-            with open(self.filepath, "a") as output:
-                output.write("# ")
-                for key, value in lifetime.items():
-                    output.write(f"{key:^8}\t")
-                output.write("\n")
-                nframes = len(value)
-                for i in range(nframes):
-                    for key, value in lifetime.items():
-                        output.write(f"{value[i]:^8.5f}\t")
-                    output.write("\n")
-        else:
-            with open(self.filepath, "a") as output:
-                output.write("# ")
-                for key, value in self.result.items():
-                    output.write(f"{key:^8}\t")
-                output.write("\n")
-                for key, value in self.result.items():
-                    output.write(f"{value:^3.5f} ")
-                output.write("\n")
+        with open(self.filepath, 'a', encoding='utf-8') as output:
+            print(self.property)
+            for key in self.result.keys():
+                output.write(f"{self.result[key]:10.6f} +/- {self.error[key]:<10.5f} # {key}\n")
         output.close()
 
+        make_lines_unique(self.filepath)
 
 class MSDResult(Result):
     r"""

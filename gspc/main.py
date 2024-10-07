@@ -92,9 +92,13 @@ def main(settings):
         keys_sru = module.return_keys("structural_units")
         for dict_key in keys_sru:
             for key in dict_key:
-                results_sru[key] = io.PropResult(key, dict_key[key], start)
-                results_sru[key].write_file_header(
-                    settings._output_directory, end - start
+                if key == 'lifetime' or key == 'hist_polyhedricity':
+                    results_sru[key] = io.DistResult(key, dict_key[key], start)
+                    results_sru[key].write_file_header(settings._output_directory, end-start)
+                else:
+                    results_sru[key] = io.PropResult(key, dict_key[key], start)
+                    results_sru[key].write_file_header(
+                        settings._output_directory, end - start
                 )
 
     if "mean_square_displacement" in settings.properties.get_value():
@@ -174,8 +178,6 @@ def main(settings):
             for d in keys_sru:
                 key = list(d.keys())[0]
                 sub_keys = d[key]
-                if key == "lifetime" or key == "switch_probability":
-                    continue
                 results_sru[key].add_to_timeline(
                     i, sub_keys, system.structural_units[key]
                 )
@@ -224,12 +226,12 @@ def main(settings):
         lifetime, switch_probability = system.calculate_lifetime()
         for d in keys_sru:
             key = list(d.keys())[0]
-            if key == "lifetime":
-                results_sru[key].append_results_to_file(lifetime)
-            if key == "switch_probability":
-                results_sru[key].append_results_to_file(switch_probability)
-            results_sru[key].calculate_average_proportion()
-            results_sru[key].append_results_to_file()
+            if key == "lifetime" or key == "hist_polyhedricity":
+                results_sru[key].calculate_average_distribution()
+                results_sru[key].append_results_to_file()
+            else:
+                results_sru[key].calculate_average_proportion()
+                results_sru[key].append_results_to_file()
     if "neutron_structure_factor" in settings.properties.get_value():
         for key in keys_nsf:
             results_nsf[key].calculate_average_distribution()
