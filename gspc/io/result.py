@@ -88,7 +88,7 @@ class DistResult(Result):
             break
         
         for frame, array in self.timeline.items():
-            self.error[frame] = array
+            self.error[frame-1] = array
             if len(self.histogram) == 0:
                 # Initialize histogram ndarray
                 self.histogram = array
@@ -200,7 +200,6 @@ class PropResult(Result):
         Appends the results to the output file.
         """
         with open(self.filepath, 'a', encoding='utf-8') as output:
-            print(self.property)
             for key in self.result.keys():
                 output.write(f"{self.result[key]:10.6f} +/- {self.error[key]:<10.5f} # {key}\n")
         output.close()

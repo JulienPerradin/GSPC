@@ -93,8 +93,11 @@ def main(settings):
         for dict_key in keys_sru:
             for key in dict_key:
                 if key == 'lifetime' or key == 'hist_polyhedricity':
-                    results_sru[key] = io.DistResult(key, dict_key[key], start)
-                    results_sru[key].write_file_header(settings._output_directory, end-start)
+                    for sub_key in dict_key[key]:
+                        if sub_key == 'bins' or sub_key == 'time':
+                            continue
+                        results_sru[sub_key] = io.DistResult(key, sub_key, start)
+                        results_sru[sub_key].write_file_header(settings._output_directory, end-start)
                 else:
                     results_sru[key] = io.PropResult(key, dict_key[key], start)
                     results_sru[key].write_file_header(
@@ -180,9 +183,19 @@ def main(settings):
                 sub_keys = d[key]
                 if key == "lifetime" or key == "switch_probability":
                     continue
-                results_sru[key].add_to_timeline(
-                    i, sub_keys, system.structural_units[key]
-                )
+                elif key == 'hist_polyhedricity':
+                    for k, sub_key in enumerate(sub_keys):
+                        if sub_key == 'bins':
+                            continue
+                        results_sru[sub_key].add_to_timeline(
+                            frame=i,
+                            bins=system.structural_units[key][0],
+                            hist=system.structural_units[key][k]
+                        )
+                else:
+                    results_sru[key].add_to_timeline(
+                        i, sub_keys, system.structural_units[key]
+                    )
 
             stored_forms = system.append_forms(stored_forms)
 
@@ -228,9 +241,35 @@ def main(settings):
         lifetime, switch_probability = system.calculate_lifetime()
         for d in keys_sru:
             key = list(d.keys())[0]
-            if key == "lifetime" or key == "hist_polyhedricity":
-                results_sru[key].calculate_average_distribution()
-                results_sru[key].append_results_to_file()
+            if key == "hist_polyhedricity":
+                sub_keys = d[key]
+                for k, sub_key in enumerate(sub_keys):
+                    if sub_key == 'bins':
+                        continue
+                    results_sru[sub_key].calculate_average_distribution()
+                    results_sru[sub_key].append_results_to_file()
+            elif key == "switch_probability" or key == "lifetime":
+                lifetime, switch_probability = system.calculate_lifetime()
+                if key == "lifetime":
+                    sub_key = d[key]
+                    for k, sub_key in enumerate(sub_key):
+                        if sub_key == 'time':
+                            continue
+                        results_sru[sub_key].add_to_timeline(
+                            frame=i,
+                            bins=lifetime['time'],
+                            hist=lifetime[sub_key]
+                        )
+                        results_sru[sub_key].calculate_average_distribution()
+                        results_sru[sub_key].append_results_to_file()
+                else:
+                    results_sru[key].add_to_timeline(
+                        frame=i,
+                        keys=switch_probability.keys(),
+                        values=switch_probability.values()
+                    )
+                    results_sru[key].calculate_average_proportion()
+                    results_sru[key].append_results_to_file()
             else:
                 results_sru[key].calculate_average_proportion()
                 results_sru[key].append_results_to_file()

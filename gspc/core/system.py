@@ -646,9 +646,9 @@ class System:
             f"gspc.extensions.{self.settings.extension.get_value()}"
         )
 
-        self.lifetime, counts = module.calculate_lifetime(self.settings, self.forms)
+        self.lifetime, prob = module.calculate_lifetime(self.settings, self.forms)
 
-        return self.lifetime, counts
+        return self.lifetime, prob
 
     def calculate_neutron_structure_factor(self, pairs) -> None:
         r"""

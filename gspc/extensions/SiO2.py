@@ -886,7 +886,7 @@ def calculate_lifetime(settings, forms):
         "5bp_to_6": np.sum(hist_5bp_to_6, dtype=np.int32)/number_of_atoms,
         "5bp_to_5bp": hist_5bp_to_5bp/number_of_atoms,
         "5p_to_5p": hist_5p_to_5p/number_of_atoms,
-        "5_to_5": hist_5p_to_5p + hist_5bp_to_5bp/number_of_atoms,
+        "5_to_5": (hist_5p_to_5p + hist_5bp_to_5bp)/number_of_atoms,
         "5_to_4" : np.sum(hist_5p_to_4 + hist_5bp_to_4, dtype=np.int32)/number_of_atoms,
         "5_to_6" : np.sum(hist_5p_to_6 + hist_5bp_to_6, dtype=np.int32)/number_of_atoms,
         "6_to_5" : np.sum(hist_6_to_5p + hist_6_to_5bp, dtype=np.int32)/number_of_atoms,
