@@ -88,14 +88,18 @@ class DistResult(Result):
             break
         
         for frame, array in self.timeline.items():
-            self.error[frame-1] = array
+            if len(self.timeline) > 1:
+                self.error[frame-1] = array
             if len(self.histogram) == 0:
                 # Initialize histogram ndarray
                 self.histogram = array
             else:
                 self.histogram += array
-         
-        self.error = np.std(self.error, axis=0) / np.sqrt(len(self.timeline))
+        
+        if len(self.timeline) > 1:
+            self.error = np.std(self.error, axis=0) / np.sqrt(len(self.timeline))
+        else:
+            self.error = np.zeros_like(self.histogram)
 
         self.result = self.histogram / len(self.timeline)
 
