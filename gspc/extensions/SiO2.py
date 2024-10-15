@@ -791,6 +791,7 @@ def calculate_lifetime(settings, forms):
     else:
         pbar = range(1, len(forms))
 
+    print("counts : \n4 -> 5\t5 -> 4\t5 -> 6\t6 -> 5")
     for f in pbar:
         # loop over frames
         previous_f = forms[f - 1]
@@ -805,6 +806,7 @@ def calculate_lifetime(settings, forms):
                 # atom a has changed form
                 # count the number of frames the atom has been in the previous form before changing
                 # then reset the counter
+                print(np.sum(hist_4_to_5bp[1:])+np.sum(hist_4_to_5p[1:]),"\t", np.sum(hist_5bp_to_4[1:])+np.sum(hist_5p_to_4[1:]),"\t", np.sum(hist_5p_to_6[1:])+np.sum(hist_5bp_to_6[1:]),"\t", np.sum(hist_6_to_5p[1:])+np.sum(hist_6_to_5bp[1:]))
                 if previous_f[a] == "tetrahedron":
                     if this_f[a] == "square base pyramid":
                         hist_4_to_5p[counter[a]] += 1

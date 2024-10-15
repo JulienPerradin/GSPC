@@ -1,0 +1,6 @@
+# polyhedricity ➜ 11 frames averaged.
+  0.448052 +/- 0.00234    # tetrahedra
+  0.402327 +/- 0.00270    # pentahedra
+  0.379600 +/- 0.00214    # square_based_pyramid
+  0.022727 +/- 0.00139    # triangular_bipyramid
+  0.149621 +/- 0.00086    # octahedra
