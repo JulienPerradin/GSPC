@@ -105,6 +105,7 @@ def main(settings):
                 )
 
     if "mean_square_displacement" in settings.properties.get_value():
+        key = module.return_keys('mean_square_displacement')
         results_msd = io.MSDResult("mean_square_displacement", key, start)
         results_msd.write_file_header(settings._output_directory, end - start)
 
@@ -141,24 +142,27 @@ def main(settings):
                 stored_forms = None
 
         else:
-            stored_forms = system.forms
-            store_msd = system.msd
+            if 'structural_units' in settings.properties.get_value():
+                stored_forms = system.forms
+            if 'mean_square_displacement' in settings.properties.get_value():
+               store_msd = system.msd
             system, current_positions = io.read_and_create_system(
                 input_file, i, n_atoms + n_header, settings, cutoffs, start, end
             )
-            system.msd = store_msd
-            for atom in system.atoms:
-                for cur in current_positions:
-                    if atom.id == cur.id:
-                        atom.set_current_position(cur)
-                        # next atom
-                        break
-            for atom in system.atoms:
-                for ref in reference_positions:
-                    if atom.id == ref.id:
-                        atom.set_reference_position(ref)
-                        # next atom
-                        break
+            if 'mean_square_displacement' in settings.properties.get_value():
+                system.msd = store_msd
+                for atom in system.atoms:
+                    for cur in current_positions:
+                        if atom.id == cur.id:
+                            atom.set_current_position(cur)
+                            # next atom
+                            break
+                for atom in system.atoms:
+                    for ref in reference_positions:
+                        if atom.id == ref.id:
+                            atom.set_reference_position(ref)
+                            # next atom
+                            break
         system.frame = i
 
         # Set the Box object to the System object

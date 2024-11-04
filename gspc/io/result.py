@@ -234,7 +234,9 @@ class MSDResult(Result):
         """
         Appends a data point to the timeline.
         """
-        self.timeline[frame] = values
+        values_copy = values.copy() # make a copy of the values to avoid modifying the original dict
+        self.timeline[frame] = values_copy
+        DEBUG = False
 
     def calculate_average_msd(self, mass) -> None:
         r"""
