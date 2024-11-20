@@ -12,7 +12,10 @@ settings.structure.set_value(
     [{"element": "Si", "number": 336}, {"element": "O", "number": 672}]
 )
 settings.properties.set_value([
-    "mean_square_displacement",
+    # "structural_units",
+    "bond_angular_distribution",
+    "pair_distribution_function",
+    # "mean_square_displacement",
 ])
 settings.pressure.set_value(9.0)
 
@@ -20,6 +23,7 @@ settings.pressure.set_value(9.0)
 settings.pdf_settings.set_rmax(8.0)
 settings.msd_settings.set_dt(0.0016)
 settings.msd_settings.set_printlevel(625)
+
 
 gspc.main(settings)
 

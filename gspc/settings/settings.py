@@ -51,7 +51,7 @@ class Settings:
         self.lbox: Parameter = Parameter("lbox", 0)
         self.temperature: Parameter = Parameter("temperature", 300)
         self.pressure: Parameter = Parameter("pressure", 0)
-        self.version: Parameter = Parameter("version", "0.0.13")
+        self.version: Parameter = Parameter("version", "0.0.14")
         self.quiet: Parameter = Parameter("quiet", False)
         self.overwrite_results: Parameter = Parameter("overwrite_results", False)
 

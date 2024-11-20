@@ -79,6 +79,8 @@ def main(settings):
         for key in keys_pdf:
             results_pdf[key] = io.DistResult("pair_distribution_function", key, start)
             results_pdf[key].write_file_header(settings._output_directory, end - start)
+        results_md = io.PropResult("mean_distances", "mean_distances", start)
+        results_md.write_file_header(settings._output_directory, end - start)
 
     if "bond_angular_distribution" in settings.properties.get_value():
         results_bad = {}
@@ -86,6 +88,8 @@ def main(settings):
         for key in keys_bad:
             results_bad[key] = io.DistResult("bond_angular_distribution", key, start)
             results_bad[key].write_file_header(settings._output_directory, end - start)
+        results_ma = io.PropResult("mean_angles", "mean_angles", start)
+        results_ma.write_file_header(settings._output_directory, end - start)
 
     if "structural_units" in settings.properties.get_value():
         results_sru = {}
@@ -211,6 +215,7 @@ def main(settings):
                 results_bad[key].add_to_timeline(
                     i, system.angles["theta"], system.angles[key]
                 )
+            results_ma.add_to_timeline(i, system.mean_angles.keys(), system.mean_angles.values())
 
         # Calculate the pair distribution function
         if "pair_distribution_function" in settings.properties.get_value():
@@ -220,6 +225,7 @@ def main(settings):
                 results_pdf[key].add_to_timeline(
                     i, system.distances["r"], system.distances[key]
                 )
+            results_md.add_to_timeline(i, system.mean_distances.keys(), system.mean_distances.values())
 
         if "neutron_structure_factor" in settings.properties.get_value():
             system.calculate_neutron_structure_factor(keys_nsf)
@@ -231,16 +237,22 @@ def main(settings):
         for key in keys_pdf:
             results_pdf[key].calculate_average_distribution()
             results_pdf[key].append_results_to_file()
+        results_md.calculate_average_proportion()
+        results_md.append_results_to_file()
 
     if "bond_angular_distribution" in settings.properties.get_value():
         for key in keys_bad:
             results_bad[key].calculate_average_distribution()
             results_bad[key].append_results_to_file()
+        results_ma.calculate_average_proportion()
+        results_ma.append_results_to_file()
+        
     if "mean_square_displacement" in settings.properties.get_value():
         results_msd.calculate_average_msd(system.calculate_mass_per_species())
         results_msd.append_results_to_file(
             settings.msd_settings.get_dt(), settings.msd_settings.get_printlevel()
         )
+        
     if "structural_units" in settings.properties.get_value():
         lifetime, switch_probability = system.calculate_lifetime()
         for d in keys_sru:

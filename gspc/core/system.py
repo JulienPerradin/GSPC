@@ -67,6 +67,8 @@ class System:
         self.structural_units: dict = {}  # Structural units of the system
         self.angles: dict = {}  # Bond angular distribution of the system
         self.distances: dict = {}  # Pair distribution function of the system
+        self.mean_distances: dict = {} # Mean distances of the system
+        self.mean_angles: dict = {} # Mean angles of the system
         self.msd: dict = {}  # Mean square displacement of the system
 
     def add_atom(self, atom) -> None:
@@ -353,6 +355,13 @@ class System:
                     self.angles[key].extend(value)
                 else:
                     self.angles[key] = value
+                    
+        # calculate the mean angles
+        for key, value in self.angles.items():
+            if key == "theta":
+                continue
+            self.mean_angles[key] = list( filter(lambda x: x <= 180, self.angles[key]))
+            self.mean_angles[key] = np.mean(self.mean_angles[key])
 
         # Calculate the bond angular distribution
         nbins = self.settings.bad_settings.get_nbins()
@@ -491,6 +500,18 @@ class System:
                 else:
                     self.distances[key] = value
 
+        # Filter the distances with cutoffs for mean distances calculations and calculate the mean distances
+        for key, value in self.distances.items():
+            if key == "r":
+                continue
+            s = self.decrypt_key(key)[1]
+            self.mean_distances[key] = list(
+                filter(
+                    lambda x: x <= self.cutoffs.get_cutoff(s[0], s[1]), self.distances[key]
+                )
+            )
+            self.mean_distances[key] = np.mean(self.mean_distances[key])
+            
         # Calculate the pair distribution function
         nbins = self.settings.pdf_settings.get_nbins()
         rmax = self.settings.pdf_settings.get_rmax()
