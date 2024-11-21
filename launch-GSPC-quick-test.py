@@ -1,7 +1,7 @@
 import gspc
 
 settings = gspc.settings.Settings(extension="SiO2")
-settings.quiet.set_value(False)
+settings.quiet.set_value(True)
 settings.project_name.set_value("quick-test")
 settings.export_directory.set_value("tests/results")
 settings.header.set_value(2)
@@ -19,6 +19,7 @@ settings.properties.set_value([
 ])
 settings.pressure.set_value(9.0)
 
+settings.logging.set_value(True)
 
 settings.pdf_settings.set_rmax(8.0)
 settings.msd_settings.set_dt(0.0016)

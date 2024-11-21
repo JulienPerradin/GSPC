@@ -54,6 +54,7 @@ class Settings:
         self.version: Parameter = Parameter("version", "0.0.14")
         self.quiet: Parameter = Parameter("quiet", False)
         self.overwrite_results: Parameter = Parameter("overwrite_results", False)
+        self.logging: Parameter = Parameter("logging", False)
 
         self.supported_extensions: Parameter = Parameter(
             "extensions", ["SiO2", "NSx"]
