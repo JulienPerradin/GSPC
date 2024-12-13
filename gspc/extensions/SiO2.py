@@ -351,7 +351,7 @@ def return_keys(property: str) -> list:
                     "6_to_4",
                     "6_to_5p",
                     "6_to_5bp",
-                    "6_to_6", 
+                    "6_to_6",
                 ]
             }
         ]
@@ -520,7 +520,7 @@ def calculate_structural_units(atoms, box) -> dict:
             FS_SiO6.append(silicon.number_of_faces)
 
             octahedricity.append(calculate_octahedricity(distances))
-            
+
             silicon.form = "octahedron"
 
         proportion_corners.append(silicon.number_of_corners)
@@ -757,7 +757,9 @@ def calculate_lifetime(settings, forms):
     """
 
     number_of_frames = len(forms)
-    number_of_atoms = len(forms[0])
+    # first key of forms
+    first_key = list(forms.keys())[0]
+    number_of_atoms = len(forms[first_key])
 
     types = ["tetrahedron", "square base pyramid", "triangular bipyramid", "octahedron"]
 
@@ -783,13 +785,16 @@ def calculate_lifetime(settings, forms):
     hist_5p_to_5p = 0
     hist_6_to_6 = 0
 
-    counter = np.zeros(len(forms[0]), dtype=np.int32)  # counter for each atom
+    counter = np.zeros(len(forms[first_key]), dtype=np.int32)  # counter for each atom
 
     if not settings.quiet.get_value():
         # create progress bar
-        pbar = tqdm(range(1, len(forms)), desc="Calculating SiOz lifetime")
+        # pbar = tqdm(range(1, len(forms)), desc="Calculating SiOz lifetime")
+        # loop over forms between starting from the second element of the list
+        pbar = tqdm(list(forms.keys()[1:]))
     else:
-        pbar = range(1, len(forms))
+        # pbar = range(1, len(forms))
+        pbar = list(forms.keys())[1:]
 
     for f in pbar:
         # loop over frames
@@ -834,9 +839,9 @@ def calculate_lifetime(settings, forms):
                     elif this_f[a] == "triangular bipyramid":
                         hist_6_to_5bp[counter[a]] += 1
                 counter[a] = 0
-    
+
     no_changes = np.where(counter==len(forms)-1)[0]
-    forms = np.array(forms[0])
+    forms = np.array(forms[first_key])
     unchanged_forms = forms[no_changes]
 
     unchanged_forms = np.unique(unchanged_forms, return_counts=True)

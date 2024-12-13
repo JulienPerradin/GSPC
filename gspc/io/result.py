@@ -86,16 +86,17 @@ class DistResult(Result):
         for frame, array in self.timeline.items():
             self.error = np.zeros((len(self.timeline), len(array)))
             break
-        
+
         for frame, array in self.timeline.items():
             if len(self.timeline) > 1:
-                self.error[frame-1] = array
+                i = frame - self.init_frame
+                self.error[i] = array
             if len(self.histogram) == 0:
                 # Initialize histogram ndarray
                 self.histogram = array
             else:
                 self.histogram += array
-        
+
         if len(self.timeline) > 1:
             self.error = np.std(self.error, axis=0) / np.sqrt(len(self.timeline))
         else:
@@ -171,7 +172,7 @@ class PropResult(Result):
         """
         for key, list_value in self.timeline.items():
             self.result[key] = sum(list_value)
-            self.error[key] = np.std(list_value) 
+            self.error[key] = np.std(list_value)
 
         for key in self.result.keys():
             self.result[key] /= len(self.timeline[key])
@@ -301,4 +302,3 @@ class MSDResult(Result):
         output.close()
 
         DEBUG = False
-
