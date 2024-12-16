@@ -791,7 +791,7 @@ def calculate_lifetime(settings, forms):
         # create progress bar
         # pbar = tqdm(range(1, len(forms)), desc="Calculating SiOz lifetime")
         # loop over forms between starting from the second element of the list
-        pbar = tqdm(list(forms.keys()[1:]))
+        pbar = tqdm(list(forms.keys())[1:])
     else:
         # pbar = range(1, len(forms))
         pbar = list(forms.keys())[1:]
