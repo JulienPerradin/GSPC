@@ -88,7 +88,7 @@ class System:
     def get_atoms(self) -> list:
         f"""
         Return the list of atoms.
-        
+
         Returns:
         --------
             - list : list of Atom objects in the system.
@@ -355,7 +355,7 @@ class System:
                     self.angles[key].extend(value)
                 else:
                     self.angles[key] = value
-                    
+
         # calculate the mean angles
         for key, value in self.angles.items():
             if key == "theta":
@@ -511,7 +511,7 @@ class System:
                 )
             )
             self.mean_distances[key] = np.mean(self.mean_distances[key])
-            
+
         # Calculate the pair distribution function
         nbins = self.settings.pdf_settings.get_nbins()
         rmax = self.settings.pdf_settings.get_rmax()
@@ -527,7 +527,7 @@ class System:
             same_species, species = self.decrypt_key(key)
             n_atoms_norm = 1
             for s in species:
-                n_atoms_norm *= len(self.get_atoms_by_element(s))
+                n_atoms_norm += len(self.get_atoms_by_element(s))
             if same_species:
                 n_atoms_norm -= 1
             normalization_factor = self.box.get_volume(self.frame) / (
@@ -761,7 +761,7 @@ class System:
                     )
             else:
                 cosd, sind = self._calculate_neutron_structure_factor(
-                    qx, qy, qz, positions, None 
+                    qx, qy, qz, positions, None
                 )
 
             qcos[species] += cosd
