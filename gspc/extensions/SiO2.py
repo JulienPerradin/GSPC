@@ -308,52 +308,52 @@ def return_keys(property: str) -> list:
                     "hist_SiO6"
                 ]
             },
-            {
-                "lifetime": [
-                    "time",
-                    "4_to_5p",
-                    "4_to_5bp",
-                    "4_to_6",
-                    "5p_to_4",
-                    "5p_to_6",
-                    "5p_to_5bp",
-                    "5bp_to_5p",
-                    "5bp_to_4",
-                    "5bp_to_6",
-                    "6_to_4",
-                    "6_to_5p",
-                    "6_to_5bp",
-                    "4_to_5" ,
-                    "5_to_4" ,
-                    "5_to_6" ,
-                    "6_to_5" ,
-                ]
-            },
-            {
-                "switch_probability": [
-                    "4_to_4",
-                    "4_to_5p",
-                    "4_to_5bp",
-                    "4_to_6",
-                    "4_to_5" ,
-                    "5p_to_4",
-                    "5p_to_6",
-                    "5p_to_5bp",
-                    "5bp_to_5p",
-                    "5bp_to_4",
-                    "5bp_to_6",
-                    "5bp_to_5bp",
-                    "5p_to_5p",
-                    "5_to_5",
-                    "5_to_4" ,
-                    "5_to_6" ,
-                    "6_to_5" ,
-                    "6_to_4",
-                    "6_to_5p",
-                    "6_to_5bp",
-                    "6_to_6",
-                ]
-            }
+            # {
+            #     "lifetime": [
+            #         "time",
+            #         "4_to_5p",
+            #         "4_to_5bp",
+            #         "4_to_6",
+            #         "5p_to_4",
+            #         "5p_to_6",
+            #         "5p_to_5bp",
+            #         "5bp_to_5p",
+            #         "5bp_to_4",
+            #         "5bp_to_6",
+            #         "6_to_4",
+            #         "6_to_5p",
+            #         "6_to_5bp",
+            #         "4_to_5" ,
+            #         "5_to_4" ,
+            #         "5_to_6" ,
+            #         "6_to_5" ,
+            #     ]
+            # },
+            # {
+            #     "switch_probability": [
+            #         "4_to_4",
+            #         "4_to_5p",
+            #         "4_to_5bp",
+            #         "4_to_6",
+            #         "4_to_5" ,
+            #         "5p_to_4",
+            #         "5p_to_6",
+            #         "5p_to_5bp",
+            #         "5bp_to_5p",
+            #         "5bp_to_4",
+            #         "5bp_to_6",
+            #         "5bp_to_5bp",
+            #         "5p_to_5p",
+            #         "5_to_5",
+            #         "5_to_4" ,
+            #         "5_to_6" ,
+            #         "6_to_5" ,
+            #         "6_to_4",
+            #         "6_to_5p",
+            #         "6_to_5bp",
+            #         "6_to_6",
+            #     ]
+            # }
         ]
     elif property == "neutron_structure_factor":
         return ["Si-Si", "Si-O", "O-O", "total"]
